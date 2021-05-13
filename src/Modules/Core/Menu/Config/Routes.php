@@ -1,7 +1,7 @@
 <?php if (!isset($routes)) {
 	$routes = \Config\Services::routes(true);
 }
-$routes->group('menu', ['namespace' => 'App\Modules\Core\Menu\Controllers'], function ($subroutes) {
+$routes->group('menu', ['namespace' => 'hamkamannan\adminigniter\Modules\Core\Menu\Controllers'], function ($subroutes) {
 	/*** Route Update for Menu ***/
 	$subroutes->add('', 'Menu::index');
 	$subroutes->add('index', 'Menu::index');
@@ -19,7 +19,7 @@ $routes->group('menu', ['namespace' => 'App\Modules\Core\Menu\Controllers'], fun
 	$subroutes->add('category_delete/(:any)', 'Menu::category_delete/$1');
 });
 
-$routes->group('api/menu', ['namespace' => 'App\Modules\Core\Menu\Controllers\Api'], function ($subroutes) {
+$routes->group('api/menu', ['namespace' => 'hamkamannan\adminigniter\Modules\Core\Menu\Controllers\Api'], function ($subroutes) {
 	/*** Route Update for Menu ***/
 	$subroutes->add('detail/(:any)', 'Menu::detail/$1');
 	$subroutes->add('edit/(:any)', 'Menu::edit/$1');

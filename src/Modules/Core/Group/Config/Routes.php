@@ -2,7 +2,7 @@
 	$routes = \Config\Services::routes(true);
 }
 
-$routes->group('group', ['namespace' => 'App\Modules\Core\Group\Controllers'], function ($subroutes) {
+$routes->group('group', ['namespace' => 'hamkamannan\adminigniter\Modules\Core\Group\Controllers'], function ($subroutes) {
 	/*** Route Update for Group ***/
 	$subroutes->add('', 'Group::index');
 	$subroutes->add('index', 'Group::index');
@@ -16,7 +16,7 @@ $routes->group('group', ['namespace' => 'App\Modules\Core\Group\Controllers'], f
 	$subroutes->add('permissions', 'Group::permissions');
 });
 
-$routes->group('api/group', ['namespace' => 'App\Modules\Core\Group\Controllers\Api'], function ($subroutes) {
+$routes->group('api/group', ['namespace' => 'hamkamannan\adminigniter\Modules\Core\Group\Controllers\Api'], function ($subroutes) {
 	/*** Route Update for Group ***/
 	$subroutes->add('detail/(:any)', 'Group::detail/$1');
 	$subroutes->add('edit/(:any)', 'Group::edit/$1');

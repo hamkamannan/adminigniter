@@ -1,7 +1,7 @@
 <?php if (!isset($routes)) {
 	$routes = \Config\Services::routes(true);
 }
-$routes->group('reference', ['namespace' => 'App\Modules\Core\Reference\Controllers'], function ($subroutes) {
+$routes->group('reference', ['namespace' => 'hamkamannan\adminigniter\Modules\Core\Reference\Controllers'], function ($subroutes) {
 	/*** Route Update for Reference ***/
 	$subroutes->add('', 'Reference::index');
 	$subroutes->add('reference', 'Reference::index');
@@ -18,7 +18,7 @@ $routes->group('reference', ['namespace' => 'App\Modules\Core\Reference\Controll
 	$subroutes->add('flip', 'Reference::flip');
 });
 
-$routes->group('api/reference', ['namespace' => 'App\Modules\Core\Reference\Controllers\Api'], function ($subroutes) {
+$routes->group('api/reference', ['namespace' => 'hamkamannan\adminigniter\Modules\Core\Reference\Controllers\Api'], function ($subroutes) {
 	/*** Route Update for Reference ***/
 	$subroutes->add('detail/(:any)', 'Reference::detail/$1');
 	$subroutes->add('edit/(:any)', 'Reference::edit/$1');

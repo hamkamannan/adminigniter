@@ -8,8 +8,8 @@ class App
     protected $logModel;
     public function __construct()
     {
-        $this->paramModel = new \App\Modules\Core\Param\Models\ParamModel();
-        $this->logModel = new \App\Models\LogModel();
+        $this->paramModel = new \hamkamannan\adminigniter\Modules\Core\Param\Models\ParamModel();
+        $this->logModel = new \hamkamannan\adminigniter\Models\LogModel();
         
         helper(['url', 'text', 'form', 'auth', 'app', 'html', 'cookie']);
     }

@@ -1,0 +1,47 @@
+{
+    "name": "hamkamannan/adminigniter",
+    "description": "Complete Authentication and Authorization system for CodeIgniter4 HMVC with Premium Admin LTE",
+    "keywords": [
+		"codeigniter",
+		"authentication",
+		"authorization",
+        "hmvc",
+		"adminigniter"
+	],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Hamka Mannan",
+            "email": "hamka@mannan.id"
+        }
+    ],
+    "require": {
+		"php": "^7.3||^8.0",
+		"codeigniter4/framework": "^4",
+		"myth/auth": "^1.0@beta"
+    },
+    "require-dev": {
+		"fakerphp/faker": "^1.9",
+		"mikey179/vfsstream": "^1.6",
+		"phpunit/phpunit": "^9.1"
+	},
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "hamkamannan\\adminigniter\\": "src"
+        }
+    },
+    "autoload-dev": {
+		"psr-4": {
+			"Tests\\Support\\": "tests/_support"
+		}
+	},
+    "scripts": {
+		"test": "phpunit"
+	},
+	"suggest": {
+		"ext-fileinfo": "Improves mime type detection for files"
+	}
+}

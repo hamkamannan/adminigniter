@@ -2,7 +2,7 @@
 if (!function_exists('create_log')) {
     function add_log($message, $controller = null, $operation = null, $ref_table = null, $ref_id = null)
     {
-        $app = new \App\Libraries\App();
+        $app = new \hamkamannan\adminigniter\Libraries\App();
         return $app->addLog($message, $controller, $operation, $ref_table, $ref_id);
     }
 }
@@ -472,7 +472,7 @@ if (!function_exists('get_lang')) {
 if (!function_exists('get_parameter')) {
     function get_parameter($param = null, $default = null)
     {
-        $app = new \App\Libraries\App();
+        $app = new \hamkamannan\adminigniter\Libraries\App();
         return $app->getParameter($param, $default);
     }
 }
@@ -480,7 +480,7 @@ if (!function_exists('get_parameter')) {
 if (!function_exists('add_parameter')) {
     function add_parameter($param = null, $value = null)
     {
-        $app = new \App\Libraries\App();
+        $app = new \hamkamannan\adminigniter\Libraries\App();
         return $app->addParameter($param, $value);
     }
 }
@@ -488,7 +488,7 @@ if (!function_exists('add_parameter')) {
 if (!function_exists('set_parameter')) {
     function set_parameter($param = null, $value = null)
     {
-        $app = new \App\Libraries\App();
+        $app = new \hamkamannan\adminigniter\Libraries\App();
         return $app->setParameter($param, $value);
     }
 }
@@ -496,7 +496,7 @@ if (!function_exists('set_parameter')) {
 if (!function_exists('delete_parameter')) {
     function delete_parameter($param = null)
     {
-        $app = new \App\Libraries\App();
+        $app = new \hamkamannan\adminigniter\Libraries\App();
         return $app->deleteParam($param);
     }
 }
@@ -504,7 +504,7 @@ if (!function_exists('delete_parameter')) {
 if (!function_exists('parameter_exists')) {
     function parameter_exists($param = null)
     {
-        $app = new \App\Libraries\App();
+        $app = new \hamkamannan\adminigniter\Libraries\App();
         return $app->parameterExists($param);
     }
 }

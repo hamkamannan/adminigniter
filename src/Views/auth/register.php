@@ -2,7 +2,7 @@
 if (!function_exists('get_parameter')) {
       function get_parameter($param = null, $default = null)
       {
-            $app = new \App\Libraries\App();
+            $app = new \hamkamannan\adminigniter\Libraries\App();
             return $app->getParameter($param, $default);
       }
 }

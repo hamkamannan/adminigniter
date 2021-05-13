@@ -9,12 +9,12 @@ class Auth extends \Myth\Auth\Config\Auth
 		'local' => 'Myth\Auth\Authentication\LocalAuthenticator',
 	];
 	public $views = [
-        'login'             => '\App\Views\Auth\login',
-        'register'          => '\App\Views\Auth\register',
-		'forgot'		    => 'App\Views\Auth\forgot',
-		'reset'		        => 'App\Views\Auth\reset',
-		'emailForgot'	    => 'App\Views\Auth\emails\forgot',
-		'emailActivation'   => 'App\Views\Auth\emails\activation',
+		'login'           => 'hamkamannan\adminigniter\Views\auth\login',
+		'register'        => 'hamkamannan\adminigniter\Views\auth\register',
+		'forgot'          => 'hamkamannan\adminigniter\Views\auth\forgot',
+		'reset'           => 'hamkamannan\adminigniter\Views\auth\reset',
+		'emailForgot'     => 'hamkamannan\adminigniter\Views\auth\emails\forgot',
+		'emailActivation' => 'hamkamannan\adminigniter\Views\auth\emails\activation',
 	];
 	public $viewLayout = 'App\Views\Auth\layout';
 	public $validFields = [

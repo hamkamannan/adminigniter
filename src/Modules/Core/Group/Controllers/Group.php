@@ -40,8 +40,6 @@ class Group extends \hamkamannan\adminigniter\Controllers\BaseController
         $this->data['title'] = 'Groups';
         $this->data['message'] = $this->validation->getErrors() ? $this->validation->listErrors() : $this->session->getFlashdata('message');
         $this->data['groups'] = $groups;
-        $this->data['adminGroup'] = $this->config->defaultAdminGroup;
-        $this->data['defaultGroup'] = $this->config->defaultUserGroup;
         echo view('hamkamannan\adminigniter\Modules\Core\Group\Views\list', $this->data);
     }
 

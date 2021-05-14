@@ -1,6 +1,6 @@
 <?php
 
-namespace hamkamannan\adminigniterDatabase\Seeds;
+namespace hamkamannan\adminigniter\Database\Seeds;
 
 use CodeIgniter\Database\Seeder;
 

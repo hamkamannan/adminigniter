@@ -525,4 +525,5 @@ class AdminigniterSeeder extends Seeder
 
         $this->db->query("SET FOREIGN_KEY_CHECKS=1;");
     }
+    
 }

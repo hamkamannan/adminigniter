@@ -114,7 +114,9 @@ class PublishCommand extends BaseCommand
 
         $content = file_get_contents($src);
 
-        $this->writeFile($dst, $content);
+        write_file($dst, $content);
+
+        CLI::write(CLI::color('  created: ', 'green').$dst);
     }
 
     //--------------------------------------------------------------------

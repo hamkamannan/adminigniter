@@ -183,9 +183,9 @@ class PublishCommand extends BaseCommand
     protected function recurseCopy($src,$dst, $childFolder='') 
     { 
         $dir = opendir($src); 
-        mkdir($dst);
+        @mkdir($dst);
         if ($childFolder!='') {
-            mkdir($dst.'/'.$childFolder);
+            @mkdir($dst.'/'.$childFolder);
     
             while(false !== ( $file = readdir($dir)) ) { 
                 if (( $file != '.' ) && ( $file != '..' )) { 

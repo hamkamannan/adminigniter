@@ -82,12 +82,12 @@ Is it ready yet? Not so fast!! ;-) After publishing `Config/Auth.php` you need t
 `public $views` with these lines below:
 ```php
 public $views = [
-    'login'           => 'hamkamannan\adminigniter\Views\Authentication\login',
-    'register'        => 'hamkamannan\adminigniter\Views\Authentication\register',
-    'forgot'          => 'hamkamannan\adminigniter\Views\Authentication\forgot',
-    'reset'           => 'hamkamannan\adminigniter\Views\Authentication\reset',
-    'emailForgot'     => 'hamkamannan\adminigniter\Views\Authentication\emails\forgot',
-    'emailActivation' => 'hamkamannan\adminigniter\Views\Authentication\emails\activation',
+    'login'           => 'hamkamannan\adminigniter\Views\auth\login',
+    'register'        => 'hamkamannan\adminigniter\Views\auth\register',
+    'forgot'          => 'hamkamannan\adminigniter\Views\auth\forgot',
+    'reset'           => 'hamkamannan\adminigniter\Views\auth\reset',
+    'emailForgot'     => 'hamkamannan\adminigniter\Views\auth\emails\forgot',
+    'emailActivation' => 'hamkamannan\adminigniter\Views\auth\emails\activation',
 ];
 ```
 

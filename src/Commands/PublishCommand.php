@@ -71,10 +71,30 @@ class PublishCommand extends BaseCommand
     public function run(array $params)
     {
         $this->determineSourcePath();
-        $this->publishConfig();
-        $this->publishMigration();
-        $this->publishAssets();
-        $this->publishPatchs();
+
+        // Config
+        if (CLI::prompt('Publish Config?', ['y', 'n']) == 'y')
+        {
+            $this->publishConfig();
+        }
+
+        // Migration
+        if (CLI::prompt('Publish Migration?', ['y', 'n']) == 'y')
+        {
+            $this->publishMigration();
+        }
+
+        // Public Asset
+        if (CLI::prompt('Copy Public Assets?', ['y', 'n']) == 'y')
+        {
+            $this->publishAssets();
+        }
+
+        // Patch View (HMVC)
+        if (CLI::prompt('Patch View for HMVC?', ['y', 'n']) == 'y')
+        {
+            $this->publishPatchs();
+        }
     }
 
     protected function publishConfig()

@@ -223,5 +223,7 @@ class PublishCommand extends BaseCommand
         }
         
         closedir($dir); 
+
+        CLI::write(CLI::color('  created: ', 'green').$dst);
     }
 }

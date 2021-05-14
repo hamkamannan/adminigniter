@@ -73,10 +73,10 @@ class PublishCommand extends BaseCommand
         $this->determineSourcePath();
 
         // Config
-        if (CLI::prompt('Publish Config?', ['y', 'n']) == 'y')
-        {
-            $this->publishConfig();
-        }
+        // if (CLI::prompt('Publish Config?', ['y', 'n']) == 'y')
+        // {
+        //     $this->publishConfig();
+        // }
 
         // Migration
         if (CLI::prompt('Publish Database Migration?', ['y', 'n']) == 'y')
@@ -147,7 +147,7 @@ class PublishCommand extends BaseCommand
 
     protected function publishPatch()
     {
-        $src = $this->sourcePath . '/Assets/patch/View.php.bak';
+        $src = $this->sourcePath . '/Asset/patch/View.php.bak';
         $dst = ROOTPATH . 'vendor/codeigniter4/framework/system/View/View.php';
 
         $content = file_get_contents($src);

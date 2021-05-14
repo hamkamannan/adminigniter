@@ -2,7 +2,7 @@
 
 <p align="center">
 <a href="https://packagist.org/packages/hamkamannan/adminigniter"><img src="https://poser.pugx.org/hamkamannan/adminigniter/version"></a>
-<a href="https://packagist.org/packages/hamkamannan/adminigniter"><img src="https://img.shields.io/badge/Package-agungsugiarto%2Fadminigniter-light.svg"></a>
+<a href="https://packagist.org/packages/hamkamannan/adminigniter"><img src="https://img.shields.io/badge/Package-hamkamannan%2Fadminigniter-light.svg"></a>
 <a href="https://packagist.org/packages/hamkamannan/adminigniter"><img src="https://poser.pugx.org/hamkamannan/adminigniter/downloads"</img></a>
 <a href="https://github.com/hamkamannan/adminigniter/blob/master/LICENSE.md"><img src="https://img.shields.io/github/license/hamkamannan/adminigniter"></a>
 </p>

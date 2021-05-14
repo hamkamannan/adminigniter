@@ -73,6 +73,7 @@ class PublishCommand extends BaseCommand
         $this->determineSourcePath();
         $this->publishConfig();
         $this->publishMigration();
+        $this->publishAssets();
     }
 
     protected function publishConfig()
@@ -95,6 +96,14 @@ class PublishCommand extends BaseCommand
 
             $this->writeFile("Database/Migrations/{$file}", $content);
         }
+    }
+
+    protected function publishAssets()
+    {
+        $src = $this->sourcePath . '/Assets/public/';
+        $dst = ROOTPATH . 'public/';
+
+        $this->recurseCopy($src, $dst);
     }
 
     //--------------------------------------------------------------------
@@ -161,5 +170,47 @@ class PublishCommand extends BaseCommand
         $path = str_replace($appPath, '', $path);
 
         CLI::write(CLI::color('  created: ', 'green').$path);
+    }
+
+    /**
+     * Copy a folder
+     *
+     * @param string $src
+     * @param string $dst
+     * @param string $childFolder
+     */
+
+    protected function recurseCopy($src,$dst, $childFolder='') 
+    { 
+        $dir = opendir($src); 
+        mkdir($dst);
+        if ($childFolder!='') {
+            mkdir($dst.'/'.$childFolder);
+    
+            while(false !== ( $file = readdir($dir)) ) { 
+                if (( $file != '.' ) && ( $file != '..' )) { 
+                    if ( is_dir($src . '/' . $file) ) { 
+                        $this->recurseCopy($src . '/' . $file,$dst.'/'.$childFolder . '/' . $file); 
+                    } 
+                    else { 
+                        copy($src . '/' . $file, $dst.'/'.$childFolder . '/' . $file); 
+                    }  
+                } 
+            }
+        }else{
+                // return $cc; 
+            while(false !== ( $file = readdir($dir)) ) { 
+                if (( $file != '.' ) && ( $file != '..' )) { 
+                    if ( is_dir($src . '/' . $file) ) { 
+                        $this->recurseCopy($src . '/' . $file,$dst . '/' . $file); 
+                    } 
+                    else { 
+                        copy($src . '/' . $file, $dst . '/' . $file); 
+                    }  
+                } 
+            } 
+        }
+        
+        closedir($dir); 
     }
 }

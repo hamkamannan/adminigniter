@@ -4,7 +4,7 @@ namespace hamkamannan\adminigniter\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class AlterTableUsers extends Migration
+class AuthAlterUsers extends Migration
 {
 	public function up()
 	{

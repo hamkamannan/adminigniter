@@ -99,12 +99,12 @@ class PublishCommand extends BaseCommand
 
     protected function publishConfig()
     {
-        $path = "{$this->sourcePath}/Config/Adminigniter.php";
+        $path = "{$this->sourcePath}/Config/Auth.php";
 
         $content = file_get_contents($path);
         $content = str_replace('namespace hamkamannan\adminigniter\Config', 'namespace Config', $content);
 
-        $this->writeFile('Config/Adminigniter.php', $content);
+        $this->writeFile('Config/Auth.php', $content);
     }
 
     protected function publishMigration()

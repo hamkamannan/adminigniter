@@ -1,7 +1,7 @@
 <?php 
 namespace hamkamannan\adminigniter\Config;
 
-class Adminigniter extends \Myth\Auth\Config\Auth
+class Auth extends \Myth\Auth\Config\Auth
 {
 	public $defaultAdminGroup = 'admin';
 	public $defaultUserGroup = 'user';

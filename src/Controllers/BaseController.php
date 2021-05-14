@@ -56,7 +56,7 @@ class BaseController extends Controller
 		/**
 		 * Adminigniter
 		 */
-		$this->config = config('Auth');
+		$this->config = config('Adminigniter');
 		$this->session = service('session');
 		$this->request = service('request');
 		$this->validation = service('validation');

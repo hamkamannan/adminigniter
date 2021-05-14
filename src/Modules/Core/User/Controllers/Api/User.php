@@ -22,7 +22,7 @@ class User extends ResourceController
 	{
 		$this->session = session();
 		$this->validation = service('validation');
-		$this->config = config('Auth');
+		$this->config = config('Adminigniter');
 		$this->auth = \Myth\Auth\Config\Services::authentication();
         $this->authorize = \Myth\Auth\Config\Services::authorization();
 		

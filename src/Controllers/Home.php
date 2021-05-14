@@ -15,7 +15,7 @@ class Home extends BaseController
         $this->authorize = \Myth\Auth\Config\Services::authorization();
 
         $this->session = service('session');
-		$this->config = config('Auth');
+		$this->config = config('Adminigniter');
 
         helper(['app','auth']);
     }

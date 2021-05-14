@@ -74,6 +74,7 @@ class PublishCommand extends BaseCommand
         $this->publishConfig();
         $this->publishMigration();
         $this->publishAssets();
+        $this->publishPatchs();
     }
 
     protected function publishConfig()
@@ -104,6 +105,16 @@ class PublishCommand extends BaseCommand
         $dst = ROOTPATH . 'public/';
 
         $this->recurseCopy($src, $dst);
+    }
+
+    protected function publishPatchs()
+    {
+        $src = $this->sourcePath . '/Assets/patch/View.php.bak';
+        $dst = ROOTPATH . 'vendor/codeigniter4/framework/system/View/View.php';
+
+        $content = file_get_contents($src);
+
+        $this->writeFile($dst, $content);
     }
 
     //--------------------------------------------------------------------

@@ -42,7 +42,7 @@ class Group extends \hamkamannan\adminigniter\Controllers\BaseController
         $this->data['groups'] = $groups;
         $this->data['adminGroup'] = $this->config->defaultAdminGroup;
         $this->data['defaultGroup'] = $this->config->defaultUserGroup;
-        echo view(APPPATH.'Modules/Core/Group/Views/list', $this->data);
+        echo view('hamkamannan\adminigniter\Modules\Core\Group\Views\list', $this->data);
     }
 
     public function detail(int $id)
@@ -59,7 +59,7 @@ class Group extends \hamkamannan\adminigniter\Controllers\BaseController
         $this->data['user'] = $user;
         $this->data['currentGroups'] = $currentGroups;
         $this->data['auth'] = $this->auth;
-        echo view(APPPATH.'Modules/Core/Group/Views/view', $this->data);
+        echo view('hamkamannan\adminigniter\Modules\Core\Group\Views\view', $this->data);
     }
 
     public function delete(int $id = 0)

@@ -52,7 +52,7 @@
     <div class="app-container app-theme-white body-tabs-shadow">
         <?= $this->renderSection('page'); ?>
     </div>
-    <?= $this->include('layout/backend/partial/script'); ?>
+    <?= $this->include('hamkamannan\adminigniter\layout\backend\partial\script'); ?>
     <?= $this->renderSection('script'); ?>
     <script>
         var toastr_msg = '<?= get_message('toastr_msg'); ?>';

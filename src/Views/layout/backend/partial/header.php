@@ -44,7 +44,7 @@
         </span>
     </div>
     <div class="app-header__content">
-        <?= $this->include('layout/backend/partial/header_left'); ?>
-        <?= $this->include('layout/backend/partial/header_right'); ?>
+        <?= $this->include('hamkamannan\adminigniter\layout\backend\partial\header_left'); ?>
+        <?= $this->include('hamkamannan\adminigniter\layout\backend\partial\header_right'); ?>
     </div>
 </div>

@@ -8,7 +8,7 @@ if (!function_exists('get_parameter')) {
 }
 ?>
 
-<?= $this->extend('layout/backend/blank'); ?>
+<?= $this->extend('hamkamannan\adminigniter\Views\layout\backend\blank'); ?>
 <?= $this->section('style'); ?>
 <?= $this->endSection('style'); ?>
 

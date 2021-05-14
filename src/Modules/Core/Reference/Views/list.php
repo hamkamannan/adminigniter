@@ -1,5 +1,5 @@
 <?php
-$baseModel = new \App\Models\BaseModel();
+$baseModel = new \hamkamannan\adminigniter\Models\BaseModel();
 $request = \Config\Services::request();
 $request->uri->setSilent();
 $menu_id = $request->getVar('menu_id') ?? 0;
@@ -11,7 +11,7 @@ $menu = $baseModel
     ->row();
 ?>
 
-<?= $this->extend('layout/backend/main'); ?>
+<?= $this->extend('\hamkamannan\adminigniter\Views\layout\backend\main'); ?>
 <?= $this->section('style'); ?>
 <link rel="stylesheet" href="<?= base_url('assets/vendors') ?>/nestable/nestable.css">
 <style>
@@ -143,8 +143,8 @@ $menu = $baseModel
 <?= $this->endSection('page'); ?>
 
 <?= $this->section('script'); ?>
-<?= $this->include(APPPATH.'Modules/Core/Reference/Views/add_modal'); ?>
-<?= $this->include(APPPATH.'Modules/Core/Reference/Views/update_modal'); ?>
+<?= $this->include('hamkamannan\adminigniter\Modules\Core\Reference\Views\add_modal'); ?>
+<?= $this->include('hamkamannan\adminigniter\Modules\Core\Reference\Views\update_modal'); ?>
 
 <script src="<?= base_url('assets/vendors'); ?>/nestable/jquery.nestable.js"></script>
 

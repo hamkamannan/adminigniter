@@ -70,7 +70,7 @@ if (!function_exists('is_accessed')) {
 if (!function_exists('get_menu')) {
     function get_menu($is_admin = false)
     {
-        $menuModel = new \App\Modules\Core\Menu\Models\MenuModel();
+        $menuModel = new \hamkamannan\adminigniter\Modules\Core\Menu\Models\MenuModel();
         if ($is_admin) {
             return $menuModel->where('parent', '0')->where('is_admin', '1')->where('active', '1')->orderBy('sort', 'asc')->findAll();
         } else {
@@ -82,7 +82,7 @@ if (!function_exists('get_menu')) {
 if (!function_exists('get_sub_menu')) {
     function get_sub_menu($parent_id)
     {
-        $menuModel = new \App\Modules\Core\Menu\Models\MenuModel();
+        $menuModel = new \hamkamannan\adminigniter\Modules\Core\Menu\Models\MenuModel();
         return $menuModel->where('parent', $parent_id)->where('active', '1')->orderBy('sort', 'asc')->findAll();
     }
 }
@@ -91,7 +91,7 @@ if(!function_exists('display_menu_backend')) {
     function display_menu_backend($parent, $level = 1) {
         $request = \Config\Services::request();
         $request->uri->setSilent();
-        $baseModel = new \App\Models\BaseModel();
+        $baseModel = new \hamkamannan\adminigniter\Models\BaseModel();
 
         $query = $baseModel->query("SELECT a.id, a.icon, a.name, a.controller, a.type, a.menu_category_id, deriv.childs 
             FROM `c_menus` a LEFT OUTER JOIN (
@@ -142,7 +142,7 @@ if(!function_exists('display_menu_frontend')) {
     function display_menu_frontend($parent, $level = 1) {
         $request = \Config\Services::request();
         $request->uri->setSilent();
-        $baseModel = new \App\Models\BaseModel();
+        $baseModel = new \hamkamannan\adminigniter\Models\BaseModel();
 
         $query = $baseModel->query("SELECT a.id, a.icon, a.name, a.controller, a.type, a.menu_category_id, deriv.childs 
             FROM `c_menus` a LEFT OUTER JOIN (
@@ -207,7 +207,7 @@ if(!function_exists('display_menu_frontend')) {
 if (!function_exists('get_menu_category_slug')) {
     function get_menu_category_slug($menu_category_id)
     {
-        $menuCategoryModel = new \App\Modules\Core\Menu\Models\MenuCategoryModel();
+        $menuCategoryModel = new \hamkamannan\adminigniter\Modules\Core\Menu\Models\MenuCategoryModel();
         $category = $menuCategoryModel->find($menu_category_id);
         return $category->slug;
     }
@@ -229,7 +229,7 @@ if (!function_exists('display_menu_dropdown')) {
 
 if(!function_exists('display_menu_module')) {
 	function display_menu_module($menu_category_id, $parent, $level) {
-        $baseModel = new \App\Models\BaseModel();
+        $baseModel = new \hamkamannan\adminigniter\Models\BaseModel();
         $query = $baseModel->query("SELECT a.id, a.name as label, a.type, a.active, a.controller, a.controller as link, a.menu_category_id, deriv.count 
             FROM `c_menus` a LEFT OUTER JOIN (
                 SELECT parent, COUNT(*) AS count 
@@ -284,7 +284,7 @@ if(!function_exists('display_menu_module')) {
 
 if(!function_exists('display_menu_option')) {
     function display_menu_option($menu_category_id, $parent, $level = 0, $selected = null, $disabled = false) {
-        $baseModel = new \App\Models\BaseModel();
+        $baseModel = new \hamkamannan\adminigniter\Models\BaseModel();
 
         $query = $baseModel->query("SELECT a.id, a.icon, a.name, a.controller, a.type, a.menu_category_id,  deriv.childs 
             FROM `c_menus` a LEFT OUTER JOIN (
@@ -325,7 +325,7 @@ if (!function_exists('display_action_menu_reference')) {
 
 if(!function_exists('display_menu_reference')) {
 	function display_menu_reference($menu_category_id, $parent, $level) {
-        $baseModel = new \App\Models\BaseModel();
+        $baseModel = new \hamkamannan\adminigniter\Models\BaseModel();
         $query = $baseModel->query("SELECT a.id, a.name as label, a.type, a.active, a.controller, a.controller as link, a.menu_category_id, deriv.count 
             FROM `c_menus` a LEFT OUTER JOIN (
                 SELECT parent, COUNT(*) AS count 
@@ -538,7 +538,7 @@ if (!function_exists('set_ip_info')) {
         if($ip_address != false) {
             $timestamp = date("Y-m-d");
 
-            $visitorModel = new \App\Models\VisitorModel();
+            $visitorModel = new \hamkamannan\adminigniter\Models\VisitorModel();
             $visitor = $visitorModel->where('ip_address', $ip_address)->where('timestamp', $timestamp)->get()->getRow();
             // $info = get_ip_info($ip_address);
             
@@ -606,7 +606,7 @@ if (!function_exists('get_visitor')) {
 if (!function_exists('count_visitor')) {
     function count_visitor()
     {
-        $visitorModel = new \App\Models\VisitorModel();
+        $visitorModel = new \hamkamannan\adminigniter\Models\VisitorModel();
         $visitors = $visitorModel->findAll();
         $sum = 0;
         foreach ($visitors as $row) {

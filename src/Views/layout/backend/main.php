@@ -34,30 +34,30 @@
             position: relative;
         }
     </style>
-    <?= $this->include('layout/backend/partial/style'); ?>
-    <?= $this->include('layout/backend/partial/custom_style'); ?>
+    <?= $this->include('hamkamannan\adminigniter\layout\backend\partial\style'); ?>
+    <?= $this->include('hamkamannan\adminigniter\layout\backend\partial\custom_style'); ?>
     <?= $this->renderSection('style'); ?>
 </head>
 
 <body>
     <div class="app-container app-theme-white body-tabs-shadow <?= get_parameter('container-header-class') ?> <?= get_parameter('container-sidebar-class') ?> <?= get_parameter('container-footer-class') ?>">
-        <?= $this->include('layout/backend/partial/header'); ?>
+        <?= $this->include('hamkamannan\adminigniter\layout\backend\partial\header'); ?>
         <?php if (is_admin()) : ?>
             <?php if (get_parameter('show-layout-setting') == '1') : ?>
-                <?= $this->include('layout/backend/partial/setting'); ?>
+                <?= $this->include('hamkamannan\adminigniter\layout\backend\partial\setting'); ?>
             <?php endif; ?>
         <?php endif; ?>
         <div class="app-main">
-            <?= $this->include('layout/backend/partial/sidebar'); ?>
+            <?= $this->include('hamkamannan\adminigniter\layout\backend\partial\sidebar'); ?>
             <div class="app-main__outer">
                 <?= $this->renderSection('page'); ?>
-                <?= $this->include('layout/backend/partial/footer'); ?>
+                <?= $this->include('hamkamannan\adminigniter\layout\backend\partial\footer'); ?>
             </div>
         </div>
     </div>
-    <?= $this->include('layout/backend/partial/drawer'); ?>
-    <?= $this->include('layout/backend/partial/script'); ?>
-    <?= $this->include('layout/backend/partial/custom_script'); ?>
+    <?= $this->include('hamkamannan\adminigniter\layout\backend\partial\drawer'); ?>
+    <?= $this->include('hamkamannan\adminigniter\layout\backend\partial\script'); ?>
+    <?= $this->include('hamkamannan\adminigniter\layout\backend\partial\custom_script'); ?>
     <?= $this->renderSection('script'); ?>
 </body>
 

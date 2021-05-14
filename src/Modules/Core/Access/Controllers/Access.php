@@ -65,6 +65,6 @@ class Access extends \hamkamannan\adminigniter\Controllers\BaseController
         $this->data['access'] = $access;
         $this->data['group'] = $group;
         
-        echo view(APPPATH.'Modules/Core/Access/Views/list', $this->data);
+        echo view('hamkamannan\adminigniter\Modules\Core\Access\Views\list', $this->data);
     }
 }

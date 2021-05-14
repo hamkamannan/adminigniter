@@ -46,7 +46,7 @@ class User extends \hamkamannan\adminigniter\Controllers\BaseController
 
         // dd($this->data['users']);
 
-        echo view(APPPATH.'Modules/Core/User/Views/list', $this->data);
+        echo view('hamkamannan\adminigniter\Modules\Core\User\Views\list', $this->data);
     }
     public function profile()
     {
@@ -72,9 +72,9 @@ class User extends \hamkamannan\adminigniter\Controllers\BaseController
         $this->data['is_profile'] = $is_profile;
         
         if($is_profile){
-            echo view(APPPATH.'Modules/Core/User/Views/profile', $this->data);
+            echo view('hamkamannan\adminigniter\Modules\Core\User\Views\profile', $this->data);
         } else {
-            echo view(APPPATH.'Modules/Core/User/Views/view', $this->data);
+            echo view('hamkamannan\adminigniter\Modules\Core\User\Views\view', $this->data);
         }
     }
 

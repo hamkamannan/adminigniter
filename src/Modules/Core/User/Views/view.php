@@ -1,4 +1,4 @@
-<?= $this->extend('layout/backend/main'); ?>
+<?= $this->extend('\hamkamannan\adminigniter\Views\layout\backend\main'); ?>
 <?= $this->section('page'); ?>
 <div class="app-main__inner">
     <div class="app-page-title">

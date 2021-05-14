@@ -41,7 +41,7 @@ class Menu extends \hamkamannan\adminigniter\Controllers\BaseController
         $this->data['slug'] = $slug;
         $this->data['title'] = 'Menus';
         $this->data['message'] = $this->validation->getErrors() ? $this->validation->listErrors() : $this->session->getFlashdata('message');
-        echo view(APPPATH.'Modules/Core/Menu/Views/list', $this->data);
+        echo view('hamkamannan\adminigniter\Modules\Core\Menu\Views\list', $this->data);
     }
 
     public function create()
@@ -87,7 +87,7 @@ class Menu extends \hamkamannan\adminigniter\Controllers\BaseController
         } else {
             $message = $this->validation->getErrors() ? $this->validation->listErrors() : $this->session->getFlashdata('message');
             $this->data['message'] = $message;
-            echo view(APPPATH.'Modules/Core/Menu/Views/add', $this->data);
+            echo view('hamkamannan\adminigniter\Modules\Core\Menu\Views\add', $this->data);
         }
     }
 
@@ -131,7 +131,7 @@ class Menu extends \hamkamannan\adminigniter\Controllers\BaseController
         }
         $this->data['message'] = $this->validation->getErrors() ? $this->validation->listErrors() : $this->session->getFlashdata('message');
         $this->data['menu'] = $menu;
-        echo view(APPPATH.'Modules/Core/Menu/Views/update', $this->data);
+        echo view('hamkamannan\adminigniter\Modules\Core\Menu\Views\update', $this->data);
     }
 
     public function delete(int $id = 0)

@@ -3,7 +3,7 @@ $request = \Config\Services::request();
 $request->uri->setSilent();
 $slug = $request->getVar('slug') ?? 'side-menu';
 
-$baseModel = new \App\Models\BaseModel();
+$baseModel = new \hamkamannan\adminigniter\Models\BaseModel();
 $baseModel->setTable('c_references');
 $permissions = $baseModel
     ->select('c_references.*')
@@ -24,7 +24,7 @@ $category = $baseModel
       ->row();
 ?>
 
-<?= $this->extend('layout/backend/main'); ?>
+<?= $this->extend('\hamkamannan\adminigniter\Views\layout\backend\main'); ?>
 <?= $this->section('style'); ?>
 <?= $this->endSection('style'); ?>
 <?= $this->section('page'); ?>

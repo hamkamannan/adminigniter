@@ -40,7 +40,7 @@ $request->uri->setSilent();
             <ul class="vertical-nav-menu">
                 <?php if (get_parameter('sidebar-mode') == 'auto') : ?>
                     <?=display_menu_backend(0,1);?>
-                <?php else : echo $this->include('layout/backend/partial/navigation');
+                <?php else : echo $this->include('hamkamannan\adminigniter\layout\backend\partialnavigation');
                 endif; ?>
             </ul>
         </div>

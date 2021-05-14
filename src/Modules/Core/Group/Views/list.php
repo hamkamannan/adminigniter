@@ -1,4 +1,4 @@
-<?= $this->extend('layout/backend/main'); ?>
+<?= $this->extend('\hamkamannan\adminigniter\Views\layout\backend\main'); ?>
 <?= $this->section('style'); ?>
 <?= $this->endSection('style'); ?>
 
@@ -70,8 +70,8 @@
 <?= $this->endSection('page'); ?>
 
 <?= $this->section('script'); ?>
-<?= $this->include(APPPATH.'Modules/Core/Group/Views/add_modal'); ?>
-<?= $this->include(APPPATH.'Modules/Core/Group/Views/update_modal'); ?>
+<?= $this->include('hamkamannan\adminigniter\Modules\Core\Group\Views\add_modal'); ?>
+<?= $this->include('hamkamannan\adminigniter\Modules\Core\Group\Views\update_modal'); ?>
 
 <script>
     setDataTable('#tbl_groups', disableOrderCols = [0, 3], defaultOrderCols = [1, 'asc'], autoNumber = true);

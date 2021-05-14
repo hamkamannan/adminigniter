@@ -37,7 +37,8 @@ class Permission extends \hamkamannan\adminigniter\Controllers\BaseController
         $this->data['title'] = 'Permissions';
         $this->data['message'] = $this->validation->getErrors() ? $this->validation->listErrors() : $this->session->getFlashdata('message');
         $this->data['permissions'] = $permissions;
-        echo view(APPPATH.'Modules/Core/Permission/Views/list', $this->data);
+
+        echo view('\hamkamannan\adminigniter\Modules\Core\Permission\Views\list', $this->data);
     }
 
     public function delete(int $id = 0)

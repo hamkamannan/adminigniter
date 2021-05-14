@@ -110,7 +110,7 @@ class AdminigniterSeeder extends Seeder
             ],
             [
                 'name' => 'sidebar-file',
-                'value' => 'layout/backend/partial/navigation',
+                'value' => 'hamkamannan\adminigniter\layout\backend\partialnavigation',
                 'description' => 'file path without extention .php',
             ],
             [

@@ -1,4 +1,4 @@
-<?= $this->extend('layout/backend/main'); ?>
+<?= $this->extend('\hamkamannan\adminigniter\Views\layout\backend\main'); ?>
 <?= $this->section('style'); ?>
 <?= $this->endSection('style'); ?>
 
@@ -94,7 +94,7 @@
 
 
 <?= $this->section('script'); ?>
-<?= $this->include(APPPATH.'Modules/Core/User/Views/add_modal'); ?>
+<?= $this->include('hamkamannan\adminigniter\Modules\Core\User\Views\add_modal'); ?>
 
 <script>
     setDataTable('#tbl_users', disableOrderCols = [0, 6], defaultOrderCols = [5, 'desc'], autoNumber = true);

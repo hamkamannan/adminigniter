@@ -63,7 +63,7 @@ class BaseController extends Controller
 
 		$this->uploadPath = WRITEPATH . 'uploads/';
 		$this->uploadFile = new \CodeIgniter\Files\File($this->uploadPath);
-		$this->baseModel = new \App\Models\BaseModel();
+		$this->baseModel = new \hamkamannan\adminigniter\Models\BaseModel();
 	}
 
 	public function do_init()

@@ -4,7 +4,6 @@ namespace hamkamannan\adminigniter\Modules\Core\Reference\Controllers\Api;
 
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
-use App\Models\ReferenceModel;
 use CodeIgniter\Files\File;
 
 class Reference extends ResourceController

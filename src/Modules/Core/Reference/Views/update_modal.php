@@ -1,5 +1,5 @@
 <?php
-$baseModel = new \App\Models\BaseModel();
+$baseModel = new \hamkamannan\adminigniter\Models\BaseModel();
 $request = \Config\Services::request();
 $request->uri->setSilent();
 $menu_id = $request->getVar('menu_id') ?? 0;

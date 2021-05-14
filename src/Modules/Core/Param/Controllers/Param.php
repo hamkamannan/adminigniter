@@ -37,7 +37,7 @@ class Param extends \hamkamannan\adminigniter\Controllers\BaseController
 
         $this->data['title'] = 'Parameter';
         $this->data['message'] = $this->validation->getErrors() ? $this->validation->listErrors() : $this->session->getFlashdata('message');
-        echo view(APPPATH.'Modules/Core/Param/Views/list', $this->data);
+        echo view('hamkamannan\adminigniter\Modules\Core\Param\Views\list', $this->data);
     }
 
     public function detail(int $id)
@@ -52,7 +52,7 @@ class Param extends \hamkamannan\adminigniter\Controllers\BaseController
         $param = $this->paramModel->find($id)->row();
         $this->data['param'] = $param;
         $this->data['auth'] = $this->auth;
-        echo view(APPPATH.'Modules/Core/Param/Views/view', $this->data);
+        echo view('hamkamannan\adminigniter\Modules\Core\Param\Views\view', $this->data);
     }
 
     public function create()
@@ -86,7 +86,7 @@ class Param extends \hamkamannan\adminigniter\Controllers\BaseController
         } else {
             $message = $this->validation->getErrors() ? $this->validation->listErrors() : $this->session->getFlashdata('message');
             $this->data['message'] = $message;
-            echo view(APPPATH.'Modules/Core/Param/Views/add', $this->data);
+            echo view('hamkamannan\adminigniter\Modules\Core\Param\Views\add', $this->data);
         }
     }
 
@@ -132,7 +132,7 @@ class Param extends \hamkamannan\adminigniter\Controllers\BaseController
         }
         $this->data['message'] = $this->validation->getErrors() ? $this->validation->listErrors() : $this->session->getFlashdata('message');
         $this->data['param'] = $param;
-        echo view(APPPATH.'Modules/Core/Param/Views/update', $this->data);
+        echo view('hamkamannan\adminigniter\Modules\Core\Param\Views\update', $this->data);
     }
 
     public function delete(int $id = 0)

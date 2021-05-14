@@ -48,7 +48,7 @@ class Reference extends \hamkamannan\adminigniter\Controllers\BaseController
         $this->data['title'] = 'Referensi';
         $this->data['message'] = $this->validation->getErrors() ? $this->validation->listErrors() : $this->session->getFlashdata('message');
         $this->data['references'] = $references;
-        echo view(APPPATH.'Modules/Core/Reference/Views/list', $this->data);
+        echo view('hamkamannan\adminigniter\Modules\Core\Reference\Views\list', $this->data);
     }
 
     public function delete(int $id = 0)

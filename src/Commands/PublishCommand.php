@@ -79,21 +79,27 @@ class PublishCommand extends BaseCommand
         }
 
         // Migration
-        if (CLI::prompt('Publish Migration?', ['y', 'n']) == 'y')
+        if (CLI::prompt('Publish Database Migration?', ['y', 'n']) == 'y')
         {
             $this->publishMigration();
+        }
+
+        // Seed
+        if (CLI::prompt('Publish Database Seed?', ['y', 'n']) == 'y')
+        {
+            $this->publishSeed();
         }
 
         // Public Asset
         if (CLI::prompt('Copy Public Assets?', ['y', 'n']) == 'y')
         {
-            $this->publishAssets();
+            $this->publishAsset();
         }
 
         // Patch View (HMVC)
         if (CLI::prompt('Patch View for HMVC?', ['y', 'n']) == 'y')
         {
-            $this->publishPatchs();
+            $this->publishPatch();
         }
     }
 
@@ -119,15 +125,27 @@ class PublishCommand extends BaseCommand
         }
     }
 
-    protected function publishAssets()
+    protected function publishSeed()
     {
-        $src = $this->sourcePath . '/Assets/public/';
+        $map = directory_map($this->sourcePath.'/Database/Seeds');
+
+        foreach ($map as $file) {
+            $content = file_get_contents("{$this->sourcePath}/Database/Seeds/{$file}");
+            $content = str_replace('namespace hamkamannan\adminigniter\Database\Seeds', 'namespace '.APP_NAMESPACE.'\Database\Seeds', $content);
+
+            $this->writeFile("Database/Seeds/{$file}", $content);
+        }
+    }
+
+    protected function publishAsset()
+    {
+        $src = $this->sourcePath . '/Asset/public/';
         $dst = ROOTPATH . 'public/';
 
         $this->recurseCopy($src, $dst);
     }
 
-    protected function publishPatchs()
+    protected function publishPatch()
     {
         $src = $this->sourcePath . '/Assets/patch/View.php.bak';
         $dst = ROOTPATH . 'vendor/codeigniter4/framework/system/View/View.php';

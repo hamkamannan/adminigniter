@@ -65,7 +65,7 @@ class InstallCommand extends BaseCommand
         try {
             $this->call('adminigniter:publish');
             // migrate all first
-            $this->call('migrate');
+            $this->call('migrate -n "hamkamannan\adminigniter" ');
             // then seed data
             $seeder = Database::seeder();
             $seeder->call('hamkamannan\adminigniter\Database\Seeds\AdminigniterSeeder');

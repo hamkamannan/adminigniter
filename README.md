@@ -132,10 +132,10 @@ Publish Database Migration? [y, n]: y
 Publish Database Seed? [y, n]: y
   created: Database/Seeds/AdminigniterSeeder.php
 Copy Public Assets? [y, n]: y
-  created: ROOTPATH. 'public/assets/*'
-  created: ROOTPATH. 'public/themes/*'
+  created: public/assets/*
+  created: public/themes/*
 Patch View for HMVC? [y, n]: y
-  created: ROOTPATH. 'vendor/codeigniter4/framework/system/View/View.php'
+  created: vendor/codeigniter4/framework/system/View/View.php
 ```
 
 **5.** Run development server:

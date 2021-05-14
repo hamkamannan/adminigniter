@@ -46,7 +46,7 @@ class Menu extends \hamkamannan\adminigniter\Controllers\BaseController
 
     public function create()
     {
-        $slug = $this->request->getVar('slug') ?? 'side-menu';
+        $slug = $this->request->getVar('slug') ?? 'backend-menu';
         if (!is_allowed('menu/create')) {
             set_message('toastr_msg', lang('App.permission.not.have'));
             set_message('toastr_type', 'error');
@@ -93,7 +93,7 @@ class Menu extends \hamkamannan\adminigniter\Controllers\BaseController
 
     public function edit(int $id = 0)
     {
-        $slug = $this->request->getVar('slug') ?? 'side-menu';
+        $slug = $this->request->getVar('slug') ?? 'backend-menu';
 
         if (!is_allowed('menu/update')) {
             set_message('toastr_msg', lang('App.permission.not.have'));
@@ -136,7 +136,7 @@ class Menu extends \hamkamannan\adminigniter\Controllers\BaseController
 
     public function delete(int $id = 0)
     {
-        $slug = $this->request->getVar('slug') ?? 'side-menu';
+        $slug = $this->request->getVar('slug') ?? 'backend-menu';
 
         if (!is_allowed('menu/delete')) {
             set_message('toastr_msg', lang('App.permission.not.have'));

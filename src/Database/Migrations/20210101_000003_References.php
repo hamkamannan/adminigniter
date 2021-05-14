@@ -6,17 +6,10 @@ use CodeIgniter\Database\Migration;
 
 class References extends Migration
 {
-	protected $config;
-	private $tables = [];
-
 	public function up()
 	{
-		$this->config = config('Core');
-		$this->DBGroup = $this->config->databaseGroupName ?? '';
-		$this->tables = $this->config->tables;
-
 		// Drop table 'references' if it exists
-		$this->forge->dropTable($this->tables['references'], true);
+		$this->forge->dropTable('c_references', true);
 
 		// Table structure for table 'references'
 		$this->forge->addField([
@@ -81,17 +74,13 @@ class References extends Migration
 			],
 		]);
 		$this->forge->addKey('id', true);
-		$this->forge->createTable($this->tables['references']);
+		$this->forge->createTable('c_references');
 	}
 
 	//--------------------------------------------------------------------
 
 	public function down()
 	{
-		$this->config = config('Core');
-		$this->DBGroup = $this->config->databaseGroupName ?? '';
-		$this->tables = $this->config->tables;
-
-		$this->forge->dropTable($this->tables['references'], true);
+		$this->forge->dropTable('c_references', true);
 	}
 }

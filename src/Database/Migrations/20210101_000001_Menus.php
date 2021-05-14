@@ -6,17 +6,10 @@ use CodeIgniter\Database\Migration;
 
 class Menus extends Migration
 {
-	protected $config;
-	private $tables = [];
-
 	public function up()
 	{
-		$this->config = config('Core');
-		$this->DBGroup = $this->config->databaseGroupName ?? '';
-		$this->tables = $this->config->tables;
-
 		// c_menus_categories
-		$this->forge->dropTable($this->tables['menus_categories'], true);
+		$this->forge->dropTable('c_menus_categories', true);
 		$this->forge->addField([
 			'id' => [
 				'type' => 'MEDIUMINT',
@@ -74,10 +67,10 @@ class Menus extends Migration
 			],
 		]);
 		$this->forge->addKey('id', true);
-		$this->forge->createTable($this->tables['menus_categories']);
+		$this->forge->createTable('c_menus_categories');
 
-		// Drop table 'menus' if it exists
-		$this->forge->dropTable($this->tables['menus'], true);
+		// Drop table 'c_menus' if it exists
+		$this->forge->dropTable('c_menus', true);
 
 		// Table structure for table 'moduels'
 		$this->forge->addField([
@@ -162,18 +155,14 @@ class Menus extends Migration
 			],
 		]);
 		$this->forge->addKey('id', true);
-		$this->forge->createTable($this->tables['menus']);
+		$this->forge->createTable('c_menus');
 	}
 
 	//--------------------------------------------------------------------
 
 	public function down()
 	{
-		$this->config = config('Core');
-		$this->DBGroup = $this->config->databaseGroupName ?? '';
-		$this->tables = $this->config->tables;
-
-		$this->forge->dropTable($this->tables['menus'], true);
-		$this->forge->dropTable($this->tables['menus_categories'], true);
+		$this->forge->dropTable('c_menus', true);
+		$this->forge->dropTable('c_menus_categories', true);
 	}
 }

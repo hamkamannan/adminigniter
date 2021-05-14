@@ -1,7 +1,7 @@
 <?php
 $request = \Config\Services::request();
 $request->uri->setSilent();
-$slug = 'side-menu';
+$slug = 'backend-menu';
 ?>
 
 <div class="modal fade" id="modal_create" tabindex="-1" role="dialog" aria-hidden="true">

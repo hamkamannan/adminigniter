@@ -2,7 +2,7 @@
 $baseModel = new \hamkamannan\adminigniter\Models\BaseModel();
 $request = \Config\Services::request();
 $request->uri->setSilent();
-$slug = $request->getVar('slug') ?? 'side-menu';
+$slug = $request->getVar('slug') ?? 'backend-menu';
 
 $baseModel->setTable('c_menus_categories');
 $categories = $baseModel
@@ -91,7 +91,7 @@ $category = $baseModel
                                             <div class="widget-heading"><?=$row->name?></div>
                                         </div>
                                         <div class="widget-content-right">
-                                            <?php if($row->slug != 'side-menu' && $row->slug != 'top-menu'): ?>
+                                            <?php if($row->slug != 'backend-menu' && $row->slug != 'frontend-menu'): ?>
                                                 <?php if(is_allowed('menu/update')):?>
                                                     <a href="javascript:void(0);" data-href="<?= base_url('api/menu/category_detail/' . $row->id); ?>" data-toggle="tooltip" data-placement="top" title="Ubah Kategori" class="btn btn-xs btn-warning show-data"><i class="pe-7s-note font-weight-bold"> </i></a>
                                                 <?php endif;?>

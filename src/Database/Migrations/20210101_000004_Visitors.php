@@ -6,18 +6,10 @@ use CodeIgniter\Database\Migration;
 
 class Visitors extends Migration
 {
-	protected $config;
-	private $tables = [];
-
 	public function up()
 	{
-		//
-		$this->config = config('Core');
-		$this->DBGroup = $this->config->databaseGroupName ?? '';
-		$this->tables = $this->config->tables;
-
 		// Drop table 'users' if it exists
-		$this->forge->dropTable($this->tables['visitors'], true);
+		$this->forge->dropTable('c_visitors', true);
 
 		// Table structure for table 'users'
 		$this->forge->addField([
@@ -96,18 +88,13 @@ class Visitors extends Migration
 			],
 		]);
 		$this->forge->addKey('id', true);
-		$this->forge->createTable($this->tables['visitors'], false);
+		$this->forge->createTable('c_visitors', false);
 	}
 
 	//--------------------------------------------------------------------
 
 	public function down()
 	{
-		//
-		$this->config = config('Core');
-		$this->DBGroup = $this->config->databaseGroupName ?? '';
-		$this->tables = $this->config->tables;
-
-		$this->forge->dropTable($this->tables['visitors'], true);
+		$this->forge->dropTable('c_visitors', true);
 	}
 }

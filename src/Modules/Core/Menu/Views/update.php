@@ -1,7 +1,7 @@
 <?php
 $request = \Config\Services::request();
 $request->uri->setSilent();
-$slug = $request->getVar('slug') ?? 'side-menu';
+$slug = $request->getVar('slug') ?? 'backend-menu';
 
 $baseModel = new \hamkamannan\adminigniter\Models\BaseModel();
 $baseModel->setTable('c_references');

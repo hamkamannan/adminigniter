@@ -6,18 +6,10 @@ use CodeIgniter\Database\Migration;
 
 class Logs extends Migration
 {
-	protected $config;
-	private $tables = [];
-
 	public function up()
 	{
-		//
-		$this->config = config('Core');
-		$this->DBGroup = $this->config->databaseGroupName ?? '';
-		$this->tables = $this->config->tables;
-
-		// Drop table 'login_attempts' if it exists
-		$this->forge->dropTable($this->tables['logs'], true);
+		// Drop table 'c_logs' if it exists
+		$this->forge->dropTable('c_logs', true);
 
 		// Table structure for table 'login_attempts'
 		$this->forge->addField([
@@ -82,18 +74,13 @@ class Logs extends Migration
 			],
 		]);
 		$this->forge->addKey('id', true);
-		$this->forge->createTable($this->tables['logs']);
+		$this->forge->createTable('c_logs');
 	}
 
 	//--------------------------------------------------------------------
 
 	public function down()
 	{
-		//
-		$this->config = config('Core');
-		$this->DBGroup = $this->config->databaseGroupName ?? '';
-		$this->tables = $this->config->tables;
-
-		$this->forge->dropTable($this->tables['logs'], true);
+		$this->forge->dropTable('c_logs', true);
 	}
 }

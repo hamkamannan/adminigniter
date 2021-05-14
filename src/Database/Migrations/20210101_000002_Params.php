@@ -6,20 +6,12 @@ use CodeIgniter\Database\Migration;
 
 class Params extends Migration
 {
-	protected $config;
-	private $tables = [];
-
 	public function up()
 	{
-		//
-		$this->config = config('Core');
-		$this->DBGroup = $this->config->databaseGroupName ?? '';
-		$this->tables = $this->config->tables;
+		// Drop table 'c_params' if it exists
+		$this->forge->dropTable('c_params', true);
 
-		// Drop table 'params' if it exists
-		$this->forge->dropTable($this->tables['params'], true);
-
-		// Table structure for table 'params'
+		// Table structure for table 'c_params'
 		$this->forge->addField([
 			'id' => [
 				'type' => 'MEDIUMINT',
@@ -66,18 +58,13 @@ class Params extends Migration
 			],
 		]);
 		$this->forge->addKey('id', true);
-		$this->forge->createTable($this->tables['params']);
+		$this->forge->createTable('c_params');
 	}
 
 	//--------------------------------------------------------------------
 
 	public function down()
 	{
-		//
-		$this->config = config('Core');
-		$this->DBGroup = $this->config->databaseGroupName ?? '';
-		$this->tables = $this->config->tables;
-
-		$this->forge->dropTable($this->tables['params'], true);
+		$this->forge->dropTable('c_params', true);
 	}
 }

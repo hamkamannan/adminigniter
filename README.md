@@ -78,8 +78,7 @@ Publish Language file? [y, n]: n
 > NOTE: Everything about how to configure auth you can find add [Myth/Auth](https://github.com/lonnieezell/myth-auth).
 
 
-Is it ready yet? Not so fast!! ;-) After publishing `Config/Auth.php` you need to change
-`public $views` with these lines below:
+Open `Config/Auth.php` find `public $views` and changes with these lines below:
 ```php
 public $views = [
     'login'           => 'hamkamannan\adminigniter\Views\auth\login',
@@ -88,6 +87,25 @@ public $views = [
     'reset'           => 'hamkamannan\adminigniter\Views\auth\reset',
     'emailForgot'     => 'hamkamannan\adminigniter\Views\auth\emails\forgot',
     'emailActivation' => 'hamkamannan\adminigniter\Views\auth\emails\activation',
+];
+```
+
+Open `Config/Auth.php` find `variables` and changes with these lines below:
+```php
+public $defaultUserGroup = 'user';
+public $allowRegistration = true;
+public $requireActivation = false; 
+public $activeResetter = false;
+public $allowRemembering = true;
+```
+
+Open `Config/Auth.php` find `public $passwordValidators` and changes with these lines below:
+```php
+public $passwordValidators = [
+  'Myth\Auth\Authentication\Passwords\CompositionValidator',
+  'Myth\Auth\Authentication\Passwords\NothingPersonalValidator',
+  'Myth\Auth\Authentication\Passwords\DictionaryValidator',
+  'Myth\Auth\Authentication\Passwords\PwnedValidator',
 ];
 ```
 
@@ -101,9 +119,23 @@ public $aliases = [
 ```
 
 **4.** Run publish, migrate and seed adminigniter
-
 ```bash
-php spark adminigniter:install
+php spark adminigniter:publish
+
+Publish Database Migration? [y, n]: y
+  created: Database/Migrations/20210101_000003_References.php
+  created: Database/Migrations/20210101_000005_Logs.php
+  created: Database/Migrations/20210101_000002_Params.php
+  created: Database/Migrations/20210101_000000_AuthAlterUsers.php
+  created: Database/Migrations/20210101_000001_Menus.php
+  created: Database/Migrations/20210101_000004_Visitors.php
+Publish Database Seed? [y, n]: y
+  created: Database/Seeds/AdminigniterSeeder.php
+Copy Public Assets? [y, n]: y
+  created: ROOTPATH. 'public/assets/*'
+  created: ROOTPATH. 'public/themes/*'
+Patch View for HMVC? [y, n]: y
+  created: ROOTPATH. 'vendor/codeigniter4/framework/system/View/View.php'
 ```
 
 **5.** Run development server:
@@ -118,8 +150,8 @@ Default user and password
 +----+--------+-------------+
 | No | User   | Password    |
 +----+--------+-------------+
-| 1  | admin  | password    |
-| 2  | user   | password    |
+| 1  | admin  | qwerty!@#   |
+| 2  | user   | qwerty!@#   |
 +----+--------+-------------+
 ```
 

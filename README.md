@@ -144,14 +144,13 @@ Patch View for HMVC? [y, n]: y
 php spark serve
 ```
 
-**6.** Open in browser http://localhost:8080/admin
+**6.** Open in browser http://localhost:8080/dashboard
 ```bash
 Default user and password
 +----+--------+-------------+
 | No | User   | Password    |
 +----+--------+-------------+
-| 1  | admin  | qwerty!@#   |
-| 2  | user   | qwerty!@#   |
+| 1  | admin  | password    |
 +----+--------+-------------+
 ```
 

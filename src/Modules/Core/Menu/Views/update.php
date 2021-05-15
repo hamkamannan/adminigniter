@@ -17,9 +17,9 @@ $menus = $baseModel
     ->where('active', '1')
     ->find_all('sort', 'asc');
 
-$baseModel->setTable('c_menus_categories');
+$baseModel->setTable('c_categories');
 $category = $baseModel
-      ->select('c_menus_categories.*')
+      ->select('c_categories.*')
       ->where('slug', $slug)
       ->row();
 ?>

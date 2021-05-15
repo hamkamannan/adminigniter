@@ -72,45 +72,46 @@ class PublishCommand extends BaseCommand
     {
         $this->determineSourcePath();
 
-        // Config
-        // if (CLI::prompt('Publish Config?', ['y', 'n']) == 'y')
-        // {
-        //     $this->publishConfig();
-        // }
+        //Config
+        if (CLI::prompt('Publish Auth Config? (Myth/Auth & Adminigniter)', ['y', 'n']) == 'y')
+        {
+            $this->publishConfig('Auth');
+            $this->publishConfig('Adminigniter');
+        }
 
         // Migration
-        if (CLI::prompt('Publish Database Migration?', ['y', 'n']) == 'y')
+        if (CLI::prompt('Publish Database Migration? (Myth/Auth & Adminigniter)', ['y', 'n']) == 'y')
         {
             $this->publishMigration();
         }
 
         // Seed
-        if (CLI::prompt('Publish Database Seed?', ['y', 'n']) == 'y')
+        if (CLI::prompt('Publish Database Seed? (Adminigniter)', ['y', 'n']) == 'y')
         {
             $this->publishSeed();
         }
 
         // Public Asset
-        if (CLI::prompt('Copy Public Assets?', ['y', 'n']) == 'y')
+        if (CLI::prompt('Copy Assets? (Adminigniter public/assets)', ['y', 'n']) == 'y')
         {
             $this->publishAsset();
         }
 
         // Patch View (HMVC)
-        if (CLI::prompt('Patch View for HMVC?', ['y', 'n']) == 'y')
+        if (CLI::prompt('Patching Codeigniter HMVC? (vendor/codeigniter4/framework/system/View/View.php)', ['y', 'n']) == 'y')
         {
             $this->publishPatch();
         }
     }
 
-    protected function publishConfig()
+    protected function publishConfig($configName = 'Adminigniter')
     {
-        $path = "{$this->sourcePath}/Config/Auth.php";
+        $path = "{$this->sourcePath}/Config/{$configName}.php";
 
         $content = file_get_contents($path);
         $content = str_replace('namespace hamkamannan\adminigniter\Config', 'namespace Config', $content);
 
-        $this->writeFile('Config/Auth.php', $content);
+        $this->writeFile("Config/{$configName}.php", $content);
     }
 
     protected function publishMigration()

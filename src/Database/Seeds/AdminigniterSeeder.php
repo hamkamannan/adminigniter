@@ -78,7 +78,7 @@ class AdminigniterSeeder extends Seeder
         $this->db->table('auth_permissions')->insertBatch($perms);
 
         // Core Params
-        $this->db->table('c_params')->truncate();
+        $this->db->table('c_parameters')->truncate();
         $params = [
             [
                 'name' => 'timezone',
@@ -276,11 +276,11 @@ class AdminigniterSeeder extends Seeder
                 'description' => '',
             ],
         ];
-        $this->db->table('c_params')->insertBatch($params);
+        $this->db->table('c_parameters')->insertBatch($params);
 
         // Core Menus - Categories
-        $this->db->table('c_menus_categories')->truncate();
-        $menus_categories = [
+        $this->db->table('c_categories')->truncate();
+        $categories = [
             [
                 'name' => 'Backend Menu',
                 'slug' => 'backend-menu',
@@ -297,7 +297,7 @@ class AdminigniterSeeder extends Seeder
                 'sort' => '3',
             ],
         ];
-        $this->db->table('c_menus_categories')->insertBatch($menus_categories);
+        $this->db->table('c_categories')->insertBatch($categories);
 
         // Core Menus - Backend
         $this->db->table('c_menus')->truncate();
@@ -310,7 +310,7 @@ class AdminigniterSeeder extends Seeder
                 'permission' => 'access',
                 'sort' => '1',
                 'type' => 'label',
-                'menu_category_id' => '1',
+                'category_id' => '1',
             ],
             [
                 'name' => 'Dashboard',
@@ -320,7 +320,7 @@ class AdminigniterSeeder extends Seeder
                 'permission' => 'access',
                 'sort' => '2',
                 'type' => 'menu',
-                'menu_category_id' => '1',
+                'category_id' => '1',
             ],
             [
                 'name' => 'Report',
@@ -330,7 +330,7 @@ class AdminigniterSeeder extends Seeder
                 'permission' => 'access',
                 'sort' => '3',
                 'type' => 'menu',
-                'menu_category_id' => '1',
+                'category_id' => '1',
             ],
             [
                 'name' => 'Activity Logs',
@@ -340,7 +340,7 @@ class AdminigniterSeeder extends Seeder
                 'permission' => 'access',
                 'sort' => '4',
                 'type' => 'menu',
-                'menu_category_id' => '1',
+                'category_id' => '1',
             ],
             [
                 'name' => 'Visitor Report',
@@ -350,7 +350,7 @@ class AdminigniterSeeder extends Seeder
                 'permission' => 'access',
                 'sort' => '5',
                 'type' => 'menu',
-                'menu_category_id' => '1',
+                'category_id' => '1',
             ],
             [
                 'name' => 'User Management',
@@ -360,7 +360,7 @@ class AdminigniterSeeder extends Seeder
                 'permission' => 'access',
                 'sort' => '6',
                 'type' => 'menu',
-                'menu_category_id' => '1',
+                'category_id' => '1',
             ],
             [
                 'name' => 'Users',
@@ -370,7 +370,7 @@ class AdminigniterSeeder extends Seeder
                 'permission' => 'access|create|read|update|delete|enable|disable',
                 'sort' => '7',
                 'type' => 'menu',
-                'menu_category_id' => '1',
+                'category_id' => '1',
             ],
             [
                 'name' => 'Roles',
@@ -380,7 +380,7 @@ class AdminigniterSeeder extends Seeder
                 'permission' => 'access|create|read|update|delete|enable|disable',
                 'sort' => '8',
                 'type' => 'menu',
-                'menu_category_id' => '1',
+                'category_id' => '1',
             ],
             [
                 'name' => 'Permissions',
@@ -390,7 +390,7 @@ class AdminigniterSeeder extends Seeder
                 'permission' => 'access|create|read|update|delete|enable|disable',
                 'sort' => '9',
                 'type' => 'menu',
-                'menu_category_id' => '1',
+                'category_id' => '1',
             ],
             [
                 'name' => 'Access',
@@ -400,7 +400,7 @@ class AdminigniterSeeder extends Seeder
                 'permission' => 'access|create|read|update|delete|enable|disable',
                 'sort' => '10',
                 'type' => 'menu',
-                'menu_category_id' => '1',
+                'category_id' => '1',
             ],
             [
                 'name' => 'Menu',
@@ -410,7 +410,7 @@ class AdminigniterSeeder extends Seeder
                 'permission' => 'access|create|read|update|delete|enable|disable',
                 'sort' => '11',
                 'type' => 'menu',
-                'menu_category_id' => '1',
+                'category_id' => '1',
             ],
             [
                 'name' => 'Setting',
@@ -420,7 +420,7 @@ class AdminigniterSeeder extends Seeder
                 'permission' => 'access|create|read|update|delete',
                 'sort' => '12',
                 'type' => 'menu',
-                'menu_category_id' => '1',
+                'category_id' => '1',
             ],
             [
                 'name' => 'Parameter',
@@ -430,7 +430,7 @@ class AdminigniterSeeder extends Seeder
                 'permission' => 'access',
                 'sort' => '13',
                 'type' => 'menu',
-                'menu_category_id' => '1',
+                'category_id' => '1',
             ],
             [
                 'name' => 'Reference',
@@ -440,7 +440,7 @@ class AdminigniterSeeder extends Seeder
                 'permission' => 'access',
                 'sort' => '14',
                 'type' => 'menu',
-                'menu_category_id' => '1',
+                'category_id' => '1',
             ],
         ];
         $this->db->table('c_menus')->insertBatch($menus_backend);
@@ -455,7 +455,7 @@ class AdminigniterSeeder extends Seeder
                 'permission' => 'access',
                 'sort' => '16',
                 'type' => 'menu',
-                'menu_category_id' => '2',
+                'category_id' => '2',
             ],
         ];
         $this->db->table('c_menus')->insertBatch($menus_reference);
@@ -470,7 +470,7 @@ class AdminigniterSeeder extends Seeder
                 'permission' => 'access',
                 'sort' => '17',
                 'type' => 'menu',
-                'menu_category_id' => '3',
+                'category_id' => '3',
             ],
         ];
         $this->db->table('c_menus')->insertBatch($menus_reference);

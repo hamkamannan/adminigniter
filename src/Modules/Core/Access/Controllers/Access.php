@@ -48,7 +48,7 @@ class Access extends \hamkamannan\adminigniter\Controllers\BaseController
             $access[] = $permission['name'];
         }
 
-        $query = $this->menuModel->where('parent', '0')->where('menu_category_id', '1');
+        $query = $this->menuModel->where('parent', '0')->where('category_id', '1');
         if(!empty($keyword)){
             $query->groupStart();
             $query->like('name', $keyword);

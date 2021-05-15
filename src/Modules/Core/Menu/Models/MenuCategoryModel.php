@@ -4,7 +4,7 @@ namespace hamkamannan\adminigniter\Modules\Core\Menu\Models;
 
 class MenuCategoryModel extends \hamkamannan\adminigniter\Models\BaseModel
 {
-    protected $table      = 'c_menus_categories';
+    protected $table      = 'c_categories';
     protected $primaryKey = 'id';
     protected $returnType     = 'object';
     protected $useSoftDeletes = false;

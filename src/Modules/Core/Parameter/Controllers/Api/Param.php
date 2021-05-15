@@ -1,6 +1,6 @@
 <?php
 
-namespace hamkamannan\adminigniter\Modules\Core\Param\Controllers\Api;
+namespace hamkamannan\adminigniter\Modules\Core\Parameter\Controllers\Api;
 
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
@@ -9,7 +9,7 @@ use CodeIgniter\Files\File;
 class Param extends ResourceController
 {
 	use ResponseTrait;
-	protected $paramModel;
+	protected $parameterModel;
 	protected $validation;
 	protected $session;
 	function __construct()
@@ -21,7 +21,7 @@ class Param extends ResourceController
 		
 		helper(['app','auth']);
 
-		$this->paramModel = new \hamkamannan\adminigniter\Modules\Core\Param\Models\ParamModel();
+		$this->parameterModel = new \hamkamannan\adminigniter\Modules\Core\Parameter\Models\ParameterModel();
 	}
 
 	public function create()
@@ -33,7 +33,7 @@ class Param extends ResourceController
 				$name = $this->request->getPost('name');
 				$value = $this->request->getPost('value');
 
-				$param = $this->paramModel->where('name', $name)->first();
+				$param = $this->parameterModel->where('name', $name)->first();
 
 				if ($param) {
 					$update_data = array(
@@ -41,14 +41,14 @@ class Param extends ResourceController
 						'value' => $value,
 					);
 
-					$paramSave = $this->paramModel->update($param->id, $update_data);
+					$paramSave = $this->parameterModel->update($param->id, $update_data);
 				} else {
 					$save_data = array(
 						'name' => $name,
 						'value' => $value,
 					);
 
-					$paramSave = $this->paramModel->insert($save_data);
+					$paramSave = $this->parameterModel->insert($save_data);
 				}
 
 				if ($paramSave) {
@@ -87,14 +87,14 @@ class Param extends ResourceController
 		if ($this->request->getPost()) {
 			if ($this->validation->withRequest($this->request)->run()) {
 				$name = $this->request->getPost('name');
-				$param = $this->paramModel->where('name', $name)->first();
+				$param = $this->parameterModel->where('name', $name)->first();
 
 				$update_data = array(
 					'name' => $name,
 					'value' => $this->request->getPost('status'),
 				);
 
-				$paramUpdate = $this->paramModel->update($param->id, $update_data);
+				$paramUpdate = $this->parameterModel->update($param->id, $update_data);
 				if ($paramUpdate) {
 					$this->session->setFlashdata('toastr_msg', 'Param berhasil diupdate');
 					$this->session->setFlashdata('toastr_type', 'success');

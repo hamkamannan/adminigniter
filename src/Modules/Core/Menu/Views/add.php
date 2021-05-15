@@ -18,9 +18,9 @@ $menus = $baseModel
     ->where('active', '1')
     ->find_all('sort', 'asc');
 
-$baseModel->setTable('c_menus_categories');
+$baseModel->setTable('c_categories');
 $category = $baseModel
-      ->select('c_menus_categories.*')
+      ->select('c_categories.*')
       ->where('slug', $slug)
       ->row();
 ?>
@@ -137,7 +137,7 @@ $category = $baseModel
                               </div>
                         </div>
                         <div class="form-group">
-                              <input type="hidden" name="menu_category_id" value="<?=$category->id?>">
+                              <input type="hidden" name="category_id" value="<?=$category->id?>">
                               <button type="submit" class="btn btn-primary" name="submit">Simpan</button>
                         </div>
                   </form>

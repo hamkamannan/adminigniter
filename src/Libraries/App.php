@@ -4,11 +4,11 @@ namespace hamkamannan\adminigniter\Libraries;
 
 class App
 {
-    protected $paramModel;
+    protected $parameterModel;
     protected $logModel;
     public function __construct()
     {
-        $this->paramModel = new \hamkamannan\adminigniter\Modules\Core\Param\Models\ParamModel();
+        $this->parameterModel = new \hamkamannan\adminigniter\Modules\Core\Parameter\Models\ParameterModel();
         $this->logModel = new \hamkamannan\adminigniter\Models\LogModel();
         
         helper(['url', 'text', 'form', 'auth', 'app', 'html', 'cookie']);
@@ -52,8 +52,8 @@ class App
                 'name' => $name,
                 'value' => $value
             );
-            $ret = $this->paramModel->insert($data);
-            $params = $this->paramModel->findAll();
+            $ret = $this->parameterModel->insert($data);
+            $params = $this->parameterModel->findAll();
             if ($set_cookie) {
                 set_cookie('params', json_encode($params), 3600 * 24 * 1);
             }
@@ -67,12 +67,12 @@ class App
         if ($this->parameterExists($name, $value) === false) {
             $this->addParameter($name, $value);
         } else {
-            $param = $this->paramModel->where('name', $name)->first();
+            $param = $this->parameterModel->where('name', $name)->first();
             $data = array(
                 'value' => $value
             );
-            $ret = $this->paramModel->update($param->id, $data);
-            $params = $this->paramModel->findAll();
+            $ret = $this->parameterModel->update($param->id, $data);
+            $params = $this->parameterModel->findAll();
 
             if ($set_cookie) {
                 set_cookie('params', json_encode($params), 3600 * 24 * 1);
@@ -83,15 +83,15 @@ class App
 
     public function deleteParam($name =  null)
     {
-        $param = $this->paramModel->where('name', $name)->first();
-        return $this->paramModel->delete($param->id);
+        $param = $this->parameterModel->where('name', $name)->first();
+        return $this->parameterModel->delete($param->id);
     }
 
     public function parameterExists($name =  null, $set_cookie = false)
     {
         $params = json_decode(get_cookie('params'));
         if (!$params) {
-            $params = $this->paramModel->findAll();
+            $params = $this->parameterModel->findAll();
 
             if ($set_cookie) {
                 set_cookie('params', json_encode($params), 3600 * 24 * 1);

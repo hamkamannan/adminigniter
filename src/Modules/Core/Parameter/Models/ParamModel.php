@@ -1,10 +1,10 @@
 <?php
 
-namespace hamkamannan\adminigniter\Modules\Core\Param\Models;
+namespace hamkamannan\adminigniter\Modules\Core\Parameter\Models;
 
-class ParamModel extends \hamkamannan\adminigniter\Models\BaseModel
+class ParameterModel extends \hamkamannan\adminigniter\Models\BaseModel
 {
-    protected $table      = 'c_params'; 
+    protected $table      = 'c_parameters'; 
     protected $primaryKey = 'id';
     protected $returnType     = 'object';
     protected $useSoftDeletes = false;

@@ -93,11 +93,11 @@ if(!function_exists('display_menu_backend')) {
         $request->uri->setSilent();
         $baseModel = new \hamkamannan\adminigniter\Models\BaseModel();
 
-        $query = $baseModel->query("SELECT a.id, a.icon, a.name, a.controller, a.type, a.menu_category_id, deriv.childs 
+        $query = $baseModel->query("SELECT a.id, a.icon, a.name, a.controller, a.type, a.category_id, deriv.childs 
             FROM `c_menus` a LEFT OUTER JOIN (
                 SELECT parent, COUNT(*) AS childs 
                     FROM `c_menus` GROUP BY parent
-                ) deriv ON a.id = deriv.parent WHERE  a.parent= " . $parent." and a.active = 1 and a.menu_category_id = '1' 
+                ) deriv ON a.id = deriv.parent WHERE  a.parent= " . $parent." and a.active = 1 and a.category_id = '1' 
             ORDER BY `sort` ASC");
         $result = $query->getResult();
 
@@ -144,11 +144,11 @@ if(!function_exists('display_menu_frontend')) {
         $request->uri->setSilent();
         $baseModel = new \hamkamannan\adminigniter\Models\BaseModel();
 
-        $query = $baseModel->query("SELECT a.id, a.icon, a.name, a.controller, a.type, a.menu_category_id, deriv.childs 
+        $query = $baseModel->query("SELECT a.id, a.icon, a.name, a.controller, a.type, a.category_id, deriv.childs 
             FROM `c_menus` a LEFT OUTER JOIN (
                 SELECT parent, COUNT(*) AS childs 
                     FROM `c_menus` GROUP BY parent
-                ) deriv ON a.id = deriv.parent WHERE  a.parent= " . $parent." and a.active = 1 and a.menu_category_id = '2' 
+                ) deriv ON a.id = deriv.parent WHERE  a.parent= " . $parent." and a.active = 1 and a.category_id = '2' 
             ORDER BY `sort` ASC");
         $result = $query->getResult();
 
@@ -205,10 +205,10 @@ if(!function_exists('display_menu_frontend')) {
 }
 
 if (!function_exists('get_menu_category_slug')) {
-    function get_menu_category_slug($menu_category_id)
+    function get_menu_category_slug($category_id)
     {
         $menuCategoryModel = new \hamkamannan\adminigniter\Modules\Core\Menu\Models\MenuCategoryModel();
-        $category = $menuCategoryModel->find($menu_category_id);
+        $category = $menuCategoryModel->find($category_id);
         return $category->slug;
     }
 }
@@ -218,9 +218,9 @@ if (!function_exists('display_menu_dropdown')) {
     {
         $action = '';
         $action .= '<div class="pull-right">';
-        $action .= '<a href="'.base_url('menu/edit/' . $row->id.'?slug='.get_menu_category_slug($row->menu_category_id)).'" data-toggle="tooltip" data-placement="top" title="Ubah Menu" class="btn btn-xs btn-warning"><i class="pe-7s-note font-weight-bold"></i></a>&nbsp;';
-        $action .= '<a href="javascript:void(0)" data-href="'.base_url('menu/delete/' . $row->id.'?slug='.get_menu_category_slug($row->menu_category_id)).'" data-toggle="tooltip" data-placement="top" title="Hapus Menu" class="btn btn-xs btn-danger remove-data"><i class="pe-7s-trash font-weight-bold"></i></a>&nbsp;';
-        $action .= '<a href="'.base_url('menu/create?slug='.get_menu_category_slug($row->menu_category_id).'&parent_id=' . $row->id).'" data-toggle="tooltip" data-placement="top" title="Tambah Sub Menu" class="btn btn-xs btn-success"><i class="pe-7s-angle-down-circle font-weight-bold"></i></a>';    
+        $action .= '<a href="'.base_url('menu/edit/' . $row->id.'?slug='.get_menu_category_slug($row->category_id)).'" data-toggle="tooltip" data-placement="top" title="Ubah Menu" class="btn btn-xs btn-warning"><i class="pe-7s-note font-weight-bold"></i></a>&nbsp;';
+        $action .= '<a href="javascript:void(0)" data-href="'.base_url('menu/delete/' . $row->id.'?slug='.get_menu_category_slug($row->category_id)).'" data-toggle="tooltip" data-placement="top" title="Hapus Menu" class="btn btn-xs btn-danger remove-data"><i class="pe-7s-trash font-weight-bold"></i></a>&nbsp;';
+        $action .= '<a href="'.base_url('menu/create?slug='.get_menu_category_slug($row->category_id).'&parent_id=' . $row->id).'" data-toggle="tooltip" data-placement="top" title="Tambah Sub Menu" class="btn btn-xs btn-success"><i class="pe-7s-angle-down-circle font-weight-bold"></i></a>';    
         $action .= '</div>';
 
         return $action;
@@ -228,13 +228,13 @@ if (!function_exists('display_menu_dropdown')) {
 }
 
 if(!function_exists('display_menu_module')) {
-	function display_menu_module($menu_category_id, $parent, $level) {
+	function display_menu_module($category_id, $parent, $level) {
         $baseModel = new \hamkamannan\adminigniter\Models\BaseModel();
-        $query = $baseModel->query("SELECT a.id, a.name as label, a.type, a.active, a.controller, a.controller as link, a.menu_category_id, deriv.count 
+        $query = $baseModel->query("SELECT a.id, a.name as label, a.type, a.active, a.controller, a.controller as link, a.category_id, deriv.count 
             FROM `c_menus` a LEFT OUTER JOIN (
                 SELECT parent, COUNT(*) AS count 
                     FROM `c_menus` GROUP BY parent
-                ) deriv ON a.id = deriv.parent WHERE  a.parent= ".$parent." and a.menu_category_id = ".$menu_category_id."
+                ) deriv ON a.id = deriv.parent WHERE  a.parent= ".$parent." and a.category_id = ".$category_id."
             ORDER BY `sort` ASC");
         $result = $query->getResult();
 
@@ -257,7 +257,7 @@ if(!function_exists('display_menu_module')) {
                     $ret .= display_menu_dropdown($row);
 		            
 		            $ret .= '</div>';
-					$ret .= display_menu_module($menu_category_id, $row->id, $level + 1);
+					$ret .= display_menu_module($category_id, $row->id, $level + 1);
 					$ret .= "</li>";
 		        } elseif ($row->count==0) {
 		            $ret .= '<li class="dd-item dd3-item '.($row->active ? '' : 'menu-toggle-activate_inactive').' menu-toggle-activate" data-id="'.$row->id.'" data-status="'.$row->active.'">';
@@ -283,14 +283,14 @@ if(!function_exists('display_menu_module')) {
 }
 
 if(!function_exists('display_menu_option')) {
-    function display_menu_option($menu_category_id, $parent, $level = 0, $selected = null, $disabled = false) {
+    function display_menu_option($category_id, $parent, $level = 0, $selected = null, $disabled = false) {
         $baseModel = new \hamkamannan\adminigniter\Models\BaseModel();
 
-        $query = $baseModel->query("SELECT a.id, a.icon, a.name, a.controller, a.type, a.menu_category_id,  deriv.childs 
+        $query = $baseModel->query("SELECT a.id, a.icon, a.name, a.controller, a.type, a.category_id,  deriv.childs 
             FROM `c_menus` a LEFT OUTER JOIN (
                 SELECT parent, COUNT(*) AS childs 
                     FROM `c_menus` GROUP BY parent
-                ) deriv ON a.id = deriv.parent WHERE  a.parent= " . $parent." and a.active = 1 and a.menu_category_id = ".$menu_category_id." 
+                ) deriv ON a.id = deriv.parent WHERE  a.parent= " . $parent." and a.active = 1 and a.category_id = ".$category_id." 
             ORDER BY `sort` ASC");
         $menus = $query->getResult();
 
@@ -303,7 +303,7 @@ if(!function_exists('display_menu_option')) {
                 $label = str_repeat('&nbsp;&nbsp;&nbsp;', ($level)) .'&#9507; '.$row->name;                
                 $result .= '<option value="'.$row->id.'" '.$attribute_selected.' '.$attribute_disabled.'>'.$label.'</option>';
                 if ($row->childs > 0) {
-                    $result .= display_menu_option($menu_category_id, $row->id, $level + 1, $selected);
+                    $result .= display_menu_option($category_id, $row->id, $level + 1, $selected);
                 } 
             }
         }
@@ -324,13 +324,13 @@ if (!function_exists('display_action_menu_reference')) {
 }
 
 if(!function_exists('display_menu_reference')) {
-	function display_menu_reference($menu_category_id, $parent, $level) {
+	function display_menu_reference($category_id, $parent, $level) {
         $baseModel = new \hamkamannan\adminigniter\Models\BaseModel();
-        $query = $baseModel->query("SELECT a.id, a.name as label, a.type, a.active, a.controller, a.controller as link, a.menu_category_id, deriv.count 
+        $query = $baseModel->query("SELECT a.id, a.name as label, a.type, a.active, a.controller, a.controller as link, a.category_id, deriv.count 
             FROM `c_menus` a LEFT OUTER JOIN (
                 SELECT parent, COUNT(*) AS count 
                     FROM `c_menus` GROUP BY parent
-                ) deriv ON a.id = deriv.parent WHERE  a.active = 1 and a.parent= ".$parent." and a.menu_category_id = ".$menu_category_id."
+                ) deriv ON a.id = deriv.parent WHERE  a.active = 1 and a.parent= ".$parent." and a.category_id = ".$category_id."
             ORDER BY `sort` ASC");
         $result = $query->getResult();
 
@@ -351,7 +351,7 @@ if(!function_exists('display_menu_reference')) {
 		        	}
 		            
 		            $ret .= '</div>';
-					$ret .= display_menu_reference($menu_category_id, $row->id, $level + 1);
+					$ret .= display_menu_reference($category_id, $row->id, $level + 1);
 					$ret .= "</li>";
 		        } elseif ($row->count==0) {
 		            $ret .= '<li class="dd-item dd3-item '.($row->active ? '' : 'menu-toggle-activate_inactive').' menu-toggle-activate" data-id="'.$row->id.'" data-status="'.$row->active.'">';

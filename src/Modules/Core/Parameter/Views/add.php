@@ -32,7 +32,7 @@
             <div class="card-body">
                   <div id="infoMessage"><?= $message ?? ''; ?></div>
                   <?= get_message('message'); ?>
-                  <form id="frm_create_group" class="col-md-12 mx-auto" method="post" action="<?= base_url('param/create'); ?>">
+                  <form id="frm_create_group" class="col-md-12 mx-auto" method="post" action="<?= base_url('parameter/create'); ?>">
                         <div class="form-row">
                               <div class="col-md-6">
                                     <div class="position-relative form-group">

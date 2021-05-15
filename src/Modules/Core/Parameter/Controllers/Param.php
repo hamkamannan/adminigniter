@@ -1,6 +1,6 @@
 <?php
 
-namespace hamkamannan\adminigniter\Modules\Core\Param\Controllers;
+namespace hamkamannan\adminigniter\Modules\Core\Parameter\Controllers;
 
 use DataTables\DataTables;
 
@@ -12,7 +12,7 @@ class Param extends \hamkamannan\adminigniter\Controllers\BaseController
     
     function __construct()
     {
-        $this->paramModel = new \hamkamannan\adminigniter\Modules\Core\Param\Models\ParamModel();
+        $this->parameterModel = new \hamkamannan\adminigniter\Modules\Core\Parameter\Models\ParameterModel();
 
         $this->auth = \Myth\Auth\Config\Services::authentication();
         $this->authorize = \Myth\Auth\Config\Services::authorization();
@@ -29,7 +29,7 @@ class Param extends \hamkamannan\adminigniter\Controllers\BaseController
 
     public function index()
     {
-        if (!is_allowed('param/access')) {
+        if (!is_allowed('parameter/access')) {
             set_message('toastr_msg', lang('App.permission.not.have'));
             set_message('toastr_type', 'error');
             return redirect()->to('/dashboard');
@@ -37,27 +37,27 @@ class Param extends \hamkamannan\adminigniter\Controllers\BaseController
 
         $this->data['title'] = 'Parameter';
         $this->data['message'] = $this->validation->getErrors() ? $this->validation->listErrors() : $this->session->getFlashdata('message');
-        echo view('hamkamannan\adminigniter\Modules\Core\Param\Views\list', $this->data);
+        echo view('hamkamannan\adminigniter\Modules\Core\Parameter\Views\list', $this->data);
     }
 
     public function detail(int $id)
     {
-        if (!is_allowed('param/read')) {
+        if (!is_allowed('parameter/read')) {
             set_message('toastr_msg', lang('App.permission.not.have'));
             set_message('toastr_type', 'error');
             return redirect()->to('/dashboard');
         }
 
         $this->data['title'] = 'Detail Parameter';
-        $param = $this->paramModel->find($id)->row();
+        $param = $this->parameterModel->find($id)->row();
         $this->data['param'] = $param;
         $this->data['auth'] = $this->auth;
-        echo view('hamkamannan\adminigniter\Modules\Core\Param\Views\view', $this->data);
+        echo view('hamkamannan\adminigniter\Modules\Core\Parameter\Views\view', $this->data);
     }
 
     public function create()
     {
-        if (!is_allowed('param/create')) {
+        if (!is_allowed('parameter/create')) {
             set_message('toastr_msg', lang('App.permission.not.have'));
             set_message('toastr_type', 'error');
             return redirect()->to('/dashboard');
@@ -73,9 +73,9 @@ class Param extends \hamkamannan\adminigniter\Controllers\BaseController
                 'description' => $this->request->getPost('description'),
             );
 
-            $newParamId = $this->paramModel->insert($save_data);
+            $newParamId = $this->parameterModel->insert($save_data);
             if ($newParamId) {
-                add_log('Tambah Parameter', 'param', 'create', 'c_params', $newParamId);
+                add_log('Tambah Parameter', 'param', 'create', 'c_parameters', $newParamId);
                 set_message('toastr_msg', 'Parameter berhasil disimpan');
                 set_message('toastr_type', 'success');
                 return redirect()->to('/param');
@@ -86,13 +86,13 @@ class Param extends \hamkamannan\adminigniter\Controllers\BaseController
         } else {
             $message = $this->validation->getErrors() ? $this->validation->listErrors() : $this->session->getFlashdata('message');
             $this->data['message'] = $message;
-            echo view('hamkamannan\adminigniter\Modules\Core\Param\Views\add', $this->data);
+            echo view('hamkamannan\adminigniter\Modules\Core\Parameter\Views\add', $this->data);
         }
     }
 
     public function edit(int $id = 0)
     {
-        if (!is_allowed('param/update')) {
+        if (!is_allowed('parameter/update')) {
             set_message('toastr_msg', lang('App.permission.not.have'));
             set_message('toastr_type', 'error');
             return redirect()->to('/dashboard');
@@ -105,7 +105,7 @@ class Param extends \hamkamannan\adminigniter\Controllers\BaseController
         }
 
         $this->data['title'] = 'Edit Parameter';
-        $param = $this->paramModel->find($id);
+        $param = $this->parameterModel->find($id);
         $this->validation->setRule('name', 'Nama Parameter', 'required');
         $this->validation->setRule('value', 'Nilai Parameter', 'trim');
         if ($this->request->getPost()) {
@@ -116,9 +116,9 @@ class Param extends \hamkamannan\adminigniter\Controllers\BaseController
                     'description' => $this->request->getPost('description'),
                 );
 
-                $paramUpdate = $this->paramModel->update($id, $update_data);
+                $paramUpdate = $this->parameterModel->update($id, $update_data);
                 if ($paramUpdate) {
-                    add_log('Ubah Parameter', 'param', 'edit', 'c_params', $id);
+                    add_log('Ubah Parameter', 'param', 'edit', 'c_parameters', $id);
                     set_message('toastr_msg', 'Parameter berhasil disimpan');
                     set_message('toastr_type', 'success');
                     return redirect()->to('/param');
@@ -132,12 +132,12 @@ class Param extends \hamkamannan\adminigniter\Controllers\BaseController
         }
         $this->data['message'] = $this->validation->getErrors() ? $this->validation->listErrors() : $this->session->getFlashdata('message');
         $this->data['param'] = $param;
-        echo view('hamkamannan\adminigniter\Modules\Core\Param\Views\update', $this->data);
+        echo view('hamkamannan\adminigniter\Modules\Core\Parameter\Views\update', $this->data);
     }
 
     public function delete(int $id = 0)
     {
-        if (!is_allowed('param/delete')) {
+        if (!is_allowed('parameter/delete')) {
             set_message('toastr_msg', lang('App.permission.not.have'));
             set_message('toastr_type', 'error');
             return redirect()->to('/dashboard');
@@ -149,9 +149,9 @@ class Param extends \hamkamannan\adminigniter\Controllers\BaseController
             return redirect()->to('/home');
         }
 
-        $paramDelete = $this->paramModel->delete($id);
+        $paramDelete = $this->parameterModel->delete($id);
         if ($paramDelete) {
-            add_log('Hapus Parameter', 'param', 'delete', 'c_params', $id);
+            add_log('Hapus Parameter', 'param', 'delete', 'c_parameters', $id);
             set_message('toastr_msg', 'Parameter berhasil dihapus');
             set_message('toastr_type', 'success');
             return redirect()->to('/param');
@@ -170,6 +170,6 @@ class Param extends \hamkamannan\adminigniter\Controllers\BaseController
 
     public function json()
 	{
-		return DataTables::use('c_params')->make(true);
+		return DataTables::use('c_parameters')->make(true);
 	}
 }

@@ -4,14 +4,14 @@ $request = \Config\Services::request();
 $request->uri->setSilent();
 $slug = $request->getVar('slug') ?? 'backend-menu';
 
-$baseModel->setTable('c_menus_categories');
+$baseModel->setTable('c_categories');
 $categories = $baseModel
-    ->select('c_menus_categories.*')
+    ->select('c_categories.*')
     ->find_all('sort', 'asc');
 
-$baseModel->setTable('c_menus_categories');
+$baseModel->setTable('c_categories');
 $category = $baseModel
-    ->select('c_menus_categories.*')
+    ->select('c_categories.*')
     ->where('slug', $slug)
     ->row();
 ?>

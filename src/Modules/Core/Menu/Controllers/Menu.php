@@ -66,7 +66,7 @@ class Menu extends \hamkamannan\adminigniter\Controllers\BaseController
 				'description' => $this->request->getPost('description'),
 				'type' => $this->request->getPost('type'),
                 'parent' => $this->request->getPost('parent') ?? 0,
-                'menu_category_id' => $this->request->getPost('menu_category_id'),
+                'category_id' => $this->request->getPost('category_id'),
 			);
 
             $type = $this->request->getPost('type');

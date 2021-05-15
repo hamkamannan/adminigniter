@@ -102,7 +102,7 @@
                                 </div>
                                 <div class="widget-content-right">
                                     <?php foreach ($currentGroups as $group) : ?>
-                                        <span class="mb-2 mr-2 badge badge-pill badge-secondary"><?= $group->name; ?></span>
+                                        <span class="mb-2 mr-2 badge badge-pill badge-secondary"><?= $group; ?></span>
                                     <?php endforeach ?>
                                 </div>
                             </div>
@@ -259,6 +259,6 @@
 <?= $this->endSection('page'); ?>
 
 <?= $this->section('script'); ?>
-<?= $this->include(APPPATH.'Modules/Core/User/Views/update_modal'); ?>
+<?= $this->include('hamkamannan\adminigniter\Modules\Core\User\Views\update_modal'); ?>
 
 <?= $this->endSection('script'); ?>

@@ -49,7 +49,6 @@
             </div>
         </div>
         <div class="card-body">
-            <?= get_message('message'); ?>
             <table style="width: 100%;" id="tbl_visitors" class="table table-hover table-striped table-bordered">
                 <thead>
                     <tr>

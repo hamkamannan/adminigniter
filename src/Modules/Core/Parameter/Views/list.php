@@ -69,11 +69,10 @@
     <div class="main-card mb-3 card">
         <div class="card-header"><i class="header-icon lnr-list icon-gradient bg-plum-plate"> </i>Semua Paramater
             <div class="btn-actions-pane-right actions-icon-btn">
-                <a href="<?= base_url('param/create'); ?>" class=" btn btn-success"><i class="fa fa-plus"></i> Tambah Parameter</a>
+                <a href="<?= base_url('parameter/create'); ?>" class=" btn btn-success"><i class="fa fa-plus"></i> Tambah Parameter</a>
             </div>
         </div>
         <div class="card-body">
-            <?= get_message('message'); ?>
             <table style="width: 100%;" id="tbl_params" class="table table-hover table-striped table-bordered">
                 <thead>
                     <tr>
@@ -105,7 +104,7 @@
         processing: true,
         serverSide: true,
         ajax:{
-            url: '<?=base_url('param/json')?>',
+            url: '<?=base_url('parameter/json')?>',
         },
         columns: [
             {data: 'id', name: 'id'},
@@ -119,8 +118,8 @@
         columnDefs:[
             {
                 targets:4, data:'id', render: function(data,type,full,meta) { 
-                    var button_edit = '<a href="<?=base_url('param/edit')?>/'+data+'" class="btn btn-xs btn-warning" data-toggle="tooltip" data-placement="top" title="Ubah Param"><i class="pe-7s-note font-weight-bold"> </i></a> ';
-                    var button_delete = '<a href="javascript:void(0);" data-href="<?=base_url('param/delete')?>/'+data+'" class="btn btn-xs btn-danger remove-data" data-toggle="tooltip" data-placement="top" title="Hapus Param"><i class="pe-7s-trash font-weight-bold"> </i></a>';
+                    var button_edit = '<a href="<?=base_url('parameter/edit')?>/'+data+'" class="btn btn-xs btn-warning" data-toggle="tooltip" data-placement="top" title="Ubah Param"><i class="pe-7s-note font-weight-bold"> </i></a> ';
+                    var button_delete = '<a href="javascript:void(0);" data-href="<?=base_url('parameter/delete')?>/'+data+'" class="btn btn-xs btn-danger remove-data" data-toggle="tooltip" data-placement="top" title="Hapus Param"><i class="pe-7s-trash font-weight-bold"> </i></a>';
                     return button_edit + button_delete;
                 },
             }

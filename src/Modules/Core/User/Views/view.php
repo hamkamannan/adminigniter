@@ -261,6 +261,6 @@
 <?= $this->endSection('page'); ?>
 
 <?= $this->section('script'); ?>
-<?= $this->include(APPPATH.'Modules/Core/User/Views/update_modal'); ?>
+<?= $this->include('hamkamannan\adminigniter\Modules\Core\User\Views\update_modal'); ?>
 
 <?= $this->endSection('script'); ?>

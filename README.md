@@ -14,16 +14,18 @@ Complete Authentication and Authorization system for CodeIgniter4 HMVC with Prem
 
 Feature
 -------
-* Configurable backend theme [Admin Dashboard Template](https://dashboardpack.com/)
+* Configurable backend theme [Premium Admin LTE](https://dashboardpack.com/)
 * CSS framework [Bootstrap 4](https://getbootstrap.com/)
 * Icons by [Font Awesome 5](https://fontawesome.com/)
 * Role-based permissions (RBAC) provided by [Myth/Auth](https://github.com/lonnieezell/myth-auth)
-* Dynamically-Generated Menu
+* Dynamically-Generated Menu (Drag n Drop)
 * Localized English / Indonesian
 
-This project is still early in its development... please feel free to contribute!
+NOTE: This library was inspired from [agungsugiarto/boilerplate](https://packagist.org/packages/agungsugiarto/boilerplate)
+
+Please feel free to contribute!
 ------------------------------------------------------------
-Screenshoot | Demo On [Mannan](https://mannan.id/)
+Screenshoot | Demo On [mannan.id](https://mannan.id/)
 -------------------------------------------------------------------------------
 ![Dashboard](.github/dashboard.png?raw=true)
 
@@ -58,23 +60,7 @@ database.default.username = root
 database.default.password = root
 database.default.DBDriver = MySQLi
 ```
-**3.** Run publish auth
-```bash
-php spark auth:publish
-
-Publish Migration? [y, n]: y
-  created: Database/Migrations/2017-11-20-223112_create_auth_tables.php
-  Remember to run `spark migrate -all` to migrate the database.
-Publish Models? [y, n]: n
-Publish Entities? [y, n]: n
-Publish Controller? [y, n]: n
-Publish Views? [y, n]: n
-Publish Filters? [y, n]: n
-Publish Config file? [y, n]: y
-  created: Config/Auth.php
-Publish Language file? [y, n]: n
-```
-
+**3.** Myth/Auth
 > NOTE: This library was inspired from [agungsugiarto/boilerplate](https://packagist.org/packages/agungsugiarto/boilerplate), everything about how to configure auth you can find add [Myth/Auth](https://github.com/lonnieezell/myth-auth).
 
 

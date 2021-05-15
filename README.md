@@ -61,7 +61,7 @@ database.default.password = root
 database.default.DBDriver = MySQLi
 ```
 **3.** Myth/Auth
-> NOTE: This library was inspired from [agungsugiarto/boilerplate](https://packagist.org/packages/agungsugiarto/boilerplate), everything about how to configure auth you can find add [Myth/Auth](https://github.com/lonnieezell/myth-auth).
+> NOTE: Everything about how to configure auth you can find add [Myth/Auth](https://github.com/lonnieezell/myth-auth).
 
 
 

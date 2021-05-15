@@ -4,7 +4,7 @@ namespace hamkamannan\adminigniter\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Menus extends Migration
+class Adminigniter extends Migration
 {
 	public function up()
 	{

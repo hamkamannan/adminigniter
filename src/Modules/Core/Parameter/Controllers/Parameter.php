@@ -4,7 +4,7 @@ namespace hamkamannan\adminigniter\Modules\Core\Parameter\Controllers;
 
 use DataTables\DataTables;
 
-class Param extends \hamkamannan\adminigniter\Controllers\BaseController
+class Parameter extends \hamkamannan\adminigniter\Controllers\BaseController
 {
     protected $auth;
     protected $authorize;

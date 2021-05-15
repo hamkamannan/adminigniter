@@ -75,10 +75,11 @@ Publish Config file? [y, n]: y
 Publish Language file? [y, n]: n
 ```
 
-> NOTE: Everything about how to configure auth you can find add [Myth/Auth](https://github.com/lonnieezell/myth-auth).
+> NOTE: This library was inspired from [agungsugiarto/boilerplate](https://packagist.org/packages/agungsugiarto/boilerplate), everything about how to configure auth you can find add [Myth/Auth](https://github.com/lonnieezell/myth-auth).
 
 
-Open `Config/Auth.php` find `public $views` and changes with these lines below:
+
+Open `app/Config/Auth.php` find `public $views` and changes with these lines below:
 ```php
 public $views = [
     'login'           => 'hamkamannan\adminigniter\Views\auth\login',
@@ -90,7 +91,7 @@ public $views = [
 ];
 ```
 
-Open `Config/Auth.php` find `variables` and changes with these lines below:
+Open `app/Config/Auth.php` find `variables` and changes with these lines below:
 ```php
 public $defaultUserGroup = 'user';
 public $allowRegistration = true;
@@ -99,7 +100,7 @@ public $activeResetter = false;
 public $allowRemembering = true;
 ```
 
-Open `Config/Auth.php` find `public $passwordValidators` and changes with these lines below:
+Open `app/Config/Auth.php` find `public $passwordValidators` and changes with these lines below:
 ```php
 public $passwordValidators = [
   'Myth\Auth\Authentication\Passwords\CompositionValidator',
@@ -109,13 +110,23 @@ public $passwordValidators = [
 ];
 ```
 
-Open `app\Config\Filters.php`, find `$aliases` and add these lines below:
+Open `app/Config/Filters.php`, find `$aliases` and add these lines below:
 ```php
 public $aliases = [
     'login'      => \Myth\Auth\Filters\LoginFilter::class,
     'role'       => \hamkamannan\adminigniter\Filters\RoleFilter::class,
     'permission' => \hamkamannan\adminigniter\Filters\PermissionFilter::class,
 ];
+```
+
+Open `app/Config/Autoload.php`, find `$psr4` and add these lines below:
+```php
+public $psr4 = [
+		APP_NAMESPACE => APPPATH, // For custom app namespace
+		'App'	       => APPPATH,
+		'Config'      => APPPATH . 'Config',
+		'DataTables'  => APPPATH .'Libraries/DataTables',
+	];
 ```
 
 **4.** Run publish, migrate and seed adminigniter
@@ -134,8 +145,25 @@ Publish Database Seed? [y, n]: y
 Copy Public Assets? [y, n]: y
   created: public/assets/*
   created: public/themes/*
+Copy Libraries? (Adminigniter Libraries/DataTables) [y, n]: y
+  created: Libraries/DataTables//Utilities/*
+  created: Libraries/DataTables/*
 Patch View for HMVC? [y, n]: y
   created: vendor/codeigniter4/framework/system/View/View.php
+```
+
+```bash
+php spark migrate
+
+  Running: (App) 20210101_000000_App\Database\Migrations\Auth
+  Running: (App) 20210101_000001_App\Database\Migrations\AuthAlterUsers
+  Running: (App) 20210101_000002_App\Database\Migrations\Adminigniter
+```
+
+```bash
+php spark db:seed AdminigniterSeeder
+
+  Seeded: App\Database\Seeds\AdminigniterSeeder
 ```
 
 **5.** Run development server:
@@ -150,7 +178,7 @@ Default user and password
 +----+--------+-------------+
 | No | User   | Password    |
 +----+--------+-------------+
-| 1  | admin  | password    |
+| 1  | admin  | qwerty!@#   |
 +----+--------+-------------+
 ```
 

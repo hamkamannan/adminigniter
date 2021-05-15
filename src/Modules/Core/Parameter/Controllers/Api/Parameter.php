@@ -6,7 +6,7 @@ use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\Files\File;
 
-class Param extends ResourceController
+class Parameter extends ResourceController
 {
 	use ResponseTrait;
 	protected $parameterModel;

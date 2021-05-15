@@ -97,6 +97,12 @@ class PublishCommand extends BaseCommand
             $this->publishAsset();
         }
 
+        // Public Library
+        if (CLI::prompt('Copy Libraries? (Adminigniter Libraries/DataTables)', ['y', 'n']) == 'y')
+        {
+            $this->publishLibrary();
+        }
+
         // Patch View (HMVC)
         if (CLI::prompt('Patching Codeigniter HMVC? (vendor/codeigniter4/framework/system/View/View.php)', ['y', 'n']) == 'y')
         {
@@ -142,6 +148,14 @@ class PublishCommand extends BaseCommand
     {
         $src = $this->sourcePath . '/Asset/public/';
         $dst = ROOTPATH . 'public/';
+
+        $this->recurseCopy($src, $dst);
+    }
+
+    protected function publishLibrary()
+    {
+        $src = $this->sourcePath . '/Asset/library/DataTables';
+        $dst = APPPATH . 'Libraries/DataTables/';
 
         $this->recurseCopy($src, $dst);
     }

@@ -66,12 +66,9 @@ database.default.DBDriver = MySQLi
 php spark adminigniter:publish
 
 Publish Database Migration? [y, n]: y
-  created: Database/Migrations/20210101_000003_References.php
-  created: Database/Migrations/20210101_000005_Logs.php
-  created: Database/Migrations/20210101_000002_Params.php
-  created: Database/Migrations/20210101_000000_AuthAlterUsers.php
-  created: Database/Migrations/20210101_000001_Menus.php
-  created: Database/Migrations/20210101_000004_Visitors.php
+  created: Database/Migrations/20210101_000000_Auth
+  created: Database/Migrations/20210101_000001_AuthAlterUser
+  created: Database/Migrations/20210101_000002_Adminigniter
 Publish Database Seed? [y, n]: y
   created: Database/Seeds/AdminigniterSeeder.php
 Copy Public Assets? [y, n]: y
@@ -87,9 +84,9 @@ Patch View for HMVC? [y, n]: y
 ```bash
 php spark migrate
 
-  Running: (App) 20210101_000000_App\Database\Migrations\Auth
-  Running: (App) 20210101_000001_App\Database\Migrations\AuthAlterUsers
-  Running: (App) 20210101_000002_App\Database\Migrations\Adminigniter
+  Running: (App) 20210101_000000_App/Database/Migrations/Auth
+  Running: (App) 20210101_000001_App/Database/Migrations/AuthAlterUsers
+  Running: (App) 20210101_000002_App/Database/Migrations/Adminigniter
 ```
 
 ```bash

@@ -60,9 +60,46 @@ database.default.username = root
 database.default.password = root
 database.default.DBDriver = MySQLi
 ```
-**3.** Myth/Auth
-> NOTE: Everything about how to configure auth you can find add [Myth/Auth](https://github.com/lonnieezell/myth-auth).
 
+**3.** Run publish, migrate and seed adminigniter
+```bash
+php spark adminigniter:publish
+
+Publish Database Migration? [y, n]: y
+  created: Database/Migrations/20210101_000003_References.php
+  created: Database/Migrations/20210101_000005_Logs.php
+  created: Database/Migrations/20210101_000002_Params.php
+  created: Database/Migrations/20210101_000000_AuthAlterUsers.php
+  created: Database/Migrations/20210101_000001_Menus.php
+  created: Database/Migrations/20210101_000004_Visitors.php
+Publish Database Seed? [y, n]: y
+  created: Database/Seeds/AdminigniterSeeder.php
+Copy Public Assets? [y, n]: y
+  created: public/assets/*
+  created: public/themes/*
+Copy Libraries? (Adminigniter Libraries/DataTables) [y, n]: y
+  created: Libraries/DataTables//Utilities/*
+  created: Libraries/DataTables/*
+Patch View for HMVC? [y, n]: y
+  created: vendor/codeigniter4/framework/system/View/View.php
+```
+
+```bash
+php spark migrate
+
+  Running: (App) 20210101_000000_App\Database\Migrations\Auth
+  Running: (App) 20210101_000001_App\Database\Migrations\AuthAlterUsers
+  Running: (App) 20210101_000002_App\Database\Migrations\Adminigniter
+```
+
+```bash
+php spark db:seed AdminigniterSeeder
+
+  Seeded: App\Database\Seeds\AdminigniterSeeder
+```
+
+**4.** Configuration
+> NOTE: Everything about how to configure auth you can find add [Myth/Auth](https://github.com/lonnieezell/myth-auth).
 
 
 Open `app/Config/Auth.php` find `public $views` and changes with these lines below:
@@ -113,43 +150,6 @@ public $psr4 = [
 		'Config'      => APPPATH . 'Config',
 		'DataTables'  => APPPATH .'Libraries/DataTables',
 	];
-```
-
-**4.** Run publish, migrate and seed adminigniter
-```bash
-php spark adminigniter:publish
-
-Publish Database Migration? [y, n]: y
-  created: Database/Migrations/20210101_000003_References.php
-  created: Database/Migrations/20210101_000005_Logs.php
-  created: Database/Migrations/20210101_000002_Params.php
-  created: Database/Migrations/20210101_000000_AuthAlterUsers.php
-  created: Database/Migrations/20210101_000001_Menus.php
-  created: Database/Migrations/20210101_000004_Visitors.php
-Publish Database Seed? [y, n]: y
-  created: Database/Seeds/AdminigniterSeeder.php
-Copy Public Assets? [y, n]: y
-  created: public/assets/*
-  created: public/themes/*
-Copy Libraries? (Adminigniter Libraries/DataTables) [y, n]: y
-  created: Libraries/DataTables//Utilities/*
-  created: Libraries/DataTables/*
-Patch View for HMVC? [y, n]: y
-  created: vendor/codeigniter4/framework/system/View/View.php
-```
-
-```bash
-php spark migrate
-
-  Running: (App) 20210101_000000_App\Database\Migrations\Auth
-  Running: (App) 20210101_000001_App\Database\Migrations\AuthAlterUsers
-  Running: (App) 20210101_000002_App\Database\Migrations\Adminigniter
-```
-
-```bash
-php spark db:seed AdminigniterSeeder
-
-  Seeded: App\Database\Seeds\AdminigniterSeeder
 ```
 
 **5.** Run development server:

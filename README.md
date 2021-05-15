@@ -143,7 +143,7 @@ Open `app/Config/Autoload.php`, find `$psr4` and add these lines below:
 ```php
 public $psr4 = [
 		APP_NAMESPACE => APPPATH, // For custom app namespace
-		'App'	       => APPPATH,
+		'App'	        => APPPATH,
 		'Config'      => APPPATH . 'Config',
 		'DataTables'  => APPPATH .'Libraries/DataTables',
 	];

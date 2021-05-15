@@ -133,19 +133,19 @@ public $passwordValidators = [
 Open `app/Config/Filters.php`, find `$aliases` and add these lines below:
 ```php
 public $aliases = [
-    'login'      => \Myth\Auth\Filters\LoginFilter::class,
-    'role'       => \hamkamannan\adminigniter\Filters\RoleFilter::class,
-    'permission' => \hamkamannan\adminigniter\Filters\PermissionFilter::class,
+    'login'         => \Myth\Auth\Filters\LoginFilter::class,
+    'role'          => \hamkamannan\adminigniter\Filters\RoleFilter::class,
+    'permission'    => \hamkamannan\adminigniter\Filters\PermissionFilter::class,
 ];
 ```
 
 Open `app/Config/Autoload.php`, find `$psr4` and add these lines below:
 ```php
 public $psr4 = [
-		APP_NAMESPACE => APPPATH, // For custom app namespace
-		'App'	        => APPPATH,
-		'Config'      => APPPATH . 'Config',
-		'DataTables'  => APPPATH .'Libraries/DataTables',
+		APP_NAMESPACE   => APPPATH, // For custom app namespace
+		'App'           => APPPATH,
+		'Config'        => APPPATH . 'Config',
+		'DataTables'    => APPPATH .'Libraries/DataTables',
 	];
 ```
 

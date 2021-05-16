@@ -1,7 +1,7 @@
 <?php if (!isset($routes)) {
 	$routes = \Config\Services::routes(true);
 }
-$routes->group('banner', ['namespace' => 'App\Modules\Backend\Banner\Controllers'], function ($subroutes) {
+$routes->group('banner', ['namespace' => 'App\Adminigniter\Modules\Backend\Banner\Controllers'], function ($subroutes) {
 	/*** Route Update for Banner ***/
 	$subroutes->add('', 'Banner::index');
 	$subroutes->add('banner', 'Banner::index');
@@ -18,7 +18,7 @@ $routes->group('banner', ['namespace' => 'App\Modules\Backend\Banner\Controllers
 	$subroutes->add('flip', 'Banner::flip');
 });
 
-$routes->group('api/banner', ['namespace' => 'App\Modules\Backend\Banner\Controllers\Api'], function ($subroutes) {
+$routes->group('api/banner', ['namespace' => 'App\Adminigniter\Modules\Backend\Banner\Controllers\Api'], function ($subroutes) {
 	/*** Route Update for Banner ***/
 	$subroutes->add('detail/(:any)', 'Banner::detail/$1');
 	$subroutes->add('edit/(:any)', 'Banner::edit/$1');

@@ -1,7 +1,7 @@
 <?php if (!isset($routes)) {
 	$routes = \Config\Services::routes(true);
 }
-$routes->group('page', ['namespace' => 'App\Modules\Backend\Page\Controllers'], function ($subroutes) {
+$routes->group('page', ['namespace' => 'App\Adminigniter\Modules\Backend\Page\Controllers'], function ($subroutes) {
 	/*** Route Update for Page ***/
 	$subroutes->add('', 'Page::index');
 	$subroutes->add('index', 'Page::index');

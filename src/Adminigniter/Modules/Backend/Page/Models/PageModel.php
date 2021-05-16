@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Modules\Backend\Banner\Models;
+namespace App\Adminigniter\Modules\Backend\Page\Models;
 
-class BannerModel extends \hamkamannan\adminigniter\Models\BaseModel
+class PageModel extends \hamkamannan\adminigniter\Models\BaseModel
 {
-    protected $table      = 't_banner';
+    protected $table      = 't_page';
     protected $primaryKey = 'id';
     protected $returnType     = 'object';
     protected $useSoftDeletes = false;
     protected $allowedFields = [
-        'id', 'name', 'description', 'file_image', 'sort', 'url', 'url_title', 'url_target',  'active', 'category_id'
+        'id', 'title', 'slug', 'content', 'file_image', 'created_by', 'updated_by', 'description',
     ];
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
@@ -18,4 +18,5 @@ class BannerModel extends \hamkamannan\adminigniter\Models\BaseModel
     protected $validationRules    = [];
     protected $validationMessages = [];
     protected $skipValidation     = true;
+
 }

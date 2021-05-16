@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Backend\Banner\Controllers\Api;
+namespace App\Adminigniter\Modules\Backend\Banner\Controllers\Api;
 
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
@@ -19,7 +19,7 @@ class Banner extends ResourceController
 	function __construct()
 	{
 		helper(['url', 'text', 'form', 'auth', 'app', 'html']);
-		$this->bannerModel = new \App\Modules\Backend\Banner\Models\BannerModel();
+		$this->bannerModel = new \App\Adminigniter\Modules\Backend\Banner\Models\BannerModel();
 		$this->validation = \Config\Services::validation();
 		$this->session = session();
 		$this->modulePath = ROOTPATH . 'public/uploads/banner/';

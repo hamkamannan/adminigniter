@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Backend\Page\Controllers;
+namespace App\Adminigniter\Modules\Backend\Page\Controllers;
 
 use \CodeIgniter\Files\File;
 
@@ -15,7 +15,7 @@ class Page extends \hamkamannan\adminigniter\Controllers\BaseController
     
     function __construct()
     {
-        $this->pageModel = new \App\Modules\Backend\Page\Models\PageModel();
+        $this->pageModel = new \App\Adminigniter\Modules\Backend\Page\Models\PageModel();
         $this->uploadPath = ROOTPATH . 'public/uploads/';
         $this->modulePath = ROOTPATH . 'public/uploads/page/';
         
@@ -53,7 +53,7 @@ class Page extends \hamkamannan\adminigniter\Controllers\BaseController
 
         $this->data['pages'] = $this->pageModel->findAll();
 
-        echo view(APPPATH.'Modules/Backend/Page/Views/list', $this->data);
+        echo view(APPPATH.'Adminigniter/Modules/Backend/Page/Views/list', $this->data);
     }
 
     public function detail(int $id)
@@ -143,7 +143,7 @@ class Page extends \hamkamannan\adminigniter\Controllers\BaseController
 
         $this->data['message'] = $this->validation->getErrors() ? $this->validation->listErrors() : $this->session->getFlashdata('message');
         $this->data['redirect'] = base_url('page/edit/' . $id);
-        echo view(APPPATH.'Modules/Backend/Page/Views/update', $this->data);
+        echo view(APPPATH.'Adminigniter/Modules/Backend/Page/Views/update', $this->data);
     }
 
     public function create()
@@ -192,12 +192,12 @@ class Page extends \hamkamannan\adminigniter\Controllers\BaseController
                 return redirect()->to('/page');
             } else {
                 set_message('message', $this->validation->getErrors() ? $this->validation->listErrors() : 'Halaman gagal ditambah');
-                echo view(APPPATH.'Modules/Backend/Page/Views/add', $this->data);
+                echo view(APPPATH.'Adminigniter/Modules/Backend/Page/Views/add', $this->data);
             }
         } else {
             $this->data['redirect'] = base_url('page/create');
             set_message('message', $this->validation->getErrors() ? $this->validation->listErrors() : $this->session->getFlashdata('message'));
-            echo view(APPPATH.'Modules/Backend/Page/Views/add', $this->data);
+            echo view(APPPATH.'Adminigniter/Modules/Backend/Page/Views/add', $this->data);
         }
     }
     public function delete(int $id = 0)

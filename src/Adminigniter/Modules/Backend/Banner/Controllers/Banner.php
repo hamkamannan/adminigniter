@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Backend\Banner\Controllers;
+namespace App\Adminigniter\Modules\Backend\Banner\Controllers;
 
 use \CodeIgniter\Files\File;
 
@@ -14,7 +14,7 @@ class Banner extends \hamkamannan\adminigniter\Controllers\BaseController
     
     function __construct()
     {
-        $this->bannerModel = new \App\Modules\Backend\Banner\Models\BannerModel();
+        $this->bannerModel = new \App\Adminigniter\Modules\Backend\Banner\Models\BannerModel();
         $this->uploadPath = ROOTPATH . 'public/uploads/';
         $this->modulePath = ROOTPATH . 'public/uploads/banner/';
         
@@ -56,7 +56,7 @@ class Banner extends \hamkamannan\adminigniter\Controllers\BaseController
         $this->data['message'] = $this->validation->getErrors() ? $this->validation->listErrors() : $this->session->getFlashdata('message');
         $this->data['banners'] = $banners;
         // echo view('backend/banner/list', $this->data);
-        echo view(APPPATH.'Modules/Backend/Banner/Views/list', $this->data);
+        echo view(APPPATH.'Adminigniter/Modules/Backend/Banner/Views/list', $this->data);
     }
 
     public function edit(int $id = null)
@@ -132,7 +132,7 @@ class Banner extends \hamkamannan\adminigniter\Controllers\BaseController
 
         $this->data['message'] = $this->validation->getErrors() ? $this->validation->listErrors() : $this->session->getFlashdata('message');
         $this->data['redirect'] = base_url('banner/edit/' . $id);
-        echo view(APPPATH.'Modules/Backend/Banner/Views/update', $this->data);
+        echo view(APPPATH.'Adminigniter/Modules/Backend/Banner/Views/update', $this->data);
     }
 
     public function create()
@@ -184,12 +184,12 @@ class Banner extends \hamkamannan\adminigniter\Controllers\BaseController
                 return redirect()->to('/banner');
             } else {
                 set_message('message', $this->validation->getErrors() ? $this->validation->listErrors() : 'Banner gagal ditambah');
-                echo view(APPPATH.'Modules/Backend/Banner/Views/add', $this->data);
+                echo view(APPPATH.'Adminigniter/Modules/Backend/Banner/Views/add', $this->data);
             }
         } else {
             $this->data['redirect'] = base_url('banner/create');
             set_message('message', $this->validation->getErrors() ? $this->validation->listErrors() : $this->session->getFlashdata('message'));
-            echo view(APPPATH.'Modules/Backend/Banner/Views/add', $this->data);
+            echo view(APPPATH.'Adminigniter/Modules/Backend/Banner/Views/add', $this->data);
         }
     }
 

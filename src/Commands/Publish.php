@@ -9,7 +9,7 @@ use Config\Autoload;
 /**
  * Class PublishCommand.
  */
-class PublishCommand extends BaseCommand
+class Publish extends BaseCommand
 {
     /**
      * The group the command is lumped under
@@ -104,7 +104,7 @@ class PublishCommand extends BaseCommand
         }
 
         // Patch View (HMVC)
-        if (CLI::prompt('Patching Codeigniter HMVC? (vendor/codeigniter4/framework/system/View/View.php)', ['y', 'n']) == 'y')
+        if (CLI::prompt('Patching Adminigniter HMVC Module? (vendor/codeigniter4/framework/system/View/View.php)', ['y', 'n']) == 'y')
         {
             $this->publishPatch();
         }

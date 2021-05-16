@@ -112,36 +112,10 @@ php spark migrate
 ```bash
 php spark db:seed AdminigniterSeeder
 
-  Seeded: App\Database\Seeds\AdminigniterSeeder
+  Seeded: App/Database/Seeds/AdminigniterSeeder
 ```
 
-
-**4.** Run `module`
-This providing Adminigniter HMVC Module Generator (CRUD).
-It will generate files for: Migration, Controller, Model, View, Config (Routes)
-
-* Run `php spark adminigniter:module` Dummy
-```bash
-php spark adminigniter:module Dummy
-
-  created: Adminigniter/Database/Migrations/2021-05-16-050256_Dummy.php
-  created: Adminigniter/Modules/Backend/Dummy/Config/Routes.php
-  created: Adminigniter/Modules/Backend/Dummy/Controllers/Dummy.php
-  created: Adminigniter/Modules/Backend/Dummy/Controllers/Api/Dummy.php
-  created: Adminigniter/Modules/Backend/Dummy/Models/DummyModel.php
-  created: Adminigniter/Modules/Backend/Dummy/Views/list.php
-  created: Adminigniter/Modules/Backend/Dummy/Views/add.php
-  created: Adminigniter/Modules/Backend/Dummy/Views/update.php
-```
-
-* Run `php spark migrate -n Adminigniter`
-```bash
-php spark migrate
-
-  Running: (Adminigniter) 2021-05-16-050256_App/Adminigniter/Database/Migrations/Dummy  
-```
-
-**5.** Configuration (Auth, Filter, and Autoload) 
+**4.** Configuration (Auth, Filter, and Autoload) 
 > NOTE: Everything about how to configure auth you can find add [myth/auth](https://github.com/lonnieezell/myth-auth)
 
 * app/Config/Auth.php
@@ -192,8 +166,34 @@ public $psr4 = [
   APP_NAMESPACE   => APPPATH, // For custom app namespace
   'App'           => APPPATH,
   'Config'        => APPPATH . 'Config',
-  'DataTables'    => APPPATH .'Libraries/DataTables',
+  'DataTables'    => APPPATH . 'Libraries/DataTables',
+  'Adminigniter'  => APPPATH . 'Adminigniter',
 ];
+```
+
+**4.** Run CRUD Generator 
+This providing Adminigniter HMVC Module Generator (CRUD).
+It will generate files for: Migration, Controller, Model, View, Config (Routes)
+
+* Run `php spark adminigniter:module` Dummy
+```bash
+php spark adminigniter:module Dummy
+
+  created: Adminigniter/Database/Migrations/2021-05-16-050256_Dummy.php
+  created: Adminigniter/Modules/Backend/Dummy/Config/Routes.php
+  created: Adminigniter/Modules/Backend/Dummy/Controllers/Dummy.php
+  created: Adminigniter/Modules/Backend/Dummy/Controllers/Api/Dummy.php
+  created: Adminigniter/Modules/Backend/Dummy/Models/DummyModel.php
+  created: Adminigniter/Modules/Backend/Dummy/Views/list.php
+  created: Adminigniter/Modules/Backend/Dummy/Views/add.php
+  created: Adminigniter/Modules/Backend/Dummy/Views/update.php
+```
+
+* Run `php spark migrate -n Adminigniter`
+```bash
+php spark migrate -n Adminigniter
+
+  Running: (Adminigniter) 2021-05-16-050256_App/Adminigniter/Database/Migrations/Dummy  
 ```
 
 **6.** Run development server:

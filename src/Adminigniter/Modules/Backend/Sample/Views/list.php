@@ -51,9 +51,6 @@
                     <?php foreach ($samples as $row) : ?>
                         <tr>
                             <td width="35"></td>
-                            <td width="100">
-                                <a href="<?= base_url('uploads/sample/' . $row->file_image) ?>" class="image-link"><img width="100" class="rounded" src="<?= base_url('uploads/sample/' . $row->file_image) ?>" alt=""></a>
-                            </td>
                             <td width="200">
                                 <?= _spec($row->name); ?> <br>
                             </td>

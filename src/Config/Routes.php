@@ -13,19 +13,19 @@ include ROOTPATH . 'vendor/hamkamannan/adminigniter/src/Modules/Backend/Dashboar
 include ROOTPATH . 'vendor/hamkamannan/adminigniter/src/Modules/Backend/Report/Config/Routes.php';
 
 // Autoload Modules Config  
-foreach (glob(APPPATH . 'Modules/*', GLOB_ONLYDIR) as $item_dir) {
+foreach (glob(APPPATH . 'Adminigniter/Modules/*', GLOB_ONLYDIR) as $item_dir) {
 	if (file_exists($item_dir . '/Config/Routes.php')) {
 		require_once($item_dir . '/Config/Routes.php');
 	}
 }
 
-foreach (glob(APPPATH . 'Modules/Backend/*', GLOB_ONLYDIR) as $item_dir) {
+foreach (glob(APPPATH . 'Adminigniter/Modules/Backend/*', GLOB_ONLYDIR) as $item_dir) {
 	if (file_exists($item_dir . '/Config/Routes.php')) {
 		require_once($item_dir . '/Config/Routes.php');
 	}
 }
 
-foreach (glob(APPPATH . 'Modules/Frontend/*', GLOB_ONLYDIR) as $item_dir) {
+foreach (glob(APPPATH . 'Adminigniter/Modules/Frontend/*', GLOB_ONLYDIR) as $item_dir) {
 	if (file_exists($item_dir . '/Config/Routes.php')) {
 		require_once($item_dir . '/Config/Routes.php');
 	}

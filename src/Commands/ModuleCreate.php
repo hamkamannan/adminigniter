@@ -24,7 +24,7 @@ class ModuleCreate extends BaseCommand
      *
      * @var string
      */
-    protected $name = 'adminigniter:module:create';
+    protected $name = 'adminigniter:module';
 
     /**
      * The command's short description.
@@ -38,7 +38,7 @@ class ModuleCreate extends BaseCommand
      *
      * @var string
      */
-    protected $usage = 'adminigniter:module:create';
+    protected $usage = 'adminigniter:module';
 
     /**
      * The commamd's argument.
@@ -90,6 +90,7 @@ class ModuleCreate extends BaseCommand
         $this->module_folder = 'Adminigniter/'.$this->module_name;
 
         $this->publishMigration();
+        $this->publisConfig('Routes');
         $this->publisController();
         $this->publisController(true);
         $this->publisModel();
@@ -102,9 +103,25 @@ class ModuleCreate extends BaseCommand
     {
         $file_from = "Sample";
         $file_to = $this->module_name;
+        $prefix = date("Y-m-d-His");
 
         $src = "{$this->sourcePath}/Adminigniter/Database/Migrations/{$file_from}.php";
-        $dst = "Adminigniter/Database/Migrations/{$file_to}.php";
+        $dst = "Adminigniter/Database/Migrations/{$prefix}_{$file_to}.php";
+        $content = file_get_contents($src);
+        $content = str_replace('Sample', $this->module_name, $content);
+        $content = str_replace('sample', strtolower($this->module_name), $content);
+
+        $this->writeFile($dst, $content);
+    }
+
+    protected function publisConfig($view = 'Routes')
+    {
+        $file_from = "Sample";
+        $file_to = $this->module_name;
+
+        $src = "{$this->sourcePath}/Adminigniter/Modules/Backend/{$file_from}/Config/{$view}.php";
+        $dst = "Adminigniter/Modules/Backend/{$file_to}/Config/{$view}.php";
+
         $content = file_get_contents($src);
         $content = str_replace('Sample', $this->module_name, $content);
         $content = str_replace('sample', strtolower($this->module_name), $content);
@@ -149,7 +166,7 @@ class ModuleCreate extends BaseCommand
 
     protected function publisView($view = 'list')
     {
-        $file_from = $view;
+        $file_from = "Sample";
         $file_to = $this->module_name;
 
         $src = "{$this->sourcePath}/Adminigniter/Modules/Backend/{$file_from}/Views/{$view}.php";

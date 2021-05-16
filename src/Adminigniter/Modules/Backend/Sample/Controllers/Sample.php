@@ -48,8 +48,6 @@ class Sample extends \hamkamannan\adminigniter\Controllers\BaseController
 
         $samples = $this->sampleModel
             ->select('t_sample.*')
-            ->select('c_references.name as category')
-            ->join('c_references','c_references.id = t_sample.category_id','left')
             ->findAll();
 
         $this->data['title'] = 'Sample';

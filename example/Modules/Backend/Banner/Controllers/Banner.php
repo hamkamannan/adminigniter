@@ -4,18 +4,24 @@ namespace App\Modules\Backend\Banner\Controllers;
 
 use \CodeIgniter\Files\File;
 
-class Banner extends \App\Controllers\BaseController
+class Banner extends \hamkamannan\adminigniter\Controllers\BaseController
 {
     protected $auth;
     protected $authorize;
     protected $bannerModel;
+    protected $uploadPath;
     protected $modulePath;
     
     function __construct()
     {
         $this->bannerModel = new \App\Modules\Backend\Banner\Models\BannerModel();
+        $this->uploadPath = ROOTPATH . 'public/uploads/';
         $this->modulePath = ROOTPATH . 'public/uploads/banner/';
         
+        if (!file_exists($this->uploadPath)) {
+            mkdir($this->uploadPath);
+        }
+
         if (!file_exists($this->modulePath)) {
             mkdir($this->modulePath);
         }

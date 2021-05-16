@@ -1,6 +1,6 @@
 <?php
 
-namespace hamkamannan\adminigniter\Database\Seeds;
+namespace App\Database\Seeds;
 
 use CodeIgniter\Database\Seeder;
 
@@ -453,7 +453,7 @@ class AdminigniterSeeder extends Seeder
                 'controller' => 'home',
                 'icon' => '',
                 'permission' => 'access',
-                'sort' => '16',
+                'sort' => '15',
                 'type' => 'menu',
                 'category_id' => '2',
             ],
@@ -466,6 +466,16 @@ class AdminigniterSeeder extends Seeder
                 'name' => 'Permission',
                 'parent' => '0',
                 'controller' => 'reference_permission',
+                'icon' => '',
+                'permission' => 'access',
+                'sort' => '16',
+                'type' => 'menu',
+                'category_id' => '3',
+            ],
+            [
+                'name' => 'Banner',
+                'parent' => '0',
+                'controller' => 'reference_banner',
                 'icon' => '',
                 'permission' => 'access',
                 'sort' => '17',
@@ -519,6 +529,12 @@ class AdminigniterSeeder extends Seeder
                 'slug' => 'disable',
                 'sort' => '7',
                 'menu_id' => '16'
+            ],  
+            [
+                'name' => 'public',
+                'slug' => 'public',
+                'sort' => '1',
+                'menu_id' => '17'
             ],  
         ];
         $this->db->table('c_references')->insertBatch($references);

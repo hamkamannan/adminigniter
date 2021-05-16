@@ -2,7 +2,7 @@
 $request = \Config\Services::request();
 $request->uri->setSilent();
 
-$baseModel = new \App\Models\BaseModel();
+$baseModel = new \hamkamannan\adminigniter\Models\BaseModel();
 $baseModel->setTable('c_references');
 $categories = $baseModel
     ->select('c_references.*')
@@ -11,7 +11,7 @@ $categories = $baseModel
     ->find_all('name', 'asc');
 ?>
 
-<?= $this->extend('layout/backend/main'); ?>
+<?= $this->extend('\hamkamannan\adminigniter\Views\layout\backend\main'); ?>
 <?= $this->section('style'); ?>
 <?= $this->endSection('style'); ?>
 

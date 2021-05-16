@@ -425,7 +425,7 @@ class AdminigniterSeeder extends Seeder
             [
                 'name' => 'Parameter',
                 'parent' => 12,
-                'controller' => 'param',
+                'controller' => 'parameter',
                 'icon' => '',
                 'permission' => 'access',
                 'sort' => '13',

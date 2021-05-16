@@ -10,7 +10,7 @@
 
 Adminigniter
 =====================================
-Complete Authentication and Authorization system for CodeIgniter4 HMVC with Premium Admin LTE.
+HMVC Module (CRUD) Generator with Complete Authentication and Authorization system for CodeIgniter4  comes with Admin LTE Template.
 
 Feature
 -------
@@ -21,7 +21,6 @@ Feature
 * Dynamically-Generated Menu (Drag & Drop)
 * Localized English / Indonesian
 
-<<<<<<< HEAD
 > NOTE: This library was inspired from [myth/auth](https://github.com/lonnieezell/myth-auth/) and  [agungsugiarto/boilerplate](https://github.com/agungsugiarto/boilerplate)
 
 Please feel free to contribute!
@@ -29,15 +28,6 @@ Please feel free to contribute!
 
 Demo On [mannan.id](https://mannan.id/)
 -------
-=======
-> NOTE: This library was inspired from [agungsugiarto/boilerplate](https://packagist.org/packages/agungsugiarto/boilerplate)
-
-Please feel free to contribute!
-------------------------------------------------------------
-
-Demo On [mannan.id](https://mannan.id/)
--------------------------------------------------------------
->>>>>>> ffa40a5012e1b977308d04286fcb2645083d35b0
 
 
 Installation
@@ -87,7 +77,7 @@ database.default.password = root
 database.default.DBDriver = MySQLi
 ```
 
-**3.** Run `publish`, `migrate` and `seed`
+**3.** Run `publish`, `migrate`, `seed`
 
 * Run `php spark adminigniter:publish`
 ```bash
@@ -125,19 +115,37 @@ php spark db:seed AdminigniterSeeder
   Seeded: App\Database\Seeds\AdminigniterSeeder
 ```
 
-<<<<<<< HEAD
-**4.** Configuration (Auth, Filter, and Autoload) 
+
+**4.** Run `module`
+This providing Adminigniter HMVC Module Generator (CRUD).
+It will generate files for: Migration, Controller, Model, View, Config (Routes)
+
+* Run `php spark adminigniter:module` Dummy
+```bash
+php spark adminigniter:module Dummy
+
+  created: Adminigniter/Database/Migrations/2021-05-16-050256_Dummy.php
+  created: Adminigniter/Modules/Backend/Dummy/Config/Routes.php
+  created: Adminigniter/Modules/Backend/Dummy/Controllers/Dummy.php
+  created: Adminigniter/Modules/Backend/Dummy/Controllers/Api/Dummy.php
+  created: Adminigniter/Modules/Backend/Dummy/Models/DummyModel.php
+  created: Adminigniter/Modules/Backend/Dummy/Views/list.php
+  created: Adminigniter/Modules/Backend/Dummy/Views/add.php
+  created: Adminigniter/Modules/Backend/Dummy/Views/update.php
+```
+
+* Run `php spark migrate -n Adminigniter`
+```bash
+php spark migrate
+
+  Running: (Adminigniter) 2021-05-16-050256_App/Adminigniter/Database/Migrations/Dummy  
+```
+
+**5.** Configuration (Auth, Filter, and Autoload) 
 > NOTE: Everything about how to configure auth you can find add [myth/auth](https://github.com/lonnieezell/myth-auth)
 
 * app/Config/Auth.php
 Open `app/Config/Auth.php` find `$views, $passwordValidators and etc` and changes with these lines below:
-=======
-**4.** Myth/Auth Config 
-> NOTE: Everything about how to configure auth you can find add [Myth/Auth](https://github.com/lonnieezell/myth-auth).
-
-* app/Config/Auth.php
-Open `app/Config/Auth.php` find `public $views` and changes with these lines below:
->>>>>>> ffa40a5012e1b977308d04286fcb2645083d35b0
 ```php
 public $defaultUserGroup = 'user';
 
@@ -165,10 +173,6 @@ public $passwordValidators = [
 ```
 
 * app/Config/Filters.php
-<<<<<<< HEAD
-
-=======
->>>>>>> ffa40a5012e1b977308d04286fcb2645083d35b0
 Open `app/Config/Filters.php`, find `$aliases` and add these lines below:
 ```php
 public $aliases = [
@@ -182,10 +186,6 @@ public $aliases = [
 ```
 
 * app/Config/Autoload.php
-<<<<<<< HEAD
-
-=======
->>>>>>> ffa40a5012e1b977308d04286fcb2645083d35b0
 Open `app/Config/Autoload.php`, find `$psr4` and add these lines below:
 ```php
 public $psr4 = [
@@ -196,29 +196,25 @@ public $psr4 = [
 ];
 ```
 
-**5.** Run development server:
+**6.** Run development server:
 > NOTE: Running on port `8888` 
 
 ```bash
 php spark serve --port 8888
 ```
 
-**6.** Open in browser http://localhost:8888/dashboard
+**7.** Open in browser http://localhost:8888/dummy
 ```bash
 Default user and password
 +----+--------+-------------+
 | No | User   | Password    |
 +----+--------+-------------+
-| 1  | admin  | qwerty!@#   |
+| 1  | admin  | password    |
 +----+--------+-------------+
 ```
 
 Usage
-<<<<<<< HEAD
 -------
-=======
------
->>>>>>> ffa40a5012e1b977308d04286fcb2645083d35b0
 You can find how it works with the read code routes, controller and views etc.
 
 Contributing

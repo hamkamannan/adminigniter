@@ -30,7 +30,7 @@ class AdminigniterSeeder extends Seeder
             [
                 'email' => 'admin@admin.com',
                 'username' => 'admin',
-                'password_hash' => '$2y$10$6c5SSDEyX6HcygFqdqNZrO1KtlU7nymvkkm9rQIlzP8L.6h4n7p0a',
+                'password_hash' => '$2y$10$bb4pfVQ23Fa5TWUERp5V.uiO9tP782qYD/bluLujUwtBeo2G5PQ0S',
                 'active' => '1',
                 'first_name' => 'Admin',
             ],

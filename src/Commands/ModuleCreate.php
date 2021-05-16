@@ -24,7 +24,7 @@ class ModuleCreate extends BaseCommand
      *
      * @var string
      */
-    protected $name = 'adminigniter:module';
+    protected $name = 'module:create';
 
     /**
      * The command's short description.
@@ -38,7 +38,7 @@ class ModuleCreate extends BaseCommand
      *
      * @var string
      */
-    protected $usage = 'adminigniter:module';
+    protected $usage = 'module:create';
 
     /**
      * The commamd's argument.
@@ -74,9 +74,8 @@ class ModuleCreate extends BaseCommand
      */
     public function run(array $params)
     {
-        $this->determineSourcePath();
-
         helper('inflector');
+        $this->determineSourcePath();
 
         $this->module_name = $params[0];
 

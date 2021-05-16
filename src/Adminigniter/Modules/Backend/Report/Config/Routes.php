@@ -1,7 +1,7 @@
 <?php if (!isset($routes)) {
 	$routes = \Config\Services::routes(true);
 }
-$routes->group('report', ['namespace' => 'hamkamannan\adminigniter\Modules\Backend\Report\Controllers'], function ($subroutes) {
+$routes->group('report', ['namespace' => 'App\Adminigniter\Modules\Backend\Report\Controllers'], function ($subroutes) {
 	/*** Route Update for Report ***/
 	$subroutes->add('', 'Report::index');
 	$subroutes->add('index', 'Report::index');

@@ -1,6 +1,6 @@
 <?php
 
-namespace hamkamannan\adminigniter\Modules\Backend\Report\Controllers;
+namespace App\Adminigniter\Modules\Backend\Report\Controllers;
 
 use PhpOffice\PhpSpreadsheet\Helper\Sample;
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -65,7 +65,7 @@ class Report extends \hamkamannan\adminigniter\Controllers\BaseController
         $this->data['logs'] = $logs;
 
         $this->data['title'] = 'Laporan - Audit Log';
-        echo view('hamkamannan\adminigniter\Modules\Backend\Report\Views\logs', $this->data);
+        echo view('App\Adminigniter\Modules\Backend\Report\Views\logs', $this->data);
     }
 
     public function visitors()
@@ -94,7 +94,7 @@ class Report extends \hamkamannan\adminigniter\Controllers\BaseController
         $this->data['visitors'] = $visitors;
 
         $this->data['title'] = 'Laporan - Visitor';
-        echo view('hamkamannan\adminigniter\Modules\Backend\Report\Views\visitors', $this->data);
+        echo view('App\Adminigniter\Modules\Backend\Report\Views\visitors', $this->data);
     }
 
     public function visitors_export(){

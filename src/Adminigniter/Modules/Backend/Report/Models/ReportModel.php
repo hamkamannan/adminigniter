@@ -1,5 +1,5 @@
 <?php 
-namespace hamkamannan\adminigniter\Modules\Report\Models;
+namespace App\Adminigniter\Modules\Report\Models;
 
 class ReportModel extends \hamkamannan\adminigniter\Models\BaseModel
 {

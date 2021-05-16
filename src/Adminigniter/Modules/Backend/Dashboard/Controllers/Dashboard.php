@@ -1,6 +1,6 @@
 <?php
 
-namespace hamkamannan\adminigniter\Modules\Backend\Dashboard\Controllers;
+namespace App\Adminigniter\Modules\Backend\\Dashboard\Controllers;
 
 class Dashboard extends \hamkamannan\adminigniter\Controllers\BaseController
 {
@@ -30,6 +30,6 @@ class Dashboard extends \hamkamannan\adminigniter\Controllers\BaseController
         $this->data['countActiveUser'] = count($this->userModel->where('active', 1)->findAll());
         $this->data['countInactiveUser'] = count($this->userModel->where('active', 0)->findAll());
 
-        echo view('\hamkamannan\adminigniter\Modules\Backend\Dashboard\Views\index', $this->data);
+        echo view('\App\Adminigniter\Modules\Backend\\Dashboard\Views\index', $this->data);
     }
 }

@@ -71,7 +71,7 @@ app.indexPage = ''
 
 # mysql
 database.default.hostname = 127.0.0.1
-database.default.database = kemenkes_emonev
+database.default.database = adminigniter
 database.default.username = root
 database.default.password = root
 database.default.DBDriver = MySQLi

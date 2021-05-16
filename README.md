@@ -33,7 +33,8 @@ Demo On [mannan.id](https://mannan.id/)
 Installation
 -------
 
-**1.** Get The Module, since the myth/auth packages is still under development, we need to change composer.json in root project directory. Open composer.json with your text editor and add code like [this](https://github.com/hamkamannan/adminigniter/blob/master/composer.json#L29-L30), or below like this.
+**1.** Get The Module 
+> NOTE: Since the myth/auth packages is still under development, we need to change composer.json in root project directory. Open composer.json with your text editor and add code like [this](https://github.com/hamkamannan/adminigniter/blob/master/composer.json#L29-L30), or below like this.
 
 ```bash
 "minimum-stability": "dev",
@@ -78,6 +79,7 @@ database.default.DBDriver = MySQLi
 ```
 
 **3.** Run `publish`, `migrate`, `seed`
+> NOTE: To publish `Database/Migration`, `Database/Seed`, `public/assets`, `public/themes`, `Libraries/DataTables`, and patch HMVC `vendor/codeigniter4/framework/system/View/View.php`
 
 * Run `php spark adminigniter:publish`
 ```bash
@@ -171,9 +173,8 @@ public $psr4 = [
 ];
 ```
 
-**5.** Run CRUD Generator (Optional)
-This providing Adminigniter HMVC Module Generator (CRUD).
-It will generate files for: Migration, Controller, Model, View, Config (Routes)
+**5.** Run Generator (Optional)
+> NOTE: This providing Adminigniter HMVC Module (CRUD) Generator. It will generate files for `Migration`, `Controller`, `Model`, `View`, `Config` (Routes)
 
 * Run `php spark adminigniter:module` Dummy
 ```bash

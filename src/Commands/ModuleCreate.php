@@ -19,7 +19,7 @@ class ModuleCreate extends BaseCommand
      */
     protected $group = 'adminigniter';
 
-    /**
+    /** 
      * The command's name.
      *
      * @var string

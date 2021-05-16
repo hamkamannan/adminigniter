@@ -15,7 +15,7 @@ class ModuleClone extends BaseCommand
      * The group the command is lumped under
      * when listing commands.
      *
-     * @var string
+     * @var string 
      */
     protected $group = 'adminigniter';
 

@@ -12,7 +12,7 @@ Adminigniter
 =====================================
 HMVC Module (CRUD) Generator with Complete Authentication and Authorization system for CodeIgniter4  comes with Admin LTE Template.
 
-Feature
+Feature 
 -------
 * Configurable backend theme [Premium Admin LTE](https://dashboardpack.com/)
 * CSS framework [Bootstrap 4](https://getbootstrap.com/)

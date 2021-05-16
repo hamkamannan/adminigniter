@@ -121,7 +121,7 @@ class AdminigniterPublish extends BaseCommand
             $this->publishModule('Backend','Report');
         }
     }
-
+ 
     protected function publishModule($module_type = 'Backend', $module_name = 'Dashboard')
     {
         $src = "{$this->sourcePath}/Adminigniter/Modules/{$module_type}/{$module_name}";

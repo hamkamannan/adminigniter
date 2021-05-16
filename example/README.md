@@ -1,0 +1,1 @@
+Copy this example folder to your app to create Module Banner (HMVC)

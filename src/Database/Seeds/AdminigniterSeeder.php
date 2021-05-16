@@ -482,43 +482,43 @@ class AdminigniterSeeder extends Seeder
                 'name' => 'access',
                 'slug' => 'access',
                 'sort' => '1',
-                'menu_id' => '17'
+                'menu_id' => '16'
             ],
             [
                 'name' => 'create',
                 'slug' => 'create',
                 'sort' => '2',
-                'menu_id' => '17'
+                'menu_id' => '16'
             ],
             [
                 'name' => 'read',
                 'slug' => 'read',
                 'sort' => '3',
-                'menu_id' => '17'
+                'menu_id' => '16'
             ],
             [
                 'name' => 'update',
                 'slug' => 'update',
                 'sort' => '4',
-                'menu_id' => '17'
+                'menu_id' => '16'
             ],
             [
                 'name' => 'delete',
                 'slug' => 'delete',
                 'sort' => '5',
-                'menu_id' => '17'
+                'menu_id' => '16'
             ],
             [
                 'name' => 'enable',
                 'slug' => 'enable',
                 'sort' => '6',
-                'menu_id' => '17'
+                'menu_id' => '16'
             ],
             [
                 'name' => 'disable',
                 'slug' => 'disable',
                 'sort' => '7',
-                'menu_id' => '17'
+                'menu_id' => '16'
             ],  
         ];
         $this->db->table('c_references')->insertBatch($references);

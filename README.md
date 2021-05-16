@@ -171,7 +171,7 @@ public $psr4 = [
 ];
 ```
 
-**4.** Run CRUD Generator 
+**5.** Run CRUD Generator (Optional)
 This providing Adminigniter HMVC Module Generator (CRUD).
 It will generate files for: Migration, Controller, Model, View, Config (Routes)
 

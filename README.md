@@ -78,6 +78,8 @@ database.default.DBDriver = MySQLi
 ```
 
 **3.** Run `publish`, `migrate` and `seed`
+
+* Run `php spark adminigniter:publish`
 ```bash
 php spark adminigniter:publish
 
@@ -97,6 +99,7 @@ Patch View for HMVC? [y, n]: y
   created: vendor/codeigniter4/framework/system/View/View.php
 ```
 
+* Run `php spark migrate`
 ```bash
 php spark migrate
 
@@ -105,6 +108,7 @@ php spark migrate
   Running: (App) 20210101_000002_App/Database/Migrations/Adminigniter
 ```
 
+* Run `php spark db:seed AdminigniterSeeder`
 ```bash
 php spark db:seed AdminigniterSeeder
 

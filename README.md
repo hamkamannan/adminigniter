@@ -21,6 +21,7 @@ Feature
 * Dynamically-Generated Menu (Drag & Drop)
 * Localized English / Indonesian
 
+<<<<<<< HEAD
 > NOTE: This library was inspired from [myth/auth](https://github.com/lonnieezell/myth-auth/) and  [agungsugiarto/boilerplate](https://github.com/agungsugiarto/boilerplate)
 
 Please feel free to contribute!
@@ -28,6 +29,15 @@ Please feel free to contribute!
 
 Demo On [mannan.id](https://mannan.id/)
 -------
+=======
+> NOTE: This library was inspired from [agungsugiarto/boilerplate](https://packagist.org/packages/agungsugiarto/boilerplate)
+
+Please feel free to contribute!
+------------------------------------------------------------
+
+Demo On [mannan.id](https://mannan.id/)
+-------------------------------------------------------------
+>>>>>>> ffa40a5012e1b977308d04286fcb2645083d35b0
 
 
 Installation
@@ -115,11 +125,19 @@ php spark db:seed AdminigniterSeeder
   Seeded: App\Database\Seeds\AdminigniterSeeder
 ```
 
+<<<<<<< HEAD
 **4.** Configuration (Auth, Filter, and Autoload) 
 > NOTE: Everything about how to configure auth you can find add [myth/auth](https://github.com/lonnieezell/myth-auth)
 
 * app/Config/Auth.php
 Open `app/Config/Auth.php` find `$views, $passwordValidators and etc` and changes with these lines below:
+=======
+**4.** Myth/Auth Config 
+> NOTE: Everything about how to configure auth you can find add [Myth/Auth](https://github.com/lonnieezell/myth-auth).
+
+* app/Config/Auth.php
+Open `app/Config/Auth.php` find `public $views` and changes with these lines below:
+>>>>>>> ffa40a5012e1b977308d04286fcb2645083d35b0
 ```php
 public $defaultUserGroup = 'user';
 
@@ -147,7 +165,10 @@ public $passwordValidators = [
 ```
 
 * app/Config/Filters.php
+<<<<<<< HEAD
 
+=======
+>>>>>>> ffa40a5012e1b977308d04286fcb2645083d35b0
 Open `app/Config/Filters.php`, find `$aliases` and add these lines below:
 ```php
 public $aliases = [
@@ -161,7 +182,10 @@ public $aliases = [
 ```
 
 * app/Config/Autoload.php
+<<<<<<< HEAD
 
+=======
+>>>>>>> ffa40a5012e1b977308d04286fcb2645083d35b0
 Open `app/Config/Autoload.php`, find `$psr4` and add these lines below:
 ```php
 public $psr4 = [
@@ -190,7 +214,11 @@ Default user and password
 ```
 
 Usage
+<<<<<<< HEAD
 -------
+=======
+-----
+>>>>>>> ffa40a5012e1b977308d04286fcb2645083d35b0
 You can find how it works with the read code routes, controller and views etc.
 
 Contributing

@@ -12,8 +12,23 @@ include ROOTPATH . 'vendor/hamkamannan/adminigniter/src/Modules/Core/User/Config
 include ROOTPATH . 'vendor/hamkamannan/adminigniter/src/Modules/Backend/Dashboard/Config/Routes.php';
 include ROOTPATH . 'vendor/hamkamannan/adminigniter/src/Modules/Backend/Report/Config/Routes.php';
 
-if (!isset($routes)) {
-	$routes = \Config\Services::routes(true);
+// Autoload Modules Config  
+foreach (glob(APPPATH . 'Modules/*', GLOB_ONLYDIR) as $item_dir) {
+	if (file_exists($item_dir . '/Config/Routes.php')) {
+		require_once($item_dir . '/Config/Routes.php');
+	}
+}
+
+foreach (glob(APPPATH . 'Modules/Backend/*', GLOB_ONLYDIR) as $item_dir) {
+	if (file_exists($item_dir . '/Config/Routes.php')) {
+		require_once($item_dir . '/Config/Routes.php');
+	}
+}
+
+foreach (glob(APPPATH . 'Modules/Frontend/*', GLOB_ONLYDIR) as $item_dir) {
+	if (file_exists($item_dir . '/Config/Routes.php')) {
+		require_once($item_dir . '/Config/Routes.php');
+	}
 }
 
 

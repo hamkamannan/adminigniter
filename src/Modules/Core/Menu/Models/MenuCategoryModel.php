@@ -8,7 +8,9 @@ class MenuCategoryModel extends \hamkamannan\adminigniter\Models\BaseModel
     protected $primaryKey = 'id';
     protected $returnType     = 'object';
     protected $useSoftDeletes = false;
-    protected $allowedFields = ['name', 'slug', 'sort', 'description', 'active'];
+    protected $allowedFields = [
+        'name', 'slug', 'sort', 'description', 'active'
+    ];
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

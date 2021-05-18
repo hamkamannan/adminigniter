@@ -97,7 +97,7 @@
         $('.loading').show();
 
         $.ajax({
-                url: '<?= base_url('api/param/create') ?>',
+                url: '<?= base_url('api/parameter/create') ?>',
                 type: 'POST',
                 dataType: 'json',
                 data: data_post,

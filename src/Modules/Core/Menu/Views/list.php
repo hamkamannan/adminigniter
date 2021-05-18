@@ -185,6 +185,7 @@ $(document).ready(function() {
                 $('#frm_edit_name').val(response.name);
                 $('#frm_edit_sort').val(response.sort);
                 $('#frm_edit_description').val(response.description);
+                $('#frm_edit_slug').val(response.slug);
 
                 $('#modal_edit').modal('show');
             }

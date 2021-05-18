@@ -111,10 +111,10 @@ class Menu extends ResourceController
 	{
 		$this->validation->setRule('name', 'Nama Menu', 'required');		
 		if ($this->request->getPost() && $this->validation->withRequest($this->request)->run()) {
-			$slug = url_title($this->request->getPost('name'), '-', TRUE);
+			$form_slug = url_title($this->request->getPost('name'), '-', TRUE);
 			$save_data = array(
 				'name' => $this->request->getPost('name'),
-				'slug' => $slug,
+				'slug' => $form_slug,
 				'sort' => $this->request->getPost('sort'),
 				'description' => $this->request->getPost('description'),
 			);
@@ -161,13 +161,15 @@ class Menu extends ResourceController
 	{
 		$this->validation->setRule('name', 'Kategori Menu', 'required');
 		if ($this->request->getPost() && $this->validation->withRequest($this->request)->run()) {
-			$slug = url_title($this->request->getPost('name'), '-', TRUE);
 			$update_data = array(
 				'name' => $this->request->getPost('name'),
-				'slug' => $slug,
 				'sort' => $this->request->getPost('sort'),
 				'description' => $this->request->getPost('description'),
 			);
+
+			if(!empty($this->request->getPost('slug'))){
+				$update_data['slug'] = $this->request->getPost('slug');
+			}
 
 			$menuCategoryUpdate = $this->menuCategoryModel->update($id, $update_data);
 			if ($menuCategoryUpdate) {

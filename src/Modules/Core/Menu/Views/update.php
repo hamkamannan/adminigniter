@@ -110,7 +110,7 @@ $category = $baseModel
                                     <div class="position-relative form-group">
                                           <label for="name">Icon</label>
                                           <div>
-                                                <input type="text" class="form-control" id="frm_edit_icon" name="icon" placeholder="Icon" value="<?= set_value('icon', $menu->icon) ?>" />
+                                                <input type="text" class="form-control" islug" name="icon" placeholder="Icon" value="<?= set_value('icon', $menu->icon) ?>" />
                                                 <small class="info help-block text-muted">Contoh: <i class="fa fa-home"></i> fa fa-home</small>
                                           </div>
                                     </div>
@@ -133,6 +133,12 @@ $category = $baseModel
                               <label for="description">Keterangan</label>
                               <div>
                                     <textarea id="description" name="description" placeholder="Keterangan" rows="2" class="form-control autosize-input" style="min-height: 38px;"><?= set_value('description', $menu->description); ?></textarea>
+                              </div>
+                        </div>
+                        <div class="form-group">
+                              <label for="description">Slug</label>
+                              <div>
+                                    <input type="text" class="form-control" id="frm_edit_slug" name="form_slug" placeholder="Slug" value="<?= set_value('form_slug', $menu->slug) ?>" />
                               </div>
                         </div>
                         <div class="form-group">

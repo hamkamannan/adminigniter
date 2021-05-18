@@ -53,8 +53,10 @@ class Reference extends ResourceController
 		$menu_id = $this->request->getPost('menu_id');
 		$this->validation->setRule('name', 'Nama Referensi', 'required');
 		if ($this->request->getPost() && $this->validation->withRequest($this->request)->run()) {
+			$form_slug = url_title($this->request->getPost('name'), '-', TRUE);
 			$save_data = array(
 				'name' => $this->request->getPost('name'),
+				'slug' => $form_slug,
 				'sort' => $this->request->getPost('sort'),
 				'description' => $this->request->getPost('description'),
 				'menu_id' => $menu_id,
@@ -102,10 +104,11 @@ class Reference extends ResourceController
 				'name' => $this->request->getPost('name'),
 				'sort' => $this->request->getPost('sort'),
 				'description' => $this->request->getPost('description'),
-				'url' => $this->request->getPost('url'),
-				'url_title' => $this->request->getPost('url_title'),
-				'url_target' => $this->request->getPost('url_target'),
 			);
+
+			if(!empty($this->request->getPost('slug'))){
+				$update_data['slug'] = $this->request->getPost('slug');
+			}
 
 			$files = (array) $this->request->getPost('file_image');
 			if (count($files)) {
@@ -139,6 +142,27 @@ class Reference extends ResourceController
 		} else {
 			$message = $this->validation->listErrors();
 			return $this->fail($message, 400);
+		}
+	}
+
+	public function list($slug)
+	{
+		// if (!is_allowed('reference/read')) {
+        //     set_message('toastr_msg', lang('App.permission.not.have'));
+        //     set_message('toastr_type', 'error');
+		// 	return $this->respond(array('status' => 201, 'error' => lang('App.permission.not.have')));
+        // }
+
+		$data = $this->referenceModel
+			->select('c_references.*')
+			->join('c_menus','c_menus.id = c_references.menu_id', 'inner')
+			->where('c_menus.slug',$slug)
+			->find_all('c_references.sort', 'asc');
+
+		if ($data) {
+			return $this->respond($data);
+		} else {
+			return $this->failNotFound('No Data Found with slug ' . $slug);
 		}
 	}
 }

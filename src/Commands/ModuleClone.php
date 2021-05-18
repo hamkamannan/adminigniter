@@ -31,7 +31,7 @@ class ModuleClone extends BaseCommand
      *
      * @var string
      */
-    protected $description = 'Clone Adminigniter HMVC Modules in app/Adminigniter/Modules folder (Available for Dashboard, Report, Banner, Page)';
+    protected $description = 'Clone Adminigniter HMVC Modules (Available: Banner, Page)';
 
     /**
      * The command's usage.

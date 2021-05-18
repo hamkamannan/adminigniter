@@ -9,7 +9,7 @@ class ReferenceModel extends \hamkamannan\adminigniter\Models\BaseModel
     protected $returnType     = 'object';
     protected $useSoftDeletes = false;
     protected $allowedFields = [
-        'id', 'name', 'description', 'sort',  'active', 'menu_id'
+        'name', 'slug', 'description', 'sort',  'active', 'menu_id',
     ];
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';

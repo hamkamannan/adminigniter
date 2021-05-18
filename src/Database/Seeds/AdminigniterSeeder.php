@@ -465,7 +465,7 @@ class AdminigniterSeeder extends Seeder
             [
                 'name' => 'Permission',
                 'parent' => '0',
-                'controller' => 'reference_permission',
+                'controller' => 'ref_permission',
                 'icon' => '',
                 'permission' => 'access',
                 'sort' => '16',
@@ -475,7 +475,7 @@ class AdminigniterSeeder extends Seeder
             [
                 'name' => 'Banner',
                 'parent' => '0',
-                'controller' => 'reference_banner',
+                'controller' => 'ref_banner',
                 'icon' => '',
                 'permission' => 'access',
                 'sort' => '17',

@@ -45,6 +45,13 @@ $slug = 'backend-menu';
                             <textarea id="frm_edit_description" name="description" placeholder="Keterangan" rows="2" class="form-control autosize-input" style="min-height: 38px;"><?= set_value('description') ?></textarea>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label for="description">Slug</label>
+                        <div>
+                            <input type="text" class="form-control" id="frm_edit_slug" name="slug" placeholder="Slug" value="<?= set_value('slug') ?>" />
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"><?= lang('App.btn.close') ?></button>

@@ -78,10 +78,10 @@ class Parameter extends \hamkamannan\adminigniter\Controllers\BaseController
                 add_log('Tambah Parameter', 'param', 'create', 'c_parameters', $newParamId);
                 set_message('toastr_msg', 'Parameter berhasil disimpan');
                 set_message('toastr_type', 'success');
-                return redirect()->to('/param');
+                return redirect()->to('/parameter');
             } else {
                 set_message('message', 'Parameter gagal disimpan');
-                return redirect()->to('/param/create/');
+                return redirect()->to('/parameter/create/');
             }
         } else {
             $message = $this->validation->getErrors() ? $this->validation->listErrors() : $this->session->getFlashdata('message');
@@ -121,12 +121,12 @@ class Parameter extends \hamkamannan\adminigniter\Controllers\BaseController
                     add_log('Ubah Parameter', 'param', 'edit', 'c_parameters', $id);
                     set_message('toastr_msg', 'Parameter berhasil disimpan');
                     set_message('toastr_type', 'success');
-                    return redirect()->to('/param');
+                    return redirect()->to('/parameter');
                 } else {
                     set_message('toastr_msg', 'Parameter gagal disimpan');
                     set_message('toastr_type', 'warning');
                     set_message('message', 'Parameter gagal disimpan');
-                    return redirect()->to('/param/edit/' . $id);
+                    return redirect()->to('/parameter/edit/' . $id);
                 }
             }
         }

@@ -24,4 +24,5 @@ $routes->group('api/reference', ['namespace' => 'hamkamannan\adminigniter\Module
 	$subroutes->add('edit/(:any)', 'Reference::edit/$1');
 	$subroutes->add('create', 'Reference::create');
 	$subroutes->add('delete/(:any)', 'Reference::delete/$1');
+	$subroutes->add('list/(:any)', 'Reference::list/$1');
 });

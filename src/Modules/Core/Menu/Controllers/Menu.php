@@ -56,9 +56,10 @@ class Menu extends \hamkamannan\adminigniter\Controllers\BaseController
         $this->data['title'] = 'Tambah Menu';
 		$this->validation->setRule('name', 'Label', 'required');
         if ($this->request->getPost() && $this->validation->withRequest($this->request)->run()) {
-            
+            $form_slug = url_title($this->request->getPost('name'), '-', TRUE);
             $save_data = array(
 				'name' => $this->request->getPost('name'),
+                'slug' => $form_slug,
 				'controller' => $this->request->getPost('controller'),
 				'icon' => $this->request->getPost('icon'),
 				'permission' => implode('|', $this->request->getPost('permission')),
@@ -115,6 +116,10 @@ class Menu extends \hamkamannan\adminigniter\Controllers\BaseController
                     'type' => $this->request->getPost('type'),
                     'parent' => $this->request->getPost('parent') ?? 0,
                 );
+
+                if(!empty($this->request->getPost('form_slug'))){
+                    $update_data['slug'] = $this->request->getPost('form_slug');
+                }
 
                 $menuUpdate = $this->menuModel->update($id, $update_data);
                 if ($menuUpdate) {

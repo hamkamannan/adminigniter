@@ -46,6 +46,12 @@ $menu_id = $request->getVar('menu_id') ?? 0;
                             <textarea id="frm_edit_description" name="description" placeholder="Keterangan" rows="2" class="form-control autosize-input" style="min-height: 38px;"><?= set_value('description') ?></textarea>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="description">Slug</label>
+                        <div>
+                            <input type="text" class="form-control" id="frm_edit_slug" name="slug" placeholder="Slug" value="<?= set_value('slug') ?>" />
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" name="menu_id" value="<?=$menu_id?>">
@@ -70,6 +76,7 @@ $menu_id = $request->getVar('menu_id') ?? 0;
                 $('#frm_edit_name').val(response.name);
                 $('#frm_edit_sort').val(response.sort);
                 $('#frm_edit_description').val(response.description);
+                $('#frm_edit_slug').val(response.slug);
 
                 $('#modal_edit').modal('show');
             }

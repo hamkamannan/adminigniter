@@ -316,8 +316,8 @@ if (!function_exists('display_action_menu_reference')) {
     {
         $action = '';
         $action .= '<div class="pull-right">';
-        $action .= '<button data-toggle="tooltip" data-placement="top" title="Kode: '.$row->controller.'" class="btn btn-xs btn-info"><i class="pe-7s-info font-weight-bold"></i></button> ';
-        $action .= '<a href="'.base_url('reference?menu_id='.$row->id).'" data-toggle="tooltip" data-placement="top" title="Lihat Referensi" class="btn btn-xs btn-primary"><i class="lnr-list font-weight-bold"></i></a>';
+        $action .= '<button data-toggle="tooltip" data-placement="top" title="slug: '.$row->slug.'" class="btn btn-xs btn-info"><i class="pe-7s-info font-weight-bold"></i></button> ';
+        $action .= '<a href="'.base_url('reference?slug='.$row->slug).'" data-toggle="tooltip" data-placement="top" title="Lihat Referensi" class="btn btn-xs btn-primary"><i class="lnr-list font-weight-bold"></i></a>';
         $action .= '</div>';
         return $action;
     }
@@ -326,7 +326,7 @@ if (!function_exists('display_action_menu_reference')) {
 if(!function_exists('display_menu_reference')) {
 	function display_menu_reference($category_id, $parent, $level) {
         $baseModel = new \hamkamannan\adminigniter\Models\BaseModel();
-        $query = $baseModel->query("SELECT a.id, a.name as label, a.type, a.active, a.controller, a.controller as link, a.category_id, deriv.count 
+        $query = $baseModel->query("SELECT a.id, a.name as label, a.type, a.active, a.controller, a.controller as link, a.slug , a.category_id, deriv.count 
             FROM `c_menus` a LEFT OUTER JOIN (
                 SELECT parent, COUNT(*) AS count 
                     FROM `c_menus` GROUP BY parent

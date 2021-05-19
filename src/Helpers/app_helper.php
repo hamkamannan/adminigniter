@@ -41,19 +41,21 @@ if (!function_exists('is_admin')) {
 }
 
 if (!function_exists('is_allowed')) {
-    function is_allowed($permission = '')
+    function is_allowed($permission)
     {
-        if(is_admin()){
-            return true;
-        } else {
-            return has_permission($permission);
-        }
+        return is_accessed($permission);
     }
 }
 
 if (!function_exists('is_accessed')) {
     function is_accessed($permission, $user_id = null)
     {
+        if (strpos($permission, '/access') !== false) {
+            $permission = $permission;
+        } else {
+            $permission = $permission.'/access';
+        }
+
         if(is_admin()){
             return true;
         } else {

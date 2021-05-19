@@ -41,9 +41,18 @@ if (!function_exists('is_admin')) {
 }
 
 if (!function_exists('is_allowed')) {
-    function is_allowed($permission)
+    function is_allowed($permission, $user_id = null)
     {
-        return is_accessed($permission);
+        if(is_admin()){
+            return true;
+        } else {
+            if (empty($user_id)) {
+                $user_id = user_id();
+            }
+    
+            $authorize = \Myth\Auth\Config\Services::authorization();
+            return $authorize->hasPermission($permission, $user_id);
+        }
     }
 }
 
@@ -56,16 +65,7 @@ if (!function_exists('is_accessed')) {
             $permission = $permission.'/access';
         }
 
-        if(is_admin()){
-            return true;
-        } else {
-            if (empty($user_id)) {
-                $user_id = user_id();
-            }
-    
-            $authorize = \Myth\Auth\Config\Services::authorization();
-            return $authorize->hasPermission($permission, $user_id);
-        }
+        return is_allowed($permission, $user_id);
     }
 }
 

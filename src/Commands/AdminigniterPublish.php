@@ -72,6 +72,9 @@ class AdminigniterPublish extends BaseCommand
     {
         $this->determineSourcePath();
 
+        @mkdir(APPPATH . "Adminigniter/Database/Migrations");
+        @mkdir(APPPATH . "Adminigniter/Modules/Backend");
+
         //Config
         if (CLI::prompt('Publish Auth Config? (Myth/Auth & Adminigniter)', ['y', 'n']) == 'y')
         {
@@ -103,12 +106,6 @@ class AdminigniterPublish extends BaseCommand
             $this->publishLibrary();
         }
 
-        // Patch View (HMVC)
-        if (CLI::prompt('Patching Adminigniter HMVC Module? (vendor/codeigniter4/framework/system/View/View.php)', ['y', 'n']) == 'y')
-        {
-            $this->publishPatch();
-        }
-
         // Publish Dashboard 
         if (CLI::prompt('Publish Dashboard Module? (Adminigniter/Modules/Backend/Dashboard)', ['y', 'n']) == 'y')
         {
@@ -119,6 +116,12 @@ class AdminigniterPublish extends BaseCommand
         if (CLI::prompt('Publish Report Module? (Adminigniter/Modules/Backend/Report)', ['y', 'n']) == 'y')
         {
             $this->publishModule('Backend','Report');
+        }
+
+        // Patch View (HMVC)
+        if (CLI::prompt('Patching Adminigniter HMVC Module? (vendor/codeigniter4/framework/system/View/View.php)', ['y', 'n']) == 'y')
+        {
+            $this->publishPatch();
         }
     }
  

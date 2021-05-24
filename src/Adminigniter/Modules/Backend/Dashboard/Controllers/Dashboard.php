@@ -9,18 +9,19 @@ class Dashboard extends \hamkamannan\adminigniter\Controllers\BaseController
 
     function __construct()
     {
-        $this->auth = \Myth\Auth\Config\Services::authentication();
-        $this->authorize = \Myth\Auth\Config\Services::authorization();
-
         $this->userModel = new \hamkamannan\adminigniter\Modules\Core\User\Models\UserModel();
         $this->groupModel = new \hamkamannan\adminigniter\Modules\Core\Group\Models\GroupModel();
+
+        $this->auth = \Myth\Auth\Config\Services::authentication();
+        $this->authorize = \Myth\Auth\Config\Services::authorization();
+        $this->session = service('session');
     }
 
     public function index()
     {
         if (! $this->auth->check() )
 		{
-			// $this->session->set('redirect_url', current_url() );
+			$this->session->set('redirect_url', current_url() );
 			return redirect()->route('login');
 		} 
         

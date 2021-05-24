@@ -43,16 +43,20 @@ if (!function_exists('is_admin')) {
 if (!function_exists('is_allowed')) {
     function is_allowed($permission, $user_id = null)
     {
-        if(is_admin()){
-            return true;
-        } else {
-            if (empty($user_id)) {
-                $user_id = user_id();
+        $auth = \Myth\Auth\Config\Services::authentication();
+        $authorize = \Myth\Auth\Config\Services::authorization();
+
+        if ($auth->check()){
+            if(is_admin()){
+                return true;
+            } else {
+                if (empty($user_id)) {
+                    $user_id = user_id();
+                }
+                return $authorize->hasPermission($permission, $user_id);
             }
-    
-            $authorize = \Myth\Auth\Config\Services::authorization();
-            return $authorize->hasPermission($permission, $user_id);
         }
+        return false;
     }
 }
 

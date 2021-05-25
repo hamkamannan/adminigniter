@@ -72,7 +72,10 @@ class AdminigniterPublish extends BaseCommand
     {
         $this->determineSourcePath();
 
+        @mkdir(APPPATH . "Adminigniter");
+        @mkdir(APPPATH . "Adminigniter/Database");
         @mkdir(APPPATH . "Adminigniter/Database/Migrations");
+        @mkdir(APPPATH . "Adminigniter/Modules");
         @mkdir(APPPATH . "Adminigniter/Modules/Backend");
 
         //Config

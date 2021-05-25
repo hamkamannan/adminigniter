@@ -18,15 +18,13 @@ class Access extends \hamkamannan\adminigniter\Controllers\BaseController
 
         $this->auth = \Myth\Auth\Config\Services::authentication();
         $this->authorize = \Myth\Auth\Config\Services::authorization();
+        $this->session = service('session');
 
         if (! $this->auth->check() )
 		{
-            $this->session = service('session');
 			$this->session->set('redirect_url', current_url() );
 			return redirect()->route('login');
-		} else {
-			return redirect()->route('dashboard');
-		}
+		} 
     }
 
     public function index()

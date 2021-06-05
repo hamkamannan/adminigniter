@@ -2,17 +2,31 @@
 
 namespace hamkamannan\adminigniter\Modules\Core\Menu\Controllers;
 
+use \CodeIgniter\Files\File;
+
 class Menu extends \hamkamannan\adminigniter\Controllers\BaseController
 {
     protected $auth;
     protected $authorize;
     protected $menuModel;
     protected $menuCategoryModel;
+    protected $uploadPath;
+    protected $modulePath;
     
     function __construct()
     {
         $this->menuModel = new \hamkamannan\adminigniter\Modules\Core\Menu\Models\MenuModel();
         $this->menuCategoryModel = new \hamkamannan\adminigniter\Modules\Core\Menu\Models\MenuCategoryModel();
+        $this->uploadPath = ROOTPATH . 'public/uploads/';
+        $this->modulePath = ROOTPATH . 'public/uploads/menu/';
+        
+        if (!file_exists($this->uploadPath)) {
+            mkdir($this->uploadPath);
+        }
+
+        if (!file_exists($this->modulePath)) {
+            mkdir($this->modulePath);
+        }
 
         $this->auth = \Myth\Auth\Config\Services::authentication();
         $this->authorize = \Myth\Auth\Config\Services::authorization();
@@ -74,6 +88,21 @@ class Menu extends \hamkamannan\adminigniter\Controllers\BaseController
                 $save_data['permission'] = 'access';
             }
 
+            // Logic Upload
+            $files = (array) $this->request->getPost('file_image');
+            if (count($files)) {
+                $listed_file = array();
+                foreach ($files as $uuid => $name) {
+                    if (file_exists($this->uploadPath . $name)) {
+                        $file = new File($this->uploadPath . $name);
+                        $newFileName = $file->getFileName(); //$file->getRandomName();
+                        $file->move($this->modulePath, $newFileName);
+                        $listed_file[] = $newFileName;
+                    }
+                }
+                $save_data['file_image'] = implode(',', $listed_file);
+            }
+
             $newMenuId = $this->menuModel->insert($save_data);
             if ($newMenuId) {
                 set_message('toastr_msg', 'Menu berhasil disimpan');
@@ -117,6 +146,25 @@ class Menu extends \hamkamannan\adminigniter\Controllers\BaseController
 
                 if(!empty($this->request->getPost('form_slug'))){
                     $update_data['slug'] = $this->request->getPost('form_slug');
+                }
+
+                // Logic Upload
+                $files = (array) $this->request->getPost('file_image');
+                if (count($files)) {
+                    $listed_file = array();
+                    foreach ($files as $uuid => $name) {
+                        if (file_exists($this->modulePath . $name)) {
+                            $listed_file[] = $name;
+                        } else {
+                            if (file_exists($this->uploadPath . $name)) {
+                                $file = new File($this->uploadPath . $name);
+                                $newFileName = $file->getFileName(); //$file->getRandomName();
+                                $file->move($this->modulePath, $newFileName);
+                                $listed_file[] = $newFileName;
+                            }
+                        }
+                    }
+                    $update_data['file_image'] = implode(',', $listed_file);
                 }
 
                 $menuUpdate = $this->menuModel->update($id, $update_data);

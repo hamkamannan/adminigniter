@@ -33,6 +33,7 @@ class Adminigniter extends Migration
 			'controller' 	=> ['type' => 'VARCHAR','constraint' => '50','null' => true,],
 			'icon' 			=> ['type' => 'VARCHAR','constraint' => '100','null' => true,],
 			'permission' 	=> ['type' => 'VARCHAR','constraint' => '255','null' => true,],
+			'file_image' 	=> ['type' => 'VARCHAR','constraint' => '255','null' => true,],
 			'type' 			=> ['type' => 'ENUM("menu", "label", "reference")','default' => 'menu','null' => false,],
 			'category_id' 	=> ['type' => 'INT','constraint' => 11,'null' => false,],
 			'slug' 			=> ['type' => 'VARCHAR','constraint' => '150','null' => true,],

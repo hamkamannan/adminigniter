@@ -115,7 +115,7 @@ $category = $baseModel
                 <div class="card-header"><i class="header-icon lnr-list icon-gradient bg-plum-plate"> </i> <?=$category->name?>
                     <div class="btn-actions-pane-right actions-icon-btn">
                         <?php if(is_allowed('menu/create')):?>
-                            <a href="<?=base_url('menu/create?slug='.$slug)?>" class="btn btn-success" title="Tambah Menu"><i class="fa fa-plus"></i> Tambah Menu</a>
+                            <a href="<?=base_url('menu/create?slug='.$slug)?>" class="btn btn-success" title="Tambah Menu"><i class="fa fa-plus"></i> <?=$category->name?></a>
                         <?php endif;?>
                     </div>
                 </div>

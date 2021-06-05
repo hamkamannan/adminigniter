@@ -9,7 +9,7 @@ class MenuModel extends \hamkamannan\adminigniter\Models\BaseModel
     protected $returnType     = 'object';
     protected $useSoftDeletes = false;
     protected $allowedFields = [
-        'name', 'slug', 'parent', 'controller', 'icon', 'permission', 'sort', 'description', 'active', 'type', 'category_id',
+        'name', 'slug', 'parent', 'controller', 'icon', 'permission', 'sort', 'description', 'active', 'type', 'category_id', 'file_image',
     ];
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';

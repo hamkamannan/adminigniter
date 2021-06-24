@@ -45,26 +45,24 @@ class App
         return $default;
     }
 
-    public function addParameter($name =  null, $value = null, $set_cookie = false)
+    public function addParameter($name =  null, $value = null)
     {
-        if ($this->parameterExists($name, $value) === false) {
+        if ($this->parameterExists($name) === false) {
             $data = array(
                 'name' => $name,
                 'value' => $value
             );
             $ret = $this->parameterModel->insert($data);
-            $params = $this->parameterModel->findAll();
-            if ($set_cookie) {
-                set_cookie('params', json_encode($params), 3600 * 24 * 1);
-            }
+            // $params = $this->parameterModel->findAll();
+            // set_cookie('params', json_encode($params), 3600 * 24 * 1);
             return $ret;
         }
         return false;
     }
 
-    public function setParameter($name =  null, $value = null, $set_cookie = false)
+    public function setParameter($name =  null, $value = null)
     {
-        if ($this->parameterExists($name, $value) === false) {
+        if ($this->parameterExists($name) === false) {
             $this->addParameter($name, $value);
         } else {
             $param = $this->parameterModel->where('name', $name)->first();
@@ -72,11 +70,8 @@ class App
                 'value' => $value
             );
             $ret = $this->parameterModel->update($param->id, $data);
-            $params = $this->parameterModel->findAll();
-
-            if ($set_cookie) {
-                set_cookie('params', json_encode($params), 3600 * 24 * 1);
-            }
+            // $params = $this->parameterModel->findAll();
+            // set_cookie('params', json_encode($params), 3600 * 24 * 1);
             return $ret;
         }
     }
@@ -87,17 +82,16 @@ class App
         return $this->parameterModel->delete($param->id);
     }
 
-    public function parameterExists($name =  null, $set_cookie = false)
+    public function parameterExists($name =  null)
     {
-        $params = json_decode(get_cookie('params'));
-        if (!$params) {
-            $params = $this->parameterModel->findAll();
+        // $params = json_decode(get_cookie('params'));
+        // dd($params);
+        // if (!$params) {
+        //     $params = $this->parameterModel->findAll();
+        //     set_cookie('params', json_encode($params), 3600 * 24 * 1);
+        // }
 
-            if ($set_cookie) {
-                set_cookie('params', json_encode($params), 3600 * 24 * 1);
-            }
-        }
-
+        $params = $this->parameterModel->findAll();
         $param = [];
 
         foreach ($params as $row) {

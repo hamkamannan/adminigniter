@@ -9,7 +9,7 @@ use Config\Autoload;
 /**
  * Class PublishCommand.
  */
-class AdminigniterPublish extends BaseCommand
+class AdminigniterInit extends BaseCommand
 {
     /**
      * The group the command is lumped under
@@ -24,21 +24,21 @@ class AdminigniterPublish extends BaseCommand
      *
      * @var string
      */
-    protected $name = 'adminigniter:publish';
+    protected $name = 'adminigniter:init';
 
     /**
      * The command's short description.
      *
      * @var string
      */
-    protected $description = 'Publish assets plugin into the current public directory.';
+    protected $description = 'Initialize Adminigniter Pattern.';
 
     /**
      * The command's usage.
      *
      * @var string
      */
-    protected $usage = 'adminigniter:publish';
+    protected $usage = 'adminigniter:init';
 
     /**
      * The commamd's argument.
@@ -77,54 +77,37 @@ class AdminigniterPublish extends BaseCommand
         @mkdir(APPPATH . "Adminigniter/Database/Migrations");
         @mkdir(APPPATH . "Adminigniter/Modules");
         @mkdir(APPPATH . "Adminigniter/Modules/Backend");
+        @mkdir(APPPATH . "Adminigniter/Modules/Frontend");
 
         //Config
-        if (CLI::prompt('Publish Auth Config? (Myth/Auth & Adminigniter)', ['y', 'n']) == 'y')
+        if (CLI::prompt('Publish Auth Config?', ['y', 'n']) == 'y')
         {
             $this->publishConfig('Auth');
             $this->publishConfig('Adminigniter');
         }
 
         // Migration
-        if (CLI::prompt('Publish Database Migration? (Myth/Auth & Adminigniter)', ['y', 'n']) == 'y')
+        if (CLI::prompt('Publish Database Migration?', ['y', 'n']) == 'y')
         {
             $this->publishMigration();
         }
 
         // Seed
-        if (CLI::prompt('Publish Database Seed? (Adminigniter)', ['y', 'n']) == 'y')
+        if (CLI::prompt('Publish Database Database Seed?', ['y', 'n']) == 'y')
         {
             $this->publishSeed();
         }
 
         // Public Asset
-        if (CLI::prompt('Copy Assets? (Adminigniter public/assets)', ['y', 'n']) == 'y')
+        if (CLI::prompt('Publish Assets? (public/assets)', ['y', 'n']) == 'y')
         {
             $this->publishAsset();
         }
 
         // Public Library
-        if (CLI::prompt('Copy Libraries? (Adminigniter Libraries/DataTables)', ['y', 'n']) == 'y')
+        if (CLI::prompt('Publish Libraries? (Libraries/DataTables)', ['y', 'n']) == 'y')
         {
             $this->publishLibrary();
-        }
-
-        // Publish Dashboard 
-        if (CLI::prompt('Publish Dashboard Module? (Adminigniter/Modules/Backend/Dashboard)', ['y', 'n']) == 'y')
-        {
-            $this->publishModule('Backend','Dashboard');
-        }
-
-        // Publish Report 
-        if (CLI::prompt('Publish Report Module? (Adminigniter/Modules/Backend/Report)', ['y', 'n']) == 'y')
-        {
-            $this->publishModule('Backend','Report');
-        }
-
-        // Patch View (HMVC)
-        if (CLI::prompt('Patching Adminigniter HMVC Module? (vendor/codeigniter4/framework/system/View/View.php)', ['y', 'n']) == 'y')
-        {
-            $this->publishPatch();
         }
     }
  
@@ -140,7 +123,6 @@ class AdminigniterPublish extends BaseCommand
             CLI::write(CLI::color('  error: ', 'red')."Module {$module_name} already exist");
         }
     }
-
 
     protected function publishConfig($configName = 'Adminigniter')
     {
@@ -190,18 +172,6 @@ class AdminigniterPublish extends BaseCommand
         $dst = APPPATH . 'Libraries/DataTables/';
 
         $this->recurseCopy($src, $dst);
-    }
-
-    protected function publishPatch()
-    {
-        $src = $this->sourcePath . '/Asset/patch/View.php.bak';
-        $dst = ROOTPATH . 'vendor/codeigniter4/framework/system/View/View.php';
-
-        $content = file_get_contents($src);
-
-        write_file($dst, $content);
-
-        CLI::write(CLI::color('  created: ', 'green').$dst);
     }
 
     //--------------------------------------------------------------------
@@ -259,15 +229,18 @@ class AdminigniterPublish extends BaseCommand
         }
 
         try {
-            write_file($appPath.$path, $content);
+            if(file_exists()){
+                write_file($appPath.$path, $content);
+                CLI::write(CLI::color('  created: ', 'green').$path);
+            } else {
+                CLI::write(CLI::color('  file already exist: ', 'yellow').$path);
+            }
         } catch (\Exception $e) {
             $this->showError($e);
             exit();
         }
 
         $path = str_replace($appPath, '', $path);
-
-        CLI::write(CLI::color('  created: ', 'green').$path);
     }
 
     /**
@@ -280,6 +253,11 @@ class AdminigniterPublish extends BaseCommand
 
     protected function recurseCopy($src,$dst, $childFolder='') 
     { 
+        if(is_dir($dst)){
+            CLI::write(CLI::color('  directory already exist: ', 'yellow').$dst);
+            exit();
+        } 
+
         $dir = opendir($src); 
         @mkdir($dst);
         if ($childFolder!='') {

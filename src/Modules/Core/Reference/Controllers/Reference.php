@@ -26,8 +26,7 @@ class Reference extends \hamkamannan\adminigniter\Controllers\BaseController
     }
     public function index()
     {
-        $slug = $this->request->getVar('slug');
-
+        $menu_id = $this->request->getVar('menu_id');
         if (!is_allowed('reference/access')) {
             set_message('toastr_msg', lang('App.permission.not.have'));
             set_message('toastr_type', 'error');
@@ -39,8 +38,8 @@ class Reference extends \hamkamannan\adminigniter\Controllers\BaseController
             ->select('c_menus.name as category, c_menus.controller as code')
             ->join('c_menus','c_menus.id = c_references.menu_id', 'left');
 
-        if(!empty($slug)){
-            $query->where('c_menus.slug', $slug);
+        if(!empty($menu_id)){
+            $query->where('menu_id', $menu_id);
         }
         $references = $query->findAll();
 
@@ -52,8 +51,6 @@ class Reference extends \hamkamannan\adminigniter\Controllers\BaseController
 
     public function delete(int $id = 0)
     {
-        $slug = $this->request->getVar('slug') ?? '';
-
         if (!is_allowed('reference/delete')) {
             set_message('toastr_msg', lang('App.permission.not.have'));
             set_message('toastr_type', 'error');
@@ -68,14 +65,14 @@ class Reference extends \hamkamannan\adminigniter\Controllers\BaseController
         $referenceDelete = $this->referenceModel->delete($id);
         if ($referenceDelete) {
             add_log('Hapus Reference', 'reference', 'delete', 't_reference', $id);
-            set_message('toastr_msg', 'Reference berhasil dihapus');
+            // set_message('toastr_msg', 'Reference berhasil dihapus');
             set_message('toastr_type', 'success');
-            return redirect()->to('/reference?slug='.$slug);
+            return redirect()->to('/reference');
         } else {
             set_message('toastr_msg', 'Reference gagal dihapus');
             set_message('toastr_type', 'warning');
-            set_message('message', 'Reference gagal dihapus');
-            return redirect()->to('/reference?slug='.$slug);
+            set_message('message', $this->auth->errors());
+            return redirect()->to('/reference/delete/' . $id);
         }
     }
 

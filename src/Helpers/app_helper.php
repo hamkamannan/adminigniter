@@ -60,6 +60,71 @@ if (!function_exists('is_allowed')) {
     }
 }
 
+if (!function_exists('display_menu_dropdown2')) {
+    function display_menu_dropdown2($id, $controller)
+    {
+        $action = '';
+        $action .= '<div class="pull-right">';
+        $action .= '<button data-toggle="tooltip" data-placement="top" title="Kode: '.$controller.'" class="btn btn-xs btn-info"><i class="pe-7s-info font-weight-bold"></i></button> ';
+        $action .= '<a href="'.base_url('reference?menu_id='.$id).'" data-toggle="tooltip" data-placement="top" title="Lihat Referensi" class="btn btn-xs btn-primary"><i class="lnr-list font-weight-bold"></i></a>';
+        $action .= '</div>';
+        return $action;
+    }
+}
+
+if(!function_exists('display_menu_module2')) {
+	function display_menu_module2($category_id, $parent, $level) {
+        $baseModel = new \hamkamannan\adminigniter\Models\BaseModel();
+        $query = $baseModel->query("SELECT a.id, a.name as label, a.type, a.active, a.controller, a.controller as link, deriv.count 
+            FROM `c_menus` a LEFT OUTER JOIN (
+                SELECT parent, COUNT(*) AS count 
+                    FROM `c_menus` GROUP BY parent
+                ) deriv ON a.id = deriv.parent WHERE  a.parent= ".$parent." and a.category_id = ".$category_id."
+            ORDER BY `sort` ASC");
+        $result = $query->getResult();
+
+		$ret = '';
+		
+	    if ($result) {
+		    $ret .= '<ol class="dd-list">';
+		   	foreach ($result as $row) {
+		        if ($row->count > 0) {
+		        	 $ret .= '<li class="dd-item dd3-item '.($row->active ? '' : 'menu-toggle-activate_inactive').' menu-toggle-activate" data-id="'.$row->id.'" data-status="'.$row->active.'">';
+
+		        	if ($row->type != 'label') {
+		        		$ret .= '<div class="dd-handle dd3-handle dd-handles"></div>';
+		            	$ret .= '<div class="dd3-content">'._ent($row->label);
+		        	} else{
+		        		$ret .= '<div class="dd-handle dd3-handle dd-handles dd-handle-label"></div>';
+		            	$ret .= '<div class="dd3-content "><b>'._ent($row->label).'</b>';
+		        	}
+		            
+		            $ret .= '</div>';
+					$ret .= display_menu_module2($category_id, $row->id, $level + 1);
+					$ret .= "</li>";
+		        } elseif ($row->count==0) {
+		            $ret .= '<li class="dd-item dd3-item '.($row->active ? '' : 'menu-toggle-activate_inactive').' menu-toggle-activate" data-id="'.$row->id.'" data-status="'.$row->active.'">';
+
+		        	if ($row->type != 'label') {
+		        		$ret .= '<div class="dd-handle dd3-handle dd-handles"></div>';
+		            	$ret .= '<div class="dd3-content">'._ent($row->label);
+		        	} else{
+		        		$ret .= '<div class="dd-handle dd3-handle dd-handles dd-handle-label"></div>';
+		            	$ret .= '<div class="dd3-content  "><b>'._ent($row->label).'</b>';
+		        	}
+
+                    $ret .= display_menu_dropdown2($row->id, $row->controller); 
+                    
+					$ret .= '</div></li>';
+		        }
+		    }
+		    $ret .= "</ol>";
+	    }
+
+	    return $ret;
+	}
+}
+
 if (!function_exists('is_accessed')) {
     function is_accessed($permission, $user_id = null)
     {
@@ -99,7 +164,7 @@ if(!function_exists('display_menu_backend')) {
         $request->uri->setSilent();
         $baseModel = new \hamkamannan\adminigniter\Models\BaseModel();
 
-        $query = $baseModel->query("SELECT a.id, a.icon, a.name, a.controller, a.type, a.category_id, deriv.childs 
+        $query = $baseModel->query("SELECT a.id, a.icon, a.name, a.controller, a.type, deriv.childs 
             FROM `c_menus` a LEFT OUTER JOIN (
                 SELECT parent, COUNT(*) AS childs 
                     FROM `c_menus` GROUP BY parent
@@ -150,7 +215,7 @@ if(!function_exists('display_menu_frontend')) {
         $request->uri->setSilent();
         $baseModel = new \hamkamannan\adminigniter\Models\BaseModel();
 
-        $query = $baseModel->query("SELECT a.id, a.icon, a.name, a.controller, a.type, a.category_id, deriv.childs 
+        $query = $baseModel->query("SELECT a.id, a.icon, a.name, a.controller, a.type, deriv.childs 
             FROM `c_menus` a LEFT OUTER JOIN (
                 SELECT parent, COUNT(*) AS childs 
                     FROM `c_menus` GROUP BY parent
@@ -210,23 +275,14 @@ if(!function_exists('display_menu_frontend')) {
     }
 }
 
-if (!function_exists('get_menu_category_slug')) {
-    function get_menu_category_slug($category_id)
-    {
-        $menuCategoryModel = new \hamkamannan\adminigniter\Modules\Core\Menu\Models\MenuCategoryModel();
-        $category = $menuCategoryModel->find($category_id);
-        return $category->slug;
-    }
-}
-
 if (!function_exists('display_menu_dropdown')) {
-    function display_menu_dropdown($row)
+    function display_menu_dropdown($id, $category_slug)
     {
         $action = '';
         $action .= '<div class="pull-right">';
-        $action .= '<a href="'.base_url('menu/edit/' . $row->id.'?slug='.get_menu_category_slug($row->category_id)).'" data-toggle="tooltip" data-placement="top" title="Ubah Menu" class="btn btn-xs btn-warning"><i class="pe-7s-note font-weight-bold"></i></a>&nbsp;';
-        $action .= '<a href="javascript:void(0)" data-href="'.base_url('menu/delete/' . $row->id.'?slug='.get_menu_category_slug($row->category_id)).'" data-toggle="tooltip" data-placement="top" title="Hapus Menu" class="btn btn-xs btn-danger remove-data"><i class="pe-7s-trash font-weight-bold"></i></a>&nbsp;';
-        $action .= '<a href="'.base_url('menu/create?slug='.get_menu_category_slug($row->category_id).'&parent_id=' . $row->id).'" data-toggle="tooltip" data-placement="top" title="Tambah Sub Menu" class="btn btn-xs btn-success"><i class="pe-7s-angle-down-circle font-weight-bold"></i></a>';    
+        $action .= '<a href="'.base_url('menu/edit/' . $id.'?slug='.$category_slug).'" data-toggle="tooltip" data-placement="top" title="Ubah Menu" class="btn btn-xs btn-warning"><i class="pe-7s-note font-weight-bold"></i></a>&nbsp;';
+        $action .= '<a href="javascript:void(0)" data-href="'.base_url('menu/delete/' . $id.'?slug='.$category_slug).'" data-toggle="tooltip" data-placement="top" title="Hapus Menu" class="btn btn-xs btn-danger remove-data"><i class="pe-7s-trash font-weight-bold"></i></a>&nbsp;';
+        $action .= '<a href="'.base_url('menu/create?slug='.$category_slug.'&parent_id=' . $id).'" data-toggle="tooltip" data-placement="top" title="Tambah Sub Menu" class="btn btn-xs btn-success"><i class="pe-7s-angle-down-circle font-weight-bold"></i></a>';    
         $action .= '</div>';
 
         return $action;
@@ -236,12 +292,14 @@ if (!function_exists('display_menu_dropdown')) {
 if(!function_exists('display_menu_module')) {
 	function display_menu_module($category_id, $parent, $level) {
         $baseModel = new \hamkamannan\adminigniter\Models\BaseModel();
-        $query = $baseModel->query("SELECT a.id, a.name as label, a.type, a.active, a.controller, a.controller as link, a.category_id, deriv.count 
-            FROM `c_menus` a LEFT OUTER JOIN (
+        $query = $baseModel->query("SELECT m.id, m.name as label, m.type, m.active, m.controller, m.controller as link, c.slug as category_slug, deriv.count 
+            FROM `c_menus` m 
+            JOIN `c_categories` c ON m.category_id = c.id 
+            LEFT OUTER JOIN (
                 SELECT parent, COUNT(*) AS count 
                     FROM `c_menus` GROUP BY parent
-                ) deriv ON a.id = deriv.parent WHERE  a.parent= ".$parent." and a.category_id = ".$category_id."
-            ORDER BY `sort` ASC");
+                ) deriv ON m.id = deriv.parent WHERE  m.parent= ".$parent." and m.category_id = ".$category_id."
+            ORDER BY m.sort ASC");
         $result = $query->getResult();
 
 		$ret = '';
@@ -260,7 +318,7 @@ if(!function_exists('display_menu_module')) {
 		            	$ret .= '<div class="dd3-content "><b>'._ent($row->label).'</b>';
 		        	}
 
-                    $ret .= display_menu_dropdown($row);
+                    $ret .= display_menu_dropdown($row->id, $row->category_slug);
 		            
 		            $ret .= '</div>';
 					$ret .= display_menu_module($category_id, $row->id, $level + 1);
@@ -276,7 +334,7 @@ if(!function_exists('display_menu_module')) {
 		            	$ret .= '<div class="dd3-content  "><b>'._ent($row->label).'</b>';
 		        	}
 
-                    $ret .= display_menu_dropdown($row); 
+                    $ret .= display_menu_dropdown($row->id, $row->category_slug); 
                     
 					$ret .= '</div></li>';
 		        }
@@ -292,7 +350,7 @@ if(!function_exists('display_menu_option')) {
     function display_menu_option($category_id, $parent, $level = 0, $selected = null, $disabled = false) {
         $baseModel = new \hamkamannan\adminigniter\Models\BaseModel();
 
-        $query = $baseModel->query("SELECT a.id, a.icon, a.name, a.controller, a.type, a.category_id,  deriv.childs 
+        $query = $baseModel->query("SELECT a.id, a.icon, a.name, a.controller, a.type, deriv.childs 
             FROM `c_menus` a LEFT OUTER JOIN (
                 SELECT parent, COUNT(*) AS childs 
                     FROM `c_menus` GROUP BY parent
@@ -332,7 +390,7 @@ if (!function_exists('display_action_menu_reference')) {
 if(!function_exists('display_menu_reference')) {
 	function display_menu_reference($category_id, $parent, $level) {
         $baseModel = new \hamkamannan\adminigniter\Models\BaseModel();
-        $query = $baseModel->query("SELECT a.id, a.name as label, a.type, a.active, a.controller, a.controller as link, a.slug , a.category_id, deriv.count 
+        $query = $baseModel->query("SELECT a.id, a.name as label, a.type, a.active, a.controller, a.controller as link, a.slug, deriv.count 
             FROM `c_menus` a LEFT OUTER JOIN (
                 SELECT parent, COUNT(*) AS count 
                     FROM `c_menus` GROUP BY parent
@@ -423,18 +481,18 @@ if (!function_exists('set_alert')) {
 }
 
 if (!function_exists('set_message')) {
-    function set_message($name = 'message', $message = '')
+    function set_message($name, $value)
     {
-        $session = session();
-        $session->setFlashdata($name, $message);
+        $session = \Config\Services::session(); 
+        $session->setFlashdata($name, $value);
     }
 }
 
 if (!function_exists('get_message')) {
-    function get_message($message = 'message')
+    function get_message($name)
     {
-        $session = session();
-        return $session->getFlashdata($message);
+        $session = \Config\Services::session(); 
+        return $session->getFlashdata($name);
     }
 }
 

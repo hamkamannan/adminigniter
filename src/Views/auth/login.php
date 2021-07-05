@@ -1,14 +1,7 @@
 <?php
-if (!function_exists('get_parameter')) {
-  function get_parameter($param = null, $default = null)
-  {
-      $app = new \hamkamannan\adminigniter\Libraries\App();
-      return $app->getParameter($param, $default);
-  }
-}
+    helper('app');
 ?>
-
-<?= $this->extend('hamkamannan\adminigniter\Views\layout\backend\blank'); ?>
+<?= $this->extend('hamkamannan\adminigniter\layout\backend\blank'); ?>
 <?= $this->section('style'); ?>
 <?= $this->endSection('style'); ?>
 

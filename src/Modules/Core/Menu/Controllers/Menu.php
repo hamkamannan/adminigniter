@@ -53,6 +53,8 @@ class Menu extends \hamkamannan\adminigniter\Controllers\BaseController
         $this->data['slug'] = $slug;
         $this->data['title'] = 'Menus';
         $this->data['message'] = $this->validation->getErrors() ? $this->validation->listErrors() : $this->session->getFlashdata('message');
+        // $this->session->setFlashdata('toastr_msg', '');
+        // $this->session->setFlashdata('toastr_type', '');
         echo view('hamkamannan\adminigniter\Modules\Core\Menu\Views\list', $this->data);
     }
 
@@ -105,11 +107,20 @@ class Menu extends \hamkamannan\adminigniter\Controllers\BaseController
 
             $newMenuId = $this->menuModel->insert($save_data);
             if ($newMenuId) {
-                set_message('toastr_msg', 'Menu berhasil disimpan');
-                set_message('toastr_type', 'success');
+                // set_message('toastr_msg', 'Menu berhasil disimpan');
+                // set_message('toastr_type', 'success');
+                $this->session->setFlashdata('toastr_msg', 'Menu berhasil disimpan');
+                $this->session->setFlashdata('toastr_type', 'success');
+
+                // $this->data['toastr_msg'] = 'Menu berhasil disimpan';
+                // $this->data['toastr_type'] = 'success';
                 return redirect()->to('/menu?slug='.$slug);
             } else {
-                set_message('message', 'Menu gagal disimpan');
+                // set_message('message', 'Menu gagal disimpan');
+                $this->session->setFlashdata('toastr_msg', 'Menu gagal disimpan');
+                $this->session->setFlashdata('toastr_type', 'warning');
+                // $this->data['toastr_msg'] = 'Menu gagal disimpan';
+                // $this->data['toastr_type'] = 'warning';
                 return redirect()->to('/menu/create?slug='.$slug);
             }
         } else {

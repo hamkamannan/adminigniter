@@ -76,7 +76,7 @@ $menu = $baseModel
                 <div class="card-body">
                     <div class="dd" id="nestable" style="width:100% !important">
                         <?php
-                        $menus = display_menu_reference(3, 0, 1); 
+                        $menus = display_menu_module2(3, 0, 1); 
                         if (empty($menus)): ?>
                             <div class="box-no-data">Data Menu tidak ada</div>
                         <?php else: 
@@ -169,7 +169,7 @@ $(document).ready(function() {
         });
         return false;
     });
-
+    
     $('.clickable').on('click', function() {
         var href = $(this).attr('data-href');
         window.location.href = href;
@@ -187,7 +187,6 @@ $(document).ready(function() {
                 $('#frm_edit_name').val(response.name);
                 $('#frm_edit_sort').val(response.sort);
                 $('#frm_edit_description').val(response.description);
-                $('#frm_edit_slug').val(response.slug);
 
                 $('#modal_edit').modal('show');
             }

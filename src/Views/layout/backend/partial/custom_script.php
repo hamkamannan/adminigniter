@@ -17,6 +17,7 @@
     /* Toaster */
     var toastr_msg = '<?= get_message('toastr_msg'); ?>';
     var toastr_type = '<?= get_message('toastr_type'); ?>';
+
     if (toastr_msg.length > 0) {
         toastr.options = {
             "closeButton": true,
@@ -64,6 +65,24 @@
                     "sNext": "<?= lang('App.tbl.next'); ?>",
                     "sPrevious": "<?= lang('App.tbl.previous'); ?>",
                 }
+            },
+            "drawCallback": function( settings ) {
+                $('.apply-status').bootstrapToggle();
+
+                $(".apply-status").on('change', function() {
+                    var href = $(this).attr('data-href');
+                    var field = $(this).attr('data-field');
+                    var id = $(this).attr('data-id');
+                    var switchStatus = $(this).is(':checked');
+
+                    if (switchStatus) {
+                        var url = href + '/' + id + '?field=' + field + '&value=1';
+                        window.location.href = url;
+                    } else {
+                        var url = href + '/' + id + '?field=' + field + '&value=0';
+                        window.location.href = url;
+                    }
+                });
             },
             "columnDefs": [{
                 "searchable": false,

@@ -9,7 +9,7 @@ use Config\Autoload;
 /**
  * Class PublishCommand.
  */
-class ModulePatch extends BaseCommand
+class CoreInit extends BaseCommand
 {
     /**
      * The group the command is lumped under
@@ -24,21 +24,21 @@ class ModulePatch extends BaseCommand
      *
      * @var string
      */
-    protected $name = 'module:patch';
+    protected $name = 'core:init';
 
     /**
      * The command's short description.
      *
      * @var string
      */
-    protected $description = 'Patch Module to HMVC Pattern.';
+    protected $description = 'Initialize Adminigniter Core.';
 
     /**
      * The command's usage.
      *
      * @var string
      */
-    protected $usage = 'module:patch';
+    protected $usage = 'core:init';
 
     /**
      * The commamd's argument.
@@ -72,23 +72,84 @@ class ModulePatch extends BaseCommand
     {
         $this->determineSourcePath();
 
-        // Module Patch (HMVC)
-        if (CLI::prompt('Patching Igniter Module to HMVC?', ['y', 'n']) == 'y')
+        CLI::write(CLI::color("Info: Adminigniter Initialization", "green"));
+
+        //Config
+        $this->publishConfig();
+
+        // Migration
+        $this->publishMigration();
+
+        // Seed
+        $this->publishMigration();
+    }
+
+    protected function publishConfig()
+    {
+        $configPath = "{$this->sourcePath}/Config";
+
+        $src = "{$this->configPath}/Auth.php";
+        $dst = APPPATH. "Config/Auth.php";
+
+        if (!file_exists($dst))
         {
-            $this->publishPatch();
+            $template = file_get_contents($src);
+            $template = str_replace('namespace hamkamannan\adminigniter\Config', 'namespace Config', $template);
+
+            file_put_contents($dst, $template);
+        }
+        else
+        {
+            CLI::write(CLI::color("Error: Auth Config already exists!\n", "red"));
         }
     }
- 
-    protected function publishPatch()
+
+    protected function publishMigration()
     {
-        $src = $this->sourcePath . '/Asset/patch/View.php.bak';
-        $dst = ROOTPATH . 'vendor/codeadminigniter4/framework/system/View/View.php';
+        $map = directory_map($this->sourcePath.'/Database/Migrations');
+        $migrationPath = "{$this->sourcePath}/Database/Migrations";
 
-        $content = file_get_contents($src);
+        foreach ($map as $file) {
+            $src = "{$this->sourcePath}/Database/Migrations/{$file}";
+            $dst = APPPATH. "Database/Migrations/{$file}";
 
-        write_file($dst, $content);
+            if (!file_exists($dst))
+            {
+                $template = file_get_contents($src);
+                $template = str_replace('namespace hamkamannan\adminigniter\Database\Migrations', 'namespace '.APP_NAMESPACE.'\Database\Migrations', $template);
+    
+                file_put_contents($dst, $template);
+            }
+            else
+            {
+                CLI::write(CLI::color("\nError: Migration File already exists!", "red"));
+                CLI::write(CLI::color("File: Migration:{$file}", "white"));
+            }
+        }
+    }
 
-        CLI::write(CLI::color('  created: ', 'green').$dst);
+    protected function publishSeed()
+    {
+        $map = directory_map($this->sourcePath.'/Database/Seeds');
+        $seedPath = "{$this->sourcePath}/Database/Seeds";
+
+        foreach ($map as $file) {
+            $src = "{$this->seedPath}/{$file}";
+            $dst = APPPATH. "Database/Seeds/{$file}";
+            
+            if (!file_exists($dst))
+            {    
+                $template = file_get_contents($src);
+                $template = str_replace('namespace hamkamannan\adminigniter\Database\Seeds', 'namespace '.APP_NAMESPACE.'\Database\Seeds', $template);
+    
+                file_put_contents($dst, $template);
+            }
+            else
+            {
+                CLI::write(CLI::color("Error: Seed File already exists!\n", "red"));
+                CLI::write(CLI::color("File: ".$file."\n", "white"));
+            }
+        }
     }
 
     //--------------------------------------------------------------------
@@ -146,15 +207,18 @@ class ModulePatch extends BaseCommand
         }
 
         try {
-            write_file($appPath.$path, $content);
+            if(file_exists()){
+                write_file($appPath.$path, $content);
+                CLI::write(CLI::color('  created: ', 'green').$path);
+            } else {
+                CLI::write(CLI::color('  file already exist: ', 'yellow').$path);
+            }
         } catch (\Exception $e) {
             $this->showError($e);
             exit();
         }
 
         $path = str_replace($appPath, '', $path);
-
-        CLI::write(CLI::color('  created: ', 'green').$path);
     }
 
     /**
@@ -167,6 +231,11 @@ class ModulePatch extends BaseCommand
 
     protected function recurseCopy($src,$dst, $childFolder='') 
     { 
+        if(is_dir($dst)){
+            CLI::write(CLI::color('  directory already exist: ', 'yellow').$dst);
+            exit();
+        } 
+
         $dir = opendir($src); 
         @mkdir($dst);
         if ($childFolder!='') {

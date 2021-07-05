@@ -9,7 +9,7 @@ use Config\Autoload;
 /**
  * Class PublishCommand.
  */
-class ModulePatch extends BaseCommand
+class CorePublish extends BaseCommand
 {
     /**
      * The group the command is lumped under
@@ -24,21 +24,21 @@ class ModulePatch extends BaseCommand
      *
      * @var string
      */
-    protected $name = 'module:patch';
+    protected $name = 'core:publish';
 
     /**
      * The command's short description.
      *
      * @var string
      */
-    protected $description = 'Patch Module to HMVC Pattern.';
+    protected $description = 'Publish Adminigniter Assets (Libraries, Uigniter Themes and Views).';
 
     /**
      * The command's usage.
      *
      * @var string
      */
-    protected $usage = 'module:patch';
+    protected $usage = 'core:publish';
 
     /**
      * The commamd's argument.
@@ -52,7 +52,9 @@ class ModulePatch extends BaseCommand
      *
      * @var array
      */
-    protected $options = [];
+    protected $options      = [
+        '-c' => '(L)ibrary for DataTables, [U]igniter assets and themes, (V)iews Layout Backend'
+    ];
 
     /**
      * The path to hamkamannan\adminigniter\src directory.
@@ -72,23 +74,56 @@ class ModulePatch extends BaseCommand
     {
         $this->determineSourcePath();
 
-        // Module Patch (HMVC)
-        if (CLI::prompt('Patching Igniter Module to HMVC?', ['y', 'n']) == 'y')
+        CLI::write(CLI::color("Info: Adminigniter Publish", "green"));
+
+        try
         {
-            $this->publishPatch();
+            if (CLI::getOption('c') == '' || strstr(CLI::getOption('c'),'L')) {
+                CLI::write(CLI::color("\nPublish for Libraries", "green"));
+
+                $src = $this->sourcePath."/Asset/library/DataTables";
+                $dst = APPPATH ."/Libraries/DataTables";
+                $this->publish($src, $dst);
+            }
+            if (CLI::getOption('c') == '' || strstr(CLI::getOption('c'),'U')) {
+                CLI::write(CLI::color("\nPublish for Uigniter", "green"));
+
+                $src = $this->sourcePath."/Asset/public/assets";
+                $dst = ROOTPATH ."/public/assets";
+                $this->publish($src, $dst);
+
+                $src = $this->sourcePath."/Asset/public/themes/uigniter";
+                $dst = ROOTPATH ."/public/themes/uigniter";
+                $this->publish($src, $dst);
+            }
+            if (CLI::getOption('c') == '' || strstr(CLI::getOption('c'),'V')) {
+                CLI::write(CLI::color("\nPublish for Views", "green"));
+
+                $src = $this->sourcePath."/Views/layout/backend";
+                $dst = APPPATH ."/Views/layout/backend";
+                $this->publish($src, $dst);
+            }
+
+            CLI::write(CLI::color("", "white"));
+
+        }
+        catch (\Exception $e)
+        {
+            CLI::error($e);
         }
     }
- 
-    protected function publishPatch()
+
+    protected function publish($src, $dst)
     {
-        $src = $this->sourcePath . '/Asset/patch/View.php.bak';
-        $dst = ROOTPATH . 'vendor/codeadminigniter4/framework/system/View/View.php';
-
-        $content = file_get_contents($src);
-
-        write_file($dst, $content);
-
-        CLI::write(CLI::color('  created: ', 'green').$dst);
+        if (!file_exists($dst))
+        {
+            $this->recurseCopy($src, $dst);
+        }
+        else
+        {
+            CLI::write(CLI::color("Warning: Directory already exists!", "yellow"));
+            CLI::write(CLI::color("         --> {$dst}", "white"));
+        }
     }
 
     //--------------------------------------------------------------------
@@ -146,15 +181,18 @@ class ModulePatch extends BaseCommand
         }
 
         try {
-            write_file($appPath.$path, $content);
+            if(file_exists()){
+                write_file($appPath.$path, $content);
+                CLI::write(CLI::color('  created: ', 'green').$path);
+            } else {
+                CLI::write(CLI::color('  file already exist: ', 'yellow').$path);
+            }
         } catch (\Exception $e) {
             $this->showError($e);
             exit();
         }
 
         $path = str_replace($appPath, '', $path);
-
-        CLI::write(CLI::color('  created: ', 'green').$path);
     }
 
     /**
@@ -167,6 +205,11 @@ class ModulePatch extends BaseCommand
 
     protected function recurseCopy($src,$dst, $childFolder='') 
     { 
+        if(is_dir($dst)){
+            CLI::write(CLI::color('  directory already exist: ', 'yellow').$dst);
+            exit();
+        } 
+
         $dir = opendir($src); 
         @mkdir($dst);
         if ($childFolder!='') {

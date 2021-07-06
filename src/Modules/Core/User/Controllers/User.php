@@ -155,4 +155,73 @@ class User extends \hamkamannan\adminigniter\Controllers\BaseController
             return redirect()->to('/user');
         }
     }
+
+    public function change_password()
+    {
+        $this->data['title'] = 'Change Password';
+        $this->validation->setRule('password_old', 'Password Lama', 'required');
+        $this->validation->setRule('password', 'Password', 'required|min_length[' . $this->config->minimumPasswordLength . ']|max_length[15]|regex_match[/^(?=.*[A-Z])(?=.*[!@#%])(?=.*[0-9])(?=.*[a-z]).{8,15}$/]');
+        $this->validation->setRule('password_confirm', 'Konfirmasi Password', 'required|matches[password]');
+        $user = user();
+        if (!$this->request->getPost() || $this->validation->withRequest($this->request)->run() === false) {
+            $this->data['message'] = ($this->validation->getErrors()) ? $this->validation->listErrors($this->validationListTemplate) : $this->session->getFlashdata('message');
+            echo view('hamkamannan\adminigniter\Modules\Core\User\Views\password\change', $this->data);
+        } else {
+            $identity = $this->session->get('identity');
+            $change = $this->auth->changePassword($identity, $this->request->getPost('password_old'), $this->request->getPost('password'));
+            if ($change) {
+                set_message('toastr_msg', 'Password berhasil diubah');
+                set_message('toastr_type', 'success');
+                return redirect()->to('/user/change_password');
+            } else {
+                $this->data['message'] = $this->auth->errors();
+                echo view('hamkamannan\adminigniter\Modules\Core\User\Views\password\change', $this->data);
+            }
+        }
+    }
+
+    public function change_avatar()
+    {
+        $this->data['title'] = 'Change Avatar';
+
+        $user = user();
+        $this->data['user'] = $user;
+
+        $this->validation->setRule('file_image', 'Gambar', 'required');
+
+        if (!$this->request->getPost() || $this->validation->withRequest($this->request)->run() === false) {
+            $this->data['message'] = ($this->validation->getErrors()) ? $this->validation->listErrors($this->validationListTemplate) : $this->session->getFlashdata('message');
+            echo view('hamkamannan\adminigniter\Modules\Core\User\Views\avatar\change', $this->data);
+        } else {
+            $update_data = array();
+                // Logic Upload
+                $files = (array) $this->request->getPost('file_image');
+                if (count($files)) {
+                    $listed_file = array();
+                    foreach ($files as $uuid => $name) {
+                        if (file_exists($this->modulePath . $name)) {
+                            $listed_file[] = $name;
+                        } else {
+                            if (file_exists($this->uploadPath . $name)) {
+                                $file = new File($this->uploadPath . $name);
+                                $newFileName = $file->getFileName(); //$file->getRandomName();
+                                $file->move($this->modulePath, $newFileName);
+                                $listed_file[] = $newFileName;
+                            }
+                        }
+                    }
+                    $update_data['file_image'] = implode(',', $listed_file);
+                }
+                $change = $this->userModel->update($user->id, $update_data);
+
+            if ($change) {
+                set_message('toastr_msg', 'Avatar berhasil diubah');
+                set_message('toastr_type', 'success');
+                return redirect()->to('/user/change_avatar');
+            } else {
+                $this->data['message'] = $this->auth->errors();
+                echo view('hamkamannan\adminigniter\Modules\Core\User\Views\avatar\change', $this->data);
+            }
+        }
+    }
 }

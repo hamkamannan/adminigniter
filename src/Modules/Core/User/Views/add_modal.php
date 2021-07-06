@@ -26,7 +26,7 @@
                             <div class="position-relative form-group">
                                 <label for="email">Email*</label>
                                 <div>
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="<?= set_value('email'); ?>" />
+                                    <input type="text" class="form-control" id="email" name="email" placeholder="Email" value="<?= set_value('email'); ?>" />
                                 </div>
                             </div>
                         </div>
@@ -36,15 +36,31 @@
                         <div class="col-md-6">
                             <div class="position-relative form-group">
                                 <label for="password">Password*</label>
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Password" />
-                                <small class="info help-block"><?= lang('User.info.create.password'); ?> </small>
+                                <div class="input-group" id="show_hide_password">
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" >
+                                    <div class="input-group-append">
+                                        <a class="btn btn-primary" href="#"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                                    </div>
+                                </div>
+                                <!-- <span id="strength">Type Password</span><br> -->
+                                <small class="info help-block">Password Security Policy:
+                                    <ul>
+                                        <li id="firstRegex">Password diawali huruf kapital (A-Z)</li>
+                                        <li>Password mengandung minimal 1 angka (0-9)</li>
+                                        <li>Password mengandung minimal 1 karakter spesial (!@#%)</li>
+                                        <li>Password memiliki panjang 8-15 karakter</li>
+                                    </ul>
+                                </small>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="position-relative form-group">
-                                <label for="pass_confirm">Konfirmasi Password*</label>
-                                <div>
-                                    <input type="password" class="form-control" id="pass_confirm" name="pass_confirm" placeholder="Konfirmasi Password" />
+                                <label for="password">Konfirmasi Password*</label>
+                                <div class="input-group" id="show_hide_password_confirm">
+                                    <input type="password" class="form-control" id="password_confirm" name="password_confirm" placeholder="Konfirmasi Password" />
+                                    <div class="input-group-append">
+                                        <a class="btn btn-primary" href="#"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -60,6 +76,67 @@
     </div>
 </div>
 
+<script language="javascript">
+    $(document).ready(function() {
+        $("#show_hide_password a").on('click', function(event) {
+            event.preventDefault();
+            if($('#show_hide_password input').attr("type") == "text"){
+                $('#show_hide_password input').attr('type', 'password');
+                $('#show_hide_password i').addClass( "fa-eye-slash" );
+                $('#show_hide_password i').removeClass( "fa-eye" );
+            }else if($('#show_hide_password input').attr("type") == "password"){
+                $('#show_hide_password input').attr('type', 'text');
+                $('#show_hide_password i').removeClass( "fa-eye-slash" );
+                $('#show_hide_password i').addClass( "fa-eye" );
+            }
+        });
+
+        $("#show_hide_password_confirm a").on('click', function(event) {
+            event.preventDefault();
+            if($('#show_hide_password_confirm input').attr("type") == "text"){
+                $('#show_hide_password_confirm input').attr('type', 'password');
+                $('#show_hide_password_confirm i').addClass( "fa-eye-slash" );
+                $('#show_hide_password_confirm i').removeClass( "fa-eye" );
+            }else if($('#show_hide_password_confirm input').attr("type") == "password"){
+                $('#show_hide_password_confirm input').attr('type', 'text');
+                $('#show_hide_password_confirm i').removeClass( "fa-eye-slash" );
+                $('#show_hide_password_confirm i').addClass( "fa-eye" );
+            }
+        });
+    });
+
+    function passwordChanged() {
+        var strength = document.getElementById('strength');
+        var firstRegex = new RegExp("^(?=.*[A-Z]).*$", "g");
+        var enoughRegex = new RegExp("(?=.{8,15}).*", "g");
+        var numberRegex = new RegExp("^(?=.{8,15})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).*$", "g");
+        var strongRegex = new RegExp("^(?=.{8,15})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
+
+        var pwd = document.getElementById("password");
+        if (pwd.value.length == 0) {
+            strength.innerHTML = 'Type Password';
+        }
+        else if (false == firstRegex.test(pwd.value)) 
+        {
+            strength.innerHTML = 'Huruf Awal Kapital';
+        } 
+        else if (false == enoughRegex.test(pwd.value)) 
+        {
+            strength.innerHTML = 'Panjang minimal 8-15 karakter';
+        } 
+        else if (false == numberRegex.test(pwd.value)) 
+        {
+            strength.innerHTML = 'Minimal mengandung 1 angka';
+        } 
+        else if (false == strongRegex.test(pwd.value)) 
+        {
+            strength.innerHTML = 'Minimal mengandung 1 spesial karakter';
+        } 
+        else {
+            strength.innerHTML = '<span style="green:red">OK</span>';
+        }
+    }
+</script>
 <script>
     $('#frm_create').submit(function(event) {
         event.preventDefault();

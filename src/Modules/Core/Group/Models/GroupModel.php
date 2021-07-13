@@ -8,6 +8,7 @@ use Myth\Auth\Authorization\PermissionModel;
 class GroupModel extends MythModel
 {
     protected $returnType = 'object';
+    protected $protectFields = false;
     protected $allowedFields = [
         'name', 'description'
     ];

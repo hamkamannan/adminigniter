@@ -31,16 +31,13 @@
             <div class="card-body">
                   <div id="infoMessage"><?= $message ?? ''; ?></div>
                   <?= get_message('message'); ?>
-                  <form id="frm_change_password" class="col-md-12 mx-auto" method="post" action="<?= base_url('user/change_password'); ?>">
+                  <form id="frm_change_password" class="col-md-12 mx-auto" method="post" action="<?= base_url('auth/change_password/'); ?>">
                         <div class="form-row">
                               <div class="col-md-6">
                                     <div class="position-relative form-group">
-                                          <label for="password">Password Lama*</label>
-                                          <div class="input-group" id="show_hide_password_old">
-                                                <input type="password" class="form-control" id="password_old" name="password_old" placeholder="Password Lama" value="<?=set_value('password_old')?>" />
-                                                <div class="input-group-append">
-                                                      <a class="btn btn-primary" href="#"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
-                                                </div>
+                                          <label for="old">Password Lama</label>
+                                          <div>
+                                                <input type="password" class="form-control" id="old" name="old" placeholder="Password Lama" value="" />
                                           </div>
                                     </div>
                               </div>
@@ -49,33 +46,18 @@
                         <div class="form-row">
                               <div class="col-md-6">
                                     <div class="position-relative form-group">
-                                          <label for="password">Password*</label>
-                                          <div class="input-group" id="show_hide_password">
-                                                <input type="password" class="form-control" id="password" name="password" placeholder="Password" value="<?=set_value('password')?>">
-                                                <div class="input-group-append">
-                                                <a class="btn btn-primary" href="#"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
-                                                </div>
+                                          <label for="new">Password Baru</label>
+                                          <div>
+                                                <input type="password" class="form-control" id="new" name="new" placeholder="Password Baru" value="" />
+                                                <small class="info help-block">Min 8 characters </small>
                                           </div>
-                                          <!-- <span id="strength">Type Password</span><br> -->
-                                          <small class="info help-block">Password Security Policy:
-                                                <ul>
-                                                <li id="firstRegex">Password diawali huruf kapital (A-Z)</li>
-                                                <li>Password mengandung minimal 1 angka (0-9)</li>
-                                                <li>Password mengandung minimal 1 karakter spesial (!@#%)</li>
-                                                <li>Password memiliki panjang 8-15 karakter</li>
-                                                </ul>
-                                          </small>
                                     </div>
                               </div>
-
                               <div class="col-md-6">
                                     <div class="position-relative form-group">
-                                          <label for="password">Konfirmasi Password*</label>
-                                          <div class="input-group" id="show_hide_password_confirm">
-                                                <input type="password" class="form-control" id="password_confirm" name="password_confirm" placeholder="Konfirmasi Password" value="<?=set_value('password_confirm')?>"/>
-                                                <div class="input-group-append">
-                                                <a class="btn btn-primary" href="#"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
-                                                </div>
+                                          <label for="new_confirm">Konfirmasi Password Baru</label>
+                                          <div>
+                                                <input type="password" class="form-control" id="new_confirm" name="new_confirm" placeholder="Konfirmasi Password Baru" value="" />
                                           </div>
                                     </div>
                               </div>
@@ -92,46 +74,4 @@
 <?= $this->endSection('page'); ?>
 
 <?= $this->section('script'); ?>
-<script>
-$(document).ready(function() {
-      $("#show_hide_password_old a").on('click', function(event) {
-            event.preventDefault();
-            if($('#show_hide_password_old input').attr("type") == "text"){
-                $('#show_hide_password_old input').attr('type', 'password');
-                $('#show_hide_password_old i').addClass( "fa-eye-slash" );
-                $('#show_hide_password_old i').removeClass( "fa-eye" );
-            }else if($('#show_hide_password_old input').attr("type") == "password"){
-                $('#show_hide_password_old input').attr('type', 'text');
-                $('#show_hide_password_old i').removeClass( "fa-eye-slash" );
-                $('#show_hide_password_old i').addClass( "fa-eye" );
-            }
-        });
-
-        $("#show_hide_password a").on('click', function(event) {
-            event.preventDefault();
-            if($('#show_hide_password input').attr("type") == "text"){
-                $('#show_hide_password input').attr('type', 'password');
-                $('#show_hide_password i').addClass( "fa-eye-slash" );
-                $('#show_hide_password i').removeClass( "fa-eye" );
-            }else if($('#show_hide_password input').attr("type") == "password"){
-                $('#show_hide_password input').attr('type', 'text');
-                $('#show_hide_password i').removeClass( "fa-eye-slash" );
-                $('#show_hide_password i').addClass( "fa-eye" );
-            }
-        });
-
-        $("#show_hide_password_confirm a").on('click', function(event) {
-            event.preventDefault();
-            if($('#show_hide_password_confirm input').attr("type") == "text"){
-                $('#show_hide_password_confirm input').attr('type', 'password');
-                $('#show_hide_password_confirm i').addClass( "fa-eye-slash" );
-                $('#show_hide_password_confirm i').removeClass( "fa-eye" );
-            }else if($('#show_hide_password_confirm input').attr("type") == "password"){
-                $('#show_hide_password_confirm input').attr('type', 'text');
-                $('#show_hide_password_confirm i').removeClass( "fa-eye-slash" );
-                $('#show_hide_password_confirm i').addClass( "fa-eye" );
-            }
-        });
-    });
-</script>
 <?= $this->endSection('script'); ?>

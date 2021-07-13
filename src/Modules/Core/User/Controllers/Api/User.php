@@ -48,19 +48,23 @@ class User extends ResourceController
 		// Validate here first, since some things,
 		// like the password, can only be validated properly here.
 		$rules = [
-			'username' => [
+			'username'  	=> [
 				'label' => 'Username',
 				'rules' => 'required|alpha_numeric_space|min_length[3]|is_unique[users.username]',
 			],
-			'email'	=> [
+			'email'			=> [
 				'label' => 'Email',
 				'rules' => 'required|valid_email|is_unique[users.email]',
 			],
-			'password' => [
+			// 'first_name'	 	=> [
+			// 	'label' => 'Nama Depan',
+			// 	'rules' => 'required',
+			// ],
+			'password'	 	=> [
 				'label' => 'Password',
-				'rules' => 'required|min_length[' . $this->config->minimumPasswordLength . ']|max_length[15]|regex_match[/^(?=.*[A-Z])(?=.*[!@#%])(?=.*[0-9])(?=.*[a-z]).{8,15}$/]',
+				'rules' => 'required',
 			],
-			'password_confirm' => [
+			'pass_confirm' 	=> [
 				'label' => 'Konfirmasi Password',
 				'rules' => 'required|matches[password]',
 			]
@@ -124,8 +128,8 @@ class User extends ResourceController
 		$this->validation->setRule('username', 'Username', 'required');
 		$this->validation->setRule('email', 'Email', 'required');
 		if ($this->request->getPost('password')) {
-			$this->validation->setRule('password', 'required|min_length[' . $this->config->minimumPasswordLength . ']|max_length[15]|regex_match[/^(?=.*[A-Z])(?=.*[!@#%])(?=.*[0-9])(?=.*[a-z]).{8,15}$/]');
-			$this->validation->setRule('password_confirm', 'Konfirmasi Password', 'required|matches[password]');
+			$this->validation->setRule('password', 'Password', 'required|min_length[' . $this->config->minimumPasswordLength . ']');
+			$this->validation->setRule('pass_confirm', 'Konfirmasi Password', 'required|matches[password]');
 		}
 
 		if (is_admin()) {

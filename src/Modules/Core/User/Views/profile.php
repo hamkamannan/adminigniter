@@ -29,17 +29,7 @@
                         <div class="menu-header-image" style="background-image: url('<?= base_url('themes/uigniter') ?>/images/dropdown-header/abstract4.jpg')"></div>
                         <div class="menu-header-content btn-pane-right">
                             <div class="avatar-icon-wrapper mr-2 avatar-icon-xl">
-                                <?php 
-                                    $file_image = user()->file_image;
-                                    $default = base_url('themes/uigniter/images/avatars/2.jpg');
-                                    $image = base_url('uploads/user/' . $file_image);
-                                    if(empty($file_image)){
-                                        $image = $default;
-                                    }
-                                ?>
-                                <div class="avatar-icon">
-                                    <img src="<?=$image?>" onerror="this.onerror=null;this.src='<?=$default?>';" alt="Avatar">
-                                </div>
+                                <div class="avatar-icon"><img src="<?= base_url('themes/uigniter') ?>/images/avatars/2.jpg" alt="User Profile"></div>
                             </div>
                             <div>
                                 <h5 class="menu-header-title"><?= $user->first_name; ?> <?= $user->last_name; ?></h5>

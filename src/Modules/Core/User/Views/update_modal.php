@@ -34,7 +34,7 @@
                     <div class="form-row">
                         <div class="col-md-6">
                             <div class="position-relative form-group">
-                                <label for="first_name">Nama Depan*</label>
+                                <label for="first_name">Nama Depan</label>
                                 <div>
                                     <input type="text" class="form-control" id="first_name" name="first_name" placeholder="<?= lang('User.label.first_name') ?>" value="<?= $user->first_name ?: ''; ?>" />
                                 </div>
@@ -87,42 +87,25 @@
                             </div>
                         </div>
                     </div>
-                    <?php if (is_admin()) : ?>
-                        <div class="form-row">
-                            <div class="col-md-6">
-                                <div class="position-relative form-group">
-                                    <label for="password">Password*</label>
-                                    <div class="input-group" id="show_hide_password">
-                                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-                                        <div class="input-group-append">
-                                            <a class="btn btn-primary" href="#"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
-                                        </div>
-                                    </div>
-                                    <!-- <span id="strength">Type Password</span><br> -->
-                                    <small class="info help-block">Password Security Policy:
-                                        <ul>
-                                            <li id="firstRegex">Password diawali huruf kapital (A-Z)</li>
-                                            <li>Password mengandung minimal 1 angka (0-9)</li>
-                                            <li>Password mengandung minimal 1 karakter spesial (!@#%)</li>
-                                            <li>Password memiliki panjang 8-15 karakter</li>
-                                        </ul>
-                                    </small>
-                                </div>
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="position-relative form-group">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Password" />
+                                <small class="info help-block"><?= lang('User.info.update.password') ?> </small>
                             </div>
-
-                            <div class="col-md-6">
-                                <div class="position-relative form-group">
-                                    <label for="password">Konfirmasi Password*</label>
-                                    <div class="input-group" id="show_hide_password_confirm">
-                                        <input type="password" class="form-control" id="password_confirm" name="password_confirm" placeholder="Konfirmasi Password" />
-                                        <div class="input-group-append">
-                                            <a class="btn btn-primary" href="#"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
-                                        </div>
-                                    </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="position-relative form-group">
+                                <label for="pass_confirm">Konfirmasi Password</label>
+                                <div>
+                                    <input type="password" class="form-control" id="pass_confirm" name="pass_confirm" placeholder="Konfirmasi Password" />
                                 </div>
                             </div>
                         </div>
+                    </div>
 
+                    <?php if (is_admin()) : ?>
                         <div class="position-relative form-group">
                             <label for="groups">Group*</label>
                             <div>
@@ -148,33 +131,6 @@
 </div>
 
 <script>
-    $(document).ready(function() {
-        $("#show_hide_password a").on('click', function(event) {
-            event.preventDefault();
-            if ($('#show_hide_password input').attr("type") == "text") {
-                $('#show_hide_password input').attr('type', 'password');
-                $('#show_hide_password i').addClass("fa-eye-slash");
-                $('#show_hide_password i').removeClass("fa-eye");
-            } else if ($('#show_hide_password input').attr("type") == "password") {
-                $('#show_hide_password input').attr('type', 'text');
-                $('#show_hide_password i').removeClass("fa-eye-slash");
-                $('#show_hide_password i').addClass("fa-eye");
-            }
-        });
-
-        $("#show_hide_password_confirm a").on('click', function(event) {
-            event.preventDefault();
-            if ($('#show_hide_password_confirm input').attr("type") == "text") {
-                $('#show_hide_password_confirm input').attr('type', 'password');
-                $('#show_hide_password_confirm i').addClass("fa-eye-slash");
-                $('#show_hide_password_confirm i').removeClass("fa-eye");
-            } else if ($('#show_hide_password_confirm input').attr("type") == "password") {
-                $('#show_hide_password_confirm input').attr('type', 'text');
-                $('#show_hide_password_confirm i').removeClass("fa-eye-slash");
-                $('#show_hide_password_confirm i').addClass("fa-eye");
-            }
-        });
-    });
     var is_profile = '<?= $is_profile ?>';
     $('#frm_edit').submit(function(event) {
         event.preventDefault();

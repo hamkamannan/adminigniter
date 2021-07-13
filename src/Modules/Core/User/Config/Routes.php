@@ -2,13 +2,14 @@
 	$routes = \Config\Services::routes(true);
 }
 
+$routes->get('profile', 'User::profile', ['namespace' => 'hamkamannan\adminigniter\Modules\Core\User\Controllers']);
+$routes->get('profil', 'User::profile', ['namespace' => 'hamkamannan\adminigniter\Modules\Core\User\Controllers']);
+
 $routes->group('user', ['namespace' => 'hamkamannan\adminigniter\Modules\Core\User\Controllers'], function ($subroutes) {
 	/*** Route Update for User ***/
 	$subroutes->add('', 'User::index');
 	$subroutes->add('index', 'User::index');
 	$subroutes->add('profile', 'User::profile');
-	$subroutes->add('change_password', 'User::change_password');
-	$subroutes->add('change_avatar', 'User::change_avatar');
 	$subroutes->add('detail/(:any)', 'User::detail/$1');
 	$subroutes->add('detail/(:any)/(:any)', 'User::detail/$1/$1');
 	$subroutes->add('create', 'User::create');

@@ -217,7 +217,7 @@ $category = $baseModel
             });
             thisDropzone = this;
 
-            var existingFile = "<?= $menu->file_image ?>";
+            var existingFile = "<?= $menu->file_image ?? '' ?>";
             if (existingFile) {
                   var files = existingFile.split(',');
                   files.forEach(function(file) {

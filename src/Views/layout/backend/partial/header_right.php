@@ -47,11 +47,18 @@
                                 <div class="scrollbar-container ps">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a href="<?= base_url('user/profile'); ?>" class="nav-link">Profil Saya
+                                            <?php $url_user_profile = get_parameter('URL User Profile', 'user/profile'); ?>
+                                            <a href="<?= base_url($url_user_profile); ?>" class="nav-link">Profil Saya
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="<?= base_url('auth/change_password'); ?>" class="nav-link">Ubah Password
+                                            <?php $url_change_avatar = get_parameter('URL Change Avatar', 'user/change_avatar'); ?>
+                                            <a href="<?= base_url($url_change_avatar); ?>" class="nav-link">Ubah Avatar
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <?php $url_change_password = get_parameter('URL Change Password', 'user/change_password'); ?>
+                                            <a href="<?= base_url($url_change_password); ?>" class="nav-link">Ubah Password
                                             </a>
                                         </li>
                                         <li class="nav-item-header nav-item">Group</li>

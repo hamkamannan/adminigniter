@@ -7,6 +7,7 @@ use Myth\Auth\Authorization\PermissionModel as MythModel;
 class PermissionModel extends MythModel
 {
     protected $returnType = 'object';
+    protected $protectFields = false;
     protected $allowedFields = [
         'name', 'description'
     ];

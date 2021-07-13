@@ -8,6 +8,7 @@ class ParameterModel extends \hamkamannan\adminigniter\Models\BaseModel
     protected $primaryKey = 'id';
     protected $returnType     = 'object';
     protected $useSoftDeletes = false;
+    protected $protectFields = false;
     protected $allowedFields = ['name', 'value', 'description'];
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';

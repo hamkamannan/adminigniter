@@ -8,6 +8,7 @@ class ReferenceModel extends \hamkamannan\adminigniter\Models\BaseModel
     protected $primaryKey = 'id';
     protected $returnType     = 'object';
     protected $useSoftDeletes = false;
+    protected $protectFields = false;
     protected $allowedFields = [
         'name', 'slug', 'description', 'sort',  'active', 'menu_id',
     ];

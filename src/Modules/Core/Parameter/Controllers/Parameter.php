@@ -157,7 +157,7 @@ class Parameter extends \hamkamannan\adminigniter\Controllers\BaseController
             set_message('toastr_msg', 'Parameter gagal dihapus');
             set_message('toastr_type', 'warning');
             set_message('message', 'Parameter gagal dihapus');
-            return redirect()->to('/param');
+            return redirect()->to('/parameter');
         }
     }
 

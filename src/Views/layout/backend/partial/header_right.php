@@ -16,7 +16,16 @@
                 <div class="widget-content-left">
                     <div class="btn-group">
                         <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
-                            <img width="42" class="rounded-circle" src="<?= base_url('themes/uigniter'); ?>/images/avatars/2.jpg" alt="">
+                            <?php 
+                                $default = base_url('themes/uigniter/images/avatars/2.jpg'); 
+                                $image = base_url('uploads/user/'.user()->avatar);
+                                if(empty(user()->avatar)){
+                                    $image = $default;
+                                }
+                            ?>
+
+                            <img width="42" class="rounded-circle" src="<?=$image?>" onerror="this.onerror=null;this.src='<?=$default?>';" alt="">
+                            
                             <i class="fa fa-angle-down ml-2 opacity-8"></i>
                         </a>
                         <div tabindex="-1" role="menu" aria-hidden="true" class="rm-pointers dropdown-menu-lg dropdown-menu dropdown-menu-right">
@@ -27,7 +36,7 @@
                                         <div class="widget-content p-0">
                                             <div class="widget-content-wrapper">
                                                 <div class="widget-content-left mr-3">
-                                                    <img width="42" class="rounded-circle" src="<?= base_url('themes/uigniter'); ?>/images/avatars/2.jpg" alt="">
+                                                    <img width="42" class="rounded-circle" src="<?=$image?>" onerror="this.onerror=null;this.src='<?=$default?>';" alt="">
                                                 </div>
                                                 <div class="widget-content-left">
                                                     <div class="widget-heading text-light"><?= user()->username ?>
@@ -47,18 +56,11 @@
                                 <div class="scrollbar-container ps">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <?php $url_user_profile = get_parameter('URL User Profile', 'user/profile'); ?>
-                                            <a href="<?= base_url($url_user_profile); ?>" class="nav-link">Profil Saya
+                                            <a href="<?= base_url('user/profile'); ?>" class="nav-link">Profil Saya
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <?php $url_change_avatar = get_parameter('URL Change Avatar', 'user/change_avatar'); ?>
-                                            <a href="<?= base_url($url_change_avatar); ?>" class="nav-link">Ubah Avatar
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <?php $url_change_password = get_parameter('URL Change Password', 'user/change_password'); ?>
-                                            <a href="<?= base_url($url_change_password); ?>" class="nav-link">Ubah Password
+                                            <a href="<?= base_url('user/change_password'); ?>" class="nav-link">Ubah Password
                                             </a>
                                         </li>
                                         <li class="nav-item-header nav-item">Group</li>

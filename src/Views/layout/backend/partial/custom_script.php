@@ -58,12 +58,12 @@
     function setDataTable(dom, disableOrderCols = [4, 6, 7], defaultOrderCols = [0, 'asc'], autoNumber = false) {
         var t = $(dom).DataTable({
             "oLanguage": {
-                "sSearch": "<?= lang('App.tbl.search'); ?>: _INPUT_",
-                "sLengthMenu": "_MENU_ <?= lang('App.tbl.entries'); ?>",
-                "sInfo": "<?= lang('App.tbl.showing'); ?> _START_ <?= lang('App.tbl.to'); ?> _END_ <?= lang('App.tbl.from'); ?> _TOTAL_ <?= lang('App.tbl.entries'); ?>",
+                "sSearch": "<i class='fa fa-search'></i> _INPUT_",
+                "sLengthMenu": "_MENU_",
+                "sInfo": "Show _START_ to _END_ of _TOTAL_ records",
                 "oPaginate": {
-                    "sNext": "<?= lang('App.tbl.next'); ?>",
-                    "sPrevious": "<?= lang('App.tbl.previous'); ?>",
+                    "sNext": "Next",
+                    "sPrevious": "Prev",
                 }
             },
             "drawCallback": function( settings ) {
